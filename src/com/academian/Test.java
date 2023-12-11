@@ -16,7 +16,7 @@ public class Test implements Runnable{
 
 		thread1.start();
 
-		System.out.println(thread1.getState());
+		System.out.println(thread1.getState()+"Hi");
 
 	}
 }
