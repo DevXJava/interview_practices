@@ -131,7 +131,7 @@ public class Employee {
   //13. Query 3.13 : What is the average salary and total salary of the whole organization?
 		DoubleSummaryStatistics doubleSummaryStatistics = employeeList.stream()
 				.collect(Collectors.summarizingDouble(Employee::getSalary));
-		System.out.println(doubleSummaryStatistics.getSum()+"  :  "+doubleSummaryStatistics.getSum());
+		System.out.println(doubleSummaryStatistics.getAverage()+"  :  "+doubleSummaryStatistics.getSum());
 		
   //14. Query 3.14 : Separate the employees who are younger or equal to 25 years from those employees who are older than 25 years.		
 		Map<Boolean, List<Employee>> partitionEmployeesByAge=
