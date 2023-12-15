@@ -10,7 +10,7 @@ import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public class InterviewsPrograms {
+public class AllInterviewsPrograms {
 	
 	public static void occuranceOfArrayElement() {
 		List<String> list = Arrays.asList("Deven","Kumar","Deven","Rahangdale");
@@ -74,7 +74,7 @@ public class InterviewsPrograms {
 	}
 
 	public static void main(String[] args) {
-		InterviewsPrograms.countEachWordOccurancr();
+		AllInterviewsPrograms.countEachWordOccurancr();
 
 	}
 
