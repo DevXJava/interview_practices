@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-public class OcuuranceCounting {
+public class StringOcuuranceCounting {
 
 	public static void main(String[] args) {
 		 List<String> list = Arrays.asList("Jon", "Ajeet", "Steve","Ajeet", "Jon", "Ajeet");

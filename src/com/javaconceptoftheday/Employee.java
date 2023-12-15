@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Employee {
 	private int id;
@@ -139,7 +140,13 @@ public class Employee {
 		
  //15. Query 3.15 : Who is the oldest employee in the organization? What is his age and which department he belongs to?	
 		Optional<Employee> oldestEmployeeWrapper = employeeList.stream().max(Comparator.comparingInt(Employee::getAge));
-         
+       
+		
+ //16. Query 3.16 : Short Employee with Age and Name;
+		List<Employee> shortByAgeAndName = employeeList.stream()
+				.sorted(Comparator.comparing(Employee::getAge)
+				.thenComparing(Employee::getName)).collect(Collectors.toList());
+		shortByAgeAndName.forEach((list)->System.out.println(list.getAge()+" : "+list.getName()));
 	}
 
 }
