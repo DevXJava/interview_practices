@@ -20,7 +20,7 @@ public class ShortMapByValues {
 				      .stream()
 				      .sorted(Map.Entry.comparingByValue())
 	.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (v1, v2) -> v1, LinkedHashMap::new));
-		map.forEach((k, v) -> System.out.println(k + "  :   " + v));
+	 map.forEach((k, v) -> System.out.println(k + "  :   " + v));
 
 	}
 
