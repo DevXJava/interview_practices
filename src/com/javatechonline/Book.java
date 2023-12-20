@@ -66,12 +66,15 @@ public class Book {
 		
 		List<Book> byId = list.stream().sorted(shortById).collect(Collectors.toList());
 		byId.forEach(i->System.out.println(i.getId()));
+		
 		List<Book> byName = list.stream().sorted(shortByName).collect(Collectors.toList());
 		byName.forEach(n->System.out.println(n.getName()));
 		
 		list.stream().map(a->a.getId ()+" : "+a.getName()).forEach(System.out::println);
 				
-				
+		List<Book> byName1 = list.stream().sorted((n1,n2)->n1.getAuthor().compareToIgnoreCase(n2.getAuthor())).collect(Collectors.toList());
+		
+		
 
 	}
 

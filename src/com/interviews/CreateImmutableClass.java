@@ -14,7 +14,7 @@ public final class CreateImmutableClass {
 	public static void main(String[] args) {
 		
 		CreateImmutableClass class1 = new CreateImmutableClass(10);
-		CreateImmutableClass class2 = class1.modify(100); // 100==10SS
+		CreateImmutableClass class2 = class1.modify(100); // 100==10
 		CreateImmutableClass class3 = class1.modify(10); // 10==10
 		
 		System.out.println(class1==class2); // false 

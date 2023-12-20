@@ -1,6 +1,7 @@
 package com.interviews;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -64,9 +65,8 @@ public class GetStudentStatesWise {
 		//map.forEach((states, students) -> System.out.println(states + "  :  " + students));
 
 		for (Entry<String, List<GetStudentStatesWise>> entry : map.entrySet()) {
-			String key = entry.getKey();
-			System.out.println(key);
-			List val = entry.getValue();
+			
+			System.out.println(entry.getKey()+"  :  "+entry.getValue().listIterator());
 
 		}
 		

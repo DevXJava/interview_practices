@@ -1,6 +1,7 @@
 package com.factory.design.pattern;
 
 public class MobileFactory {
+	
 	public MobileFactory(){
 
     }

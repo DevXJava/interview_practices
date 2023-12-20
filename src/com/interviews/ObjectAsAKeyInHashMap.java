@@ -2,6 +2,29 @@ package com.interviews;
 
 import java.util.HashMap;
 
+class Employee{
+	private int empno;
+	private String empname;
+	public Employee(int empno, String empname) {
+		super();
+		this.empno = empno;
+		this.empname = empname;
+	}
+	public int getEmpno() {
+		return empno;
+	}
+	public void setEmpno(int empno) {
+		this.empno = empno;
+	}
+	public String getEmpname() {
+		return empname;
+	}
+	public void setEmpname(String empname) {
+		this.empname = empname;
+	}
+}
+
+
 class Student {
 	private int rollno;
 	private String name;
@@ -77,6 +100,19 @@ public class ObjectAsAKeyInHashMap {
   
         // we get Geeks1 
         System.out.println(map.get(three)); 
+        
+        Employee emp1 = new Employee(1, "John");
+        Employee emp2 = new Employee(2, "Johns");
+        Employee emp3 = new Employee(3, "Johnsd");
+        
+        HashMap<Employee, String> mapEmp = new HashMap<>(); 
+        mapEmp.put(emp1, "Aa");
+        mapEmp.put(emp2, "Ab");
+        mapEmp.put(emp3, "Ac");
+        
+        System.out.println("size is : "+mapEmp.size());
+        
+        mapEmp.forEach((k,v)->System.out.println(k.getEmpno()));
     } 
 
 }

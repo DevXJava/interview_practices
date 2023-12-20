@@ -81,32 +81,37 @@ public class AllInterviewsPrograms {
 
 		Integer min = list.stream().min(Integer::compareTo).get();
 		System.out.println("min is : " + min);
-		
+
 		Integer max1 = list.stream().max(Integer::compareTo).get();
 		System.out.println("max is : " + max1);
 
 		Integer secondLargest = list.stream().sorted(Comparator.reverseOrder()).skip(1).findFirst().get();
 		System.out.println("secondLargest : " + secondLargest);
 	}
-	
+
 	public static void getMaxAndSecondMax() {
-		int arr[] = {4,5,2,6,7};
-		int secondmax =0;
-		int max =0;
-        for(int i=0;i<arr.length;i++){
-            
-            if(max<arr[i]){
-                max=arr[i];
-            }
-       
-        }
-        System.out.println("max : "+max);
-        secondmax =max-1;
-        System.out.println("secondmax : "+secondmax);
+		Integer arr[] = { 4, 5, 2, 7 };
+		int secondmax = 0;
+		int max = 0;
+		for (int i = 0; i < arr.length; i++) {
+
+			if (max < arr[i]) {
+				max = arr[i];
+			}
+
+		}
+		System.out.println("max : " + max);
+		
+		List<Integer> list = Arrays.asList(arr);
+		Collections.sort(list);
+		int total = arr.length;
+		secondmax = list.get(total - 2);
+		System.out.println("second max is : " + secondmax);
+
 	}
 
 	public static void main(String[] args) {
-		AllInterviewsPrograms.countEachWordOccurancr();
+		AllInterviewsPrograms.getMaxAndSecondMax();
 
 	}
 

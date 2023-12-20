@@ -1,4 +1,4 @@
-package com.globant;
+package com.interviews;
 
 import java.util.Arrays;
 import java.util.IntSummaryStatistics;
