@@ -1,4 +1,4 @@
-package com.interview.object.classes;
+package com.browser.search;
 
 import java.awt.Desktop;
 import java.net.URI;

@@ -2,28 +2,45 @@ package com.interview.neosoft;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class PrintDuplicateValuesFromSet {
 
 	public static void main(String[] args) {
-		Set<String> set = new HashSet<String>();
+		Set<String> stringSet = new HashSet<>();
+        stringSet.add("apple");
+        stringSet.add("orange");
+        stringSet.add("banana");
+        stringSet.add("apple");
+        stringSet.add("grape");
+        stringSet.add("banana");
 
-		set.add("A");
-		set.add("A");
-		set.add("C");
-		set.add("B");
-		
-		//using normal java
-		
-		for(String string : set) {
-			if(set.add(string)==false) {
-				System.out.println("duplicates is : "+string);
-			}
-		}
+        System.out.println("Original Set: " + stringSet);
+        
+        
+        Set<String> uniqueSet = new HashSet<>();
+        Set<String> duplicates = new HashSet<>();
 
-		//List<String> list = set.stream().filter(s->!s.add(s)).collect(Collectors.toList()); 
+        for (String element : stringSet) {
+            if (!uniqueSet.add(element)) {
+                // If not added to uniqueSet, it's a duplicate
+                duplicates.add(element);
+            }
+        }
+
+        System.out.println("Duplicate Values: " + duplicates);
+
+//        Set<String> duplicates = stringSet.stream()
+//                .collect(Collectors.groupingBy(s -> s, Collectors.counting()))
+//                .entrySet()
+//                .stream()
+//                .filter(entry -> entry.getValue() > 2)
+//                .map(Map.Entry::getKey)
+//                .collect(Collectors.toSet());
+//
+//        System.out.println("Duplicate Values: " + duplicates);
 
 	}
 

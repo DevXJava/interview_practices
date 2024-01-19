@@ -1,6 +1,6 @@
 package com.academian;
 
-public class Test implements Runnable{
+public class ThreadStartTwice implements Runnable{
 
 	public void run(){
 
@@ -10,7 +10,7 @@ public class Test implements Runnable{
 
 	public static void main(String[] args) throws InterruptedException{
 
-		Thread thread1 = new Thread(new Test());
+		Thread thread1 = new Thread(new ThreadStartTwice());
 
 		thread1.start();
 

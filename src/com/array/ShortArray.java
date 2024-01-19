@@ -1,7 +1,5 @@
 package com.array;
 
-import java.util.Arrays;
-
 public class ShortArray {
 	
 	public static void shortArray() {

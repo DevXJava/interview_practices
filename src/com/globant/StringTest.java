@@ -1,9 +1,5 @@
 package com.globant;
 
-import java.util.Arrays;
-import java.util.IntSummaryStatistics;
-import java.util.List;
-
 public class StringTest {
 
 	public static void main(String[] args) {
@@ -16,7 +12,7 @@ public class StringTest {
 
 		String s1 = new String("Java");
 		String s2 = new String("Java");
-		System.out.println(s1 == s2);
+		System.out.println(s1 == s2); //false because we are comparing object by == operator
 		System.out.println(s1+"  "+s2);
 		
 
