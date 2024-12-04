@@ -22,8 +22,7 @@ public class MergeTwoArrayAndFindUniqueValue {
 		}
 
 		for (int k = 0; k < mergeArray.length; k++) {
-
-			System.out.println("merged array is :" + mergeArray[k]);
+			System.out.print(mergeArray[k]);
 		}
 		
 		
