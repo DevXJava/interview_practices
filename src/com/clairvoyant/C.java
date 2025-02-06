@@ -19,6 +19,10 @@ public class C extends B {
 		C c = new C();
 		System.out.println("==================================");
 		A a = new C();
+		
+		System.out.println("===================================");
+		
+		B b = new B();
 
 	}
 

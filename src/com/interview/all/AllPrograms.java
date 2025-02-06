@@ -299,7 +299,6 @@ public class AllPrograms {
 //19.
 	public static void findMostOccuranceStringFromAndArrayList() {
 		String[] str = { "pune", "pune", "pune", "mumbai", "mumbai", "indore" };
-		List<String> list = Arrays.asList(str);
 		
 		Stream.of(str).collect(Collectors.groupingBy(s -> s, Collectors.counting())).entrySet()
 	      .stream()
@@ -307,7 +306,8 @@ public class AllPrograms {
 	      .ifPresent(System.out::println);
 		System.out.println("======================================================");
 	 	//========================Another way==============================
-	 Optional<Entry<String, Long>>	maxStr = list.stream()
+		List<String> list = Arrays.asList(str);
+	    Optional<Entry<String, Long>>	maxStr = list.stream()
 			 .collect(Collectors.groupingBy(s->s,Collectors.counting()))
 	 	     .entrySet().stream().max(Comparator.comparing(Entry::getValue));
 	 
