@@ -178,6 +178,7 @@ public class AllPrograms {
 		// count occurrence of string
 		List<String> list = Arrays.asList("Jon", "Ajeet", "Steve", "Ajeet", "Jon", "Ajeet");
 		Set<String> st = new HashSet<String>(list);
+		System.out.println("Set is ! "+st);
 		for (String s : st)
 			System.out.println(s + ": " + Collections.frequency(list, s));
 	}
@@ -318,8 +319,7 @@ public class AllPrograms {
 		System.out.println(0.1*2 == 0.2);
 	}
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-
+		AllPrograms.countWordOccuranceOfArrayList();
 	}
 
 }
