@@ -8,9 +8,12 @@ public class MethodOverloading {
 	public static void hello(Object object) {
 		System.out.println("Object parameter");
 	}
+	public static void hello(StringBuffer stringBuffer) {
+		System.out.println("Object parameter");
+	}
 	
 	public static void main(String[] args) {
-		hello(null);
+		//hello(null);   //with single child parameter of Object class method its working fine 
 
 	}
 

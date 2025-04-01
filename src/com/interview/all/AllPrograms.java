@@ -53,6 +53,16 @@ public class AllPrograms {
 		map.forEach((key, value) -> {
 			System.out.println("ocuurance: " + key + "   " + value);
 		});
+		// Character occurrence
+		Character ch[] = {'h','e','l','l','o','h','o','w','a','r','e','y','o','u'};
+		ArrayList<Character> arrayList = new ArrayList<>();
+		for(Character character:ch) {
+			arrayList.add(character);
+		}
+		Map<Character, Long> map2 = arrayList.stream().collect(Collectors.groupingBy(Function.identity(),Collectors.counting()));
+		map2.forEach((key, value) -> {
+			System.out.println("character ocuurance: " + key + "   " + value);
+		});
 	}
 
 // 3.
@@ -318,8 +328,69 @@ public class AllPrograms {
 		System.out.println(0.1*3 == 0.3);
 		System.out.println(0.1*2 == 0.2);
 	}
-	public static void main(String[] args) {
-		AllPrograms.countWordOccuranceOfArrayList();
+	
+	//22-03-2025 capgemini
+	public static void reverseStringByWordUsingJava8(){
+		String sentence = "Java Concept Of The Day";
+		String reversed = Arrays.stream(sentence.split(" ")) //split sentence into words
+				          .collect(Collectors.collectingAndThen(Collectors.toList(), list->{
+				        	  Collections.reverse(list); //Reverse the list
+				        	  return list.stream();
+				          }))
+				          .collect(Collectors.joining(" ")); // Join word back into a sentence
+		System.out.println("reversed by word :" +reversed);
+		
+		
 	}
+	public static LinkedHashMap<String, Integer> shortHashMapAscOrderByValue(HashMap<String, Integer> mapParameter) {
+		HashMap<String, Integer> map = new HashMap<>();
+        map.put("Apple", 50);
+        map.put("Banana", 20);
+        map.put("Cherry", 30);
+        map.put("Mango", 40);
+
+        System.out.println("Original HashMap: " + map);
+        //convert HashMap to List of Map Entries 
+        List<Map.Entry<String, Integer>> list = new ArrayList<>(mapParameter.entrySet());
+        
+        //sort list based on values 
+        Collections.sort(list, new Comparator<Map.Entry<String, Integer>>() {
+        	@Override
+        	public int compare(Entry<String, Integer> o1, Entry<String, Integer> o2) {
+        		// TODO Auto-generated method stub
+        		//return o1.getValue().compareTo(o2.getValue()); //by value
+        		return o1.getKey().compareTo(o2.getKey()); //by key
+        	}
+		});
+        // Maintain insertion order using LinkedHashMap
+        LinkedHashMap<String, Integer> sortedMap = new LinkedHashMap<>();
+        for(Map.Entry<String, Integer> entry:list) {
+        	sortedMap.put(entry.getKey(), entry.getValue());
+        }
+        return sortedMap;
+        
+	}
+    //===================================================================================================================
+	
+	  public static void objectTypeParameters(String string) {
+	     System.out.println("string"); 
+	  }
+	 
+		/*
+		 * public static void objectTypeParameters(StringBuffer stringBuffer) {
+		 * System.out.println("string buffer"); }
+		 */
+	    public static void objectTypeParameters(Object object) {
+		System.out.println("objects");
+		}
+		public static void main(String[] args) {
+			HashMap<String, Integer> map = new HashMap<>();
+	        map.put("Apple", 50);
+	        map.put("Banana", 20);
+	        map.put("Cherry", 30);
+	        map.put("Mango", 40);
+	        LinkedHashMap<String, Integer> linkedHashMap = AllPrograms.shortHashMapAscOrderByValue(map);
+	        System.out.println(linkedHashMap);
+		}
 
 }
