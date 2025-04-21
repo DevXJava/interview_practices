@@ -32,6 +32,12 @@ public class FruitGrouping {
         	System.out.println(entry2.getKey()+"   :  "+entry2.getValue());
         }
 		
+        List<Integer> numbers = Arrays.asList(0, 1, 2, 3);
+        int sum = numbers.stream().reduce(0, Integer::sum); 
+        int min = numbers.stream().reduce(0, Integer::min); 
+        int max = numbers.stream().reduce(0, Integer::max);
+        
+        System.out.println("sum : "+sum+" min : "+min+" max : "+max);
 
 	}
 

@@ -9,6 +9,18 @@ public class Test {
 			System.out.println("In side finally block !!!");
 			notification();
 		}
+		System.out.println("---------------------------------------");
+		try {
+			System.out.println("tyr");
+			int a = 5/0;
+		} catch(ArithmeticException e){
+			System.out.println("catch");
+			int a = 0/5;
+			System.out.println("a is "+a);
+			return;
+		}finally {
+			System.out.println("finally");
+		}
 
 	}
 	

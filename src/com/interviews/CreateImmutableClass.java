@@ -9,7 +9,8 @@ public final class CreateImmutableClass {
 	public CreateImmutableClass modify(int i) {
 		if(this.i==i)
 			return this;
-		else return  (new CreateImmutableClass(i));
+		else 
+			return  (new CreateImmutableClass(i));
 	}
 	public static void main(String[] args) {
 		
