@@ -181,6 +181,15 @@ public class AllPrograms {
 		Map<String, Long> result = Arrays.stream(str.split("")).map(String::toLowerCase)
 				.collect(Collectors.groupingBy(s -> s, LinkedHashMap::new, Collectors.counting()));
 		result.forEach((k,v)->{System.out.println(k+"  "+v);});
+
+		
+		// 2nd way
+		List<Character> list = str.chars().mapToObj(c->(char)c).collect(Collectors.toList());
+		Map<Character,Long> map = list.stream().collect(Collectors.groupingBy(Function.identity(),Collectors.counting()));
+		map.forEach((k,v)->{
+			System.out.println(k+" : "+v);
+		});
+
 	}
 	
 //9.
@@ -191,6 +200,13 @@ public class AllPrograms {
 		System.out.println("Set is ! "+st);
 		for (String s : st)
 			System.out.println(s + ": " + Collections.frequency(list, s));
+
+		
+		//Second Way
+		Map<String, Long> map = list.stream().collect(Collectors.groupingBy(Function.identity(),Collectors.counting()));
+		map.forEach((k,v)->{
+			System.out.println(k+" : "+v);
+		});
 	}
 
 //10.
@@ -329,7 +345,11 @@ public class AllPrograms {
 		System.out.println(0.1*2 == 0.2);
 	}
 	
+
 	//22-03-2025 capgemini
+
+	//22-03-2025 capgamini
+
 	public static void reverseStringByWordUsingJava8(){
 		String sentence = "Java Concept Of The Day";
 		String reversed = Arrays.stream(sentence.split(" ")) //split sentence into words
@@ -338,10 +358,24 @@ public class AllPrograms {
 				        	  return list.stream();
 				          }))
 				          .collect(Collectors.joining(" ")); // Join word back into a sentence
+
 		System.out.println("reversed by word :" +reversed);
 		
 		
 	}
+
+	
+	// 
+	public static void reverseEachWordOfAStringInJava() {
+		
+		String string = "Welcome to Powerplay !";
+		String reversedEachWords = Arrays.stream(string.split(" "))
+				                         .map(word->new StringBuilder(word).reverse().toString())
+				                         .collect(Collectors.joining(" ")); 
+		System.out.println("reversedEachWords : "+reversedEachWords);
+	}
+	
+
 	public static LinkedHashMap<String, Integer> shortHashMapAscOrderByValue(HashMap<String, Integer> mapParameter) {
 		HashMap<String, Integer> map = new HashMap<>();
         map.put("Apple", 50);
@@ -370,6 +404,17 @@ public class AllPrograms {
         return sortedMap;
         
 	}
+
+	public static void reverseEachWordOfStringusingJava8(){
+		String input = "Welcome to Powerplay";
+
+        String result = Arrays.stream(input.split(" "))
+                .map(word -> new StringBuilder(word).reverse().toString())
+                .collect(Collectors.joining(" "));
+        System.out.println("result is : "+result);
+
+	}
+
     //===================================================================================================================
 	
 	  public static void objectTypeParameters(String string) {
@@ -391,6 +436,10 @@ public class AllPrograms {
 	        map.put("Mango", 40);
 	        LinkedHashMap<String, Integer> linkedHashMap = AllPrograms.shortHashMapAscOrderByValue(map);
 	        System.out.println(linkedHashMap);
+
+	        
+	        AllPrograms.reverseEachWordOfAStringInJava();
+
 		}
 
 }

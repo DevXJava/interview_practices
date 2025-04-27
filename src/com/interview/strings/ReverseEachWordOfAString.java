@@ -1,5 +1,9 @@
 package com.interview.strings;
 
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
+
 public class ReverseEachWordOfAString {
 	
 	
@@ -16,6 +20,18 @@ public class ReverseEachWordOfAString {
 		}
 		System.out.println(reverseString);
 	}
+
+	
+	public static void reverseEachWordOfStringusingJava8(){
+		String input = "Welcome to Powerplay";
+
+        String result = Arrays.stream(input.split(" "))
+                .map(word -> new StringBuilder(word).reverse().toString())
+                .collect(Collectors.joining(" "));
+        System.out.println("result is : "+result);
+
+	}
+
 
 	public static void main(String[] args) {
 		

@@ -147,6 +147,13 @@ public class Employee {
 				.sorted(Comparator.comparing(Employee::getAge)
 				.thenComparing(Employee::getName)).collect(Collectors.toList());
 		shortByAgeAndName.forEach((list)->System.out.println(list.getAge()+" : "+list.getName()));
+
+		
+  //17. Short Employee Salary with Department
+		Map<String, List<Employee>> shortEmpSalWithDepartment = employeeList.stream()
+				                                    .sorted(Comparator.comparing(Employee::getSalary))
+				                                    .collect(Collectors.groupingBy(Employee::getDepartment));
+
 	}
 
 }

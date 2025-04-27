@@ -88,6 +88,9 @@ public class ComparableComparatorTest {
 		}
 
 		// System.out.println(list);
+
+		// System.out.println(sortByDepart);
+
 	}
 
 }

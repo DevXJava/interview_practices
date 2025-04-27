@@ -35,29 +35,29 @@ public class ComparableTest implements Comparable<ComparableTest> {
 
 	public static void main(String[] args) {
 		// Create one LinkedList for Student object
-        LinkedList<ComparableTest> List
+        LinkedList<ComparableTest> list
             = new LinkedList<ComparableTest>();
-        List.add(new ComparableTest("Meet", 32, 2));
-        List.add(new ComparableTest("Jhon", 11, 5));
-        List.add(new ComparableTest("Sham", 92, 1));
-        List.add(new ComparableTest("William", 86, 3));
-        List.add(new ComparableTest("Harry", 35, 4));
+        list.add(new ComparableTest("Meet", 32, 2));
+        list.add(new ComparableTest("Jhon", 11, 5));
+        list.add(new ComparableTest("Sham", 92, 1));
+        list.add(new ComparableTest("William", 86, 3));
+        list.add(new ComparableTest("Harry", 35, 4));
         System.out.println("before sorting-------------------------");
         
-        for (ComparableTest s : List) {
+        for (ComparableTest s : list) {
         	System.out.println(s.name + " " + s.id + " "+ s.rollno);
 			
 		}
         System.out.println("after sorting---------------------------");
-        Collections.sort(List);
-        for (ComparableTest s : List) {
+        Collections.sort(list);
+        for (ComparableTest s : list) {
         	System.out.println(s.name + " " + s.id + " "+ s.rollno);
 			
 		}
         
-        Collections.sort(List,Collections.reverseOrder());
+        Collections.sort(list,Collections.reverseOrder());
         System.out.println("sorting in revers order-----------------");
-        for (ComparableTest s : List) {
+        for (ComparableTest s : list) {
         	System.out.println(s.name + " " + s.id + " "+ s.rollno);
 			
 		}
