@@ -17,7 +17,7 @@ public class PalindromCheckString {
 
 	public static void main(String[] args) {
 		
-		String str="nayand";
+		String str="nayan";
 		
 		boolean checking = PalindromCheckString.isPalindrom(str);
 		System.out.println("is it palindrom : "+checking);
