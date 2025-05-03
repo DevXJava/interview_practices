@@ -23,7 +23,7 @@ public class ReverseEachWordOfAString {
 
 	
 	public static void reverseEachWordOfStringusingJava8(){
-		String input = "Welcome to Powerplay";
+		String input = "Java Concept Of The Day";
 
         String result = Arrays.stream(input.split(" "))
                 .map(word -> new StringBuilder(word).reverse().toString())
@@ -36,6 +36,7 @@ public class ReverseEachWordOfAString {
 	public static void main(String[] args) {
 		
 		ReverseEachWordOfAString.reverseEachWordOfString("Java Concept Of The Day!");
+		ReverseEachWordOfAString.reverseEachWordOfStringusingJava8();
 		
 	}
 
