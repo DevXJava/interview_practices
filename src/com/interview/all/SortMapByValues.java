@@ -6,6 +6,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 public class SortMapByValues {
 
@@ -28,6 +29,17 @@ public class SortMapByValues {
 		}
 
 		map.forEach((k,v)->{System.out.println(k+" "+v);});
+		
+		
+		
+		// ===================Second way=========================
+				HashMap<Integer, String> shortedhashMap = map.entrySet().stream()
+						.sorted((i1, i2) -> i1.getValue().compareTo(i2.getValue()))
+						.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+
+				shortedhashMap.forEach((k, v) -> {
+					System.out.println(k + " " + v);
+				});
 	}
 
 }

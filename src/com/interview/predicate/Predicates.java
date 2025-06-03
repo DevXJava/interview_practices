@@ -68,7 +68,8 @@ public class Predicates {
 		listOfStudents.add(new Student(101010, "Chris", 89.8, "Computers"));
 		
 		// 1. Predicate – Tests an object
-		//Takes an argument T and returns a boolean
+		//Takes an argument T and returns a boolean 
+		//containing test() method
 		Predicate<Student> mathematicsPredicate = (Student student) -> student.getSpecialization().equals("Mathematics");
 		List<Student> mathematicsStudent = new ArrayList<>();
 		for(Student student : listOfStudents) {
@@ -79,6 +80,7 @@ public class Predicates {
 		
 		// 2. Consumer – Consumes an object
 		// Takes an argument and returns nothing
+		// Containing accept() method 
 		Consumer<Student> percentageConsumer = (Student student) ->{
 			System.out.println(student.getName()+"  "+student.getPercentage());
 		};
@@ -87,6 +89,7 @@ public class Predicates {
 		}
 		//3. Function – Applies to an object
 		// Takes an argument of type T and returns a result of type R
+		// Containing apply method +
 		Function<Student, String> nameFunction = (Student student) -> student.getName();
 		List<String> studentName = new ArrayList<>();
 		for(Student student : listOfStudents) {
@@ -95,6 +98,7 @@ public class Predicates {
 		
 		//4. Supplier – Supplies the objects
 		// Takes no argument and returns the results of type R
+		// Containing get() method 
 		Supplier<Student> studentSupplier = () -> new Student(11111, "New Student", 92.9, "Java 8");
 		listOfStudents.add(studentSupplier.get());
 		

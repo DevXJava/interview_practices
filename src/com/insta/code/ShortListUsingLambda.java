@@ -7,11 +7,23 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 class Employee{
-	String name;
-	int age;
+	private String name;
+	private int age;
 	public Employee(String name,int age) {
 		this.name=name;
 		this.age=age;
+	}
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
 	}
 	@Override
 	public String toString() {
@@ -23,7 +35,7 @@ class Employee{
 public class ShortListUsingLambda {
 	public static void convertLisToMap() {
 		List<Employee> employees = Arrays.asList(new Employee("John", 30),new Employee("Emma", 25),new Employee("Alex", 35));
-		Map<Integer, String> map = employees.stream().collect(Collectors.toMap(e->e.age, e->e.name));
+		Map<Integer, String> map = employees.stream().collect(Collectors.toMap(e->e.getAge(), e->e.getName()));
 		
 	}
 	
@@ -43,7 +55,8 @@ public class ShortListUsingLambda {
 
 	public static void sortListAscendingOrder() {
 		List<Employee> employees = Arrays.asList(new Employee("John", 30),new Employee("Emma", 25),new Employee("Alex", 35));
-		List<Employee> list =employees.stream().sorted(Comparator.comparingInt(e->e.age)).collect(Collectors.toList());
+		List<Employee> list =employees.stream().sorted(Comparator.comparingInt(e->e.getAge())).collect(Collectors.toList());
+		List<Employee> listReversed =employees.stream().sorted(Comparator.comparingInt(Employee::getAge).reversed()).collect(Collectors.toList());
 		list.forEach(System.out::print);
 	}
 	public static void main(String[] args) {

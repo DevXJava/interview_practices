@@ -20,5 +20,11 @@ public final class FinalClassExample {
 	public String getAddress() {
 		return address;
 	}
+	
+	public static void main(String[] args) {
+		FinalClassExample finalClassExample = new FinalClassExample(1, "dev", "baker street london");
+		
+		System.out.println(finalClassExample.getId()+" : "+finalClassExample.getName()+" : "+finalClassExample.getAddress());
+	}
 
 }

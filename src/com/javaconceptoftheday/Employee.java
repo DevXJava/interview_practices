@@ -93,6 +93,19 @@ public class Employee {
 		Optional<Employee> employeesPaid = employeeList.stream()
 				.collect(Collectors.maxBy(Comparator.comparing(Employee::getSalary)));
 		
+		//Another Way 
+		Optional<Employee> empHighest = employeeList.stream().sorted(Comparator.comparingDouble(Employee::getSalary).reversed())
+                .findFirst();
+
+         System.out.println("Highest Salary in the organisation : " + empHighest.get().getSalary());
+
+//(or)
+         //Another Way
+         System.out.println("Highest salary in the organisation: ");
+         employeeList.stream().max(Comparator.comparingDouble(Employee::getSalary)).ifPresent(System.out::println);
+		
+		
+		
    //5. Query 3.5 : Get the names of all employees who have joined after 2015?
 		List<String> joined2015 = employeeList.stream()
 				.filter(e->e.getYearOfJoining()>2015)
@@ -153,6 +166,15 @@ public class Employee {
 		Map<String, List<Employee>> shortEmpSalWithDepartment = employeeList.stream()
 				                                    .sorted(Comparator.comparing(Employee::getSalary))
 				                                    .collect(Collectors.groupingBy(Employee::getDepartment));
+		
+  //18. Second Highest Salary 
+		Optional<Employee> secondHighestSalary = employeeList.stream()
+				.sorted(Comparator.comparingDouble(Employee::getSalary).reversed()).skip(1).findFirst();
+  //19. Nth Highest salary.
+		int n=10;
+		Optional<Employee> nthHigh = employeeList.stream().sorted(Comparator.comparingDouble(Employee::getSalary)
+				.reversed()).skip(n-1).findFirst();
+				
 
 	}
 

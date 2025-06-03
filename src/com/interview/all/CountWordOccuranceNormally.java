@@ -23,6 +23,10 @@ public class CountWordOccuranceNormally {
 			}
 		}
 		System.out.println(charCount);
+		
+		// Character occurrence
+		Map<Character, Long> characterCount = str.chars().mapToObj(c->(char)c)
+				.collect(Collectors.groupingBy(s->s,Collectors.counting()));
 
 	}
 

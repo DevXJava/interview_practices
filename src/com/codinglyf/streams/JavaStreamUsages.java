@@ -32,7 +32,7 @@ public class JavaStreamUsages {
 		return commonValues3;
 
 	}
-	//Find elements in present in list1 but Not in list2
+	//Find elements which is present in list1 but Not in list2
 	public static List<Integer> findElementsInList1ButNotInList2(List<Integer> list1,List<Integer> list2) {
 		return list1.stream().filter(e->list2.stream().noneMatch(e::equals)).collect(Collectors.toList());
 	}

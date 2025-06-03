@@ -30,6 +30,9 @@ public class Stududent implements Comparable<Stududent>{
 		else
 			return -1;
 	}
+	/*public int compareTo(Stududent other) {
+        return this.id - other.id;  // Sort by ID ascending
+    }*/
 	
 	public static void main(String[] args) {
 		List<Stududent> list = new ArrayList<>();

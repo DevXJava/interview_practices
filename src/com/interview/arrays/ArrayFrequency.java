@@ -48,4 +48,9 @@ public class ArrayFrequency {
 		System.out.println("Start with 1-----------------------------");
 
 	}
+	
+	public void primitiveToList() {
+		int[] primitiveArray = {1, 2, 3, 4, 5};
+		List<Integer> integers = Arrays.stream(primitiveArray).boxed().collect(Collectors.toList());
+	}
 }

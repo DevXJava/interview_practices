@@ -2,7 +2,7 @@ package com.interview.all;
 
 interface defaultMethodInterface{
 	default void test() {
-		System.out.println("I am defaultMethodInterface method");
+		System.out.println("I am default Method Interface method");
 	}
 }
 
@@ -15,7 +15,7 @@ public class OverrideDefaultMethod implements defaultMethodInterface{
 
 	@Override
 	public void test() {
-		System.out.println("I am OverrideDefaultMethod class methdo ...");
+		System.out.println("I am Override Default Method class methdo ...");
 	}
 	
 }
