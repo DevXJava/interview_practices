@@ -40,7 +40,7 @@ public class ShortListUsingLambda {
 	}
 	
 	// Given a list of integers, filter even numbers,square them and sort the result in descending order 
-	public static void filerEvenAndSquareInDescendingOrder() {
+	public static void filterEvenAndSquareInDescendingOrder() {
 		List<Integer> list = Arrays.asList(5,2,8,1,3,7,6);
 		List<Integer> result = list.stream()
 				                //Filter even number
@@ -61,7 +61,7 @@ public class ShortListUsingLambda {
 	}
 	public static void main(String[] args) {
 		
-       ShortListUsingLambda.filerEvenAndSquareInDescendingOrder();
+       ShortListUsingLambda.filterEvenAndSquareInDescendingOrder();
 	}
 
 }
