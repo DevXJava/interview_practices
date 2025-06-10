@@ -5,6 +5,7 @@ public class ConvertIntegerToBinary {
 	public static void usingInBuiltMethod() {
 		int num =15;
 		String binary = Integer.toBinaryString(num);
+		System.out.println("binary is : "+binary);
 	}
 
 	public static void main(String[] args) {

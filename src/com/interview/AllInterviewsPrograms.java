@@ -123,7 +123,7 @@ public class AllInterviewsPrograms {
 	}
 
 	public static void main(String[] args) {
-		AllInterviewsPrograms.getMaxAndSecondMax();
+		AllInterviewsPrograms.findDuplicateFromArrayList();
 
 	}
 

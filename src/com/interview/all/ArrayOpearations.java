@@ -2,7 +2,7 @@ package com.interview.all;
 
 public class ArrayOpearations {
 
-	public void sortArray() {
+	public static void sortArray() {
 		int arr[] = {3,2,1,5,4};
 		int temp =0;
 		for (int i = 0; i < arr.length; i++) {
@@ -20,6 +20,9 @@ public class ArrayOpearations {
 			System.out.println("sorted array is "+arr[i]);
 			
 		}
+		
+		int findSecondHighest = arr.length-3;
+		System.out.println("findSecondHighest :"+findSecondHighest);
 	}
 	
 	//---------------------------------------------------------------------------------
@@ -30,7 +33,7 @@ public class ArrayOpearations {
 		
 	}
 	public static void main(String[] args) {
-		
+		ArrayOpearations.sortArray();
 	
 		
 	}
