@@ -1,4 +1,4 @@
-package com.interview.arrays;
+package com.arrays;
 
 public class SecondLargestNumber {
    

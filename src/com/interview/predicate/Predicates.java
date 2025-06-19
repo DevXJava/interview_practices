@@ -104,7 +104,8 @@ public class Predicates {
 		
        System.out.println("==================Normal Java v/s Java 8===================");	
        String message;
-       String documentType = null;
+       //String documentType = null;
+       String documentType = "pdf";
        if(documentType.equals("pdf")) {
     	   message = "Processing PDF";
        }else if(documentType.equals("docx")) {
@@ -123,6 +124,13 @@ public class Predicates {
        processors.put("txt", () -> "Processing TXT ...");
        //Find the processors or use a default if not found
        String result = processors.getOrDefault(documentType, () -> "Unknown format").get();
+       
+       
+       Predicate<String> isLongWord = str -> str.length() > 5;
+       System.out.println("isLongWord :"+isLongWord.test("hello")); // false
+
+       Function<String, Integer> getLength = str -> str.length();
+       System.out.println("getLength: "+getLength.apply("hello")); // 5
 
 	}
 

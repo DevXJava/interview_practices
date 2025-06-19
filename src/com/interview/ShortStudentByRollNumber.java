@@ -2,6 +2,7 @@ package com.interview;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,6 +54,10 @@ public class ShortStudentByRollNumber implements Comparable<ShortStudentByRollNu
         		.sorted((v1,v2)->v1.getRollNumber()-v2.getRollNumber())
         		.collect(Collectors.toList());
         byRollNumbers.forEach((l)->System.out.print(l.getRollNumber()));
+        
+        //Third Way
+        List<ShortStudentByRollNumber> byRollNumbers2 = list.stream()
+        		.sorted(Comparator.comparing(ShortStudentByRollNumber::getRollNumber).reversed()).collect(Collectors.toList());
 
 	}
 }

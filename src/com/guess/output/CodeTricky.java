@@ -1,4 +1,4 @@
-package com.interview.all;
+package com.guess.output;
 
 import java.util.Arrays;
 import java.util.List;
@@ -95,7 +95,20 @@ public class CodeTricky {
              System.out.println((String) null);  // prints: null
              System.out.println((Object) null);  // prints: null
         	*/
-
+             
+            //10.
+             char[] str ={'A','B','C'} ;
+             System.out.println(str);
+            /* 🧠 Why?
+            		 Because in Java:
+            		 When you print a char[] (character array) using System.out.println(),
+            		 It is implicitly converted into a String, not the memory address (like with other arrays).
+            		 This is a special behavior for char[] only.
+            		 
+            		 int[] arr = {1, 2, 3};
+					System.out.println(arr);   // prints something like [I@6f94fa3e
+					For int[] or Object[], it prints the type + hashcode, because toString() is not overridden.
+               */
 	}
 
 }

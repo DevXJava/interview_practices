@@ -25,6 +25,7 @@ public class FindSecondHighestSalary {
 		
 		Optional<Employee> secondHighestSal = list.stream()
 				.sorted(Comparator.comparingDouble(Employee::getSalary).reversed()).skip(1).findFirst();
+		System.out.println(secondHighestSal);
 
 	}
 
