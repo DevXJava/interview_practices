@@ -23,8 +23,7 @@ public class CheckPalindromStrings {
 	
 	public static boolean anotherWay() {
 		String str = "bakerstreet";
-		StringBuffer stringBuffer = new StringBuffer(str);
-		String reversed = stringBuffer.reverse().toString();
+		String reversed = new StringBuffer(str).reverse().toString();
 		boolean ans = false;
 		if(str.equals(reversed)) {
 			ans = true;

@@ -54,6 +54,12 @@ public class RemoveLaptopWordFromProduct {
 		
 		
 		productsList.forEach(product->System.out.println(product.getBrandname()));
+		
+		List<Product> products = productsList.stream().map(l->{
+			l.setBrandname(l.getBrandname().replace("Laptop", ""));
+			return l;
+		}).collect(Collectors.toList());
+				
 	}
 
 }

@@ -6,6 +6,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class MergeTwoListAndFindCommonValues {
 
@@ -29,6 +30,12 @@ public class MergeTwoListAndFindCommonValues {
 		System.out.println(str);
 
 		}
+		
+		// Merge 2 List and find common value
+		List<String> merging  = Stream.concat(l1.stream(), l2.stream()).collect(Collectors.toList());
+		HashSet<String> hashSet = new HashSet<>();
+		Set<String> commonValue = merge.stream().filter(s->!hashSet.add(s)).collect(Collectors.toSet());
+		
 
 	}
 

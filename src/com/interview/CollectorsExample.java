@@ -1,20 +1,45 @@
 package com.interview;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 class ProductCollect{  
-    int id;  
-    String name;  
-    float price;  
+    private int id;  
+    private String name;  
+    private float price;  
       
     public ProductCollect(int id, String name, float price) {  
         this.id = id;  
         this.name = name;  
         this.price = price;  
-    }  
+    }
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public float getPrice() {
+		return price;
+	}
+
+	public void setPrice(float price) {
+		this.price = price;
+	}  
 }  
 public class CollectorsExample {
 
@@ -28,7 +53,12 @@ public class CollectorsExample {
         productsList.add(new ProductCollect(5,"Apple Laptop",90000f));  
         
         Set<Float> set = productsList.stream()
-        		.map(product->product.price).collect(Collectors.toSet());
+        		.map(product->product.getPrice()).collect(Collectors.toSet());
+        
+        //1. sort Product by price
+        List<ProductCollect> sortByPrice = productsList.stream()
+        		.sorted(Comparator.comparing(ProductCollect::getPrice).reversed()).collect(Collectors.toList());
+        sortByPrice.forEach(l->System.out.println(l.getPrice()));
 
 	}
 

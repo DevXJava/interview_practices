@@ -65,7 +65,7 @@ public class AllInterviewsPrograms {
 		List<String> sortedListNatural = list.stream().sorted().collect(Collectors.toList());
 	}
 
-	public static void countEachWordOccurancr() {
+	public static void countEachCharacterOccurancrance() {
 		String str = "devendra";
 		HashMap<Character, Integer> hashMap = new HashMap<>();
 		char ch[] = str.toCharArray();
@@ -78,9 +78,17 @@ public class AllInterviewsPrograms {
 		}
 		hashMap.forEach((k, v) -> System.out.println(k + "  :  " + v));
 	}
+	
+	public static void countEachCharacterOccurancranceUsingJava8() {
+		String str = "devendra";
+		List<Character> list = str.chars().mapToObj(c->(char)c).collect(Collectors.toList());
+		Map<Character,Long> map = list.stream().collect(Collectors.groupingBy(Character::charValue,Collectors.counting()));
+		System.out.println("map is : "+map);
+	}
 
 	public static void getMinMaxSecondHighestNumberUsingJava8() {
 		int arr[] = { 4, 5, 2, 6, 7 };
+		//converting primitive to Object type
 		List<Integer> list = Arrays.stream(arr).boxed().collect(Collectors.toList());
 
 		Integer min = list.stream().min(Integer::compareTo).get();
@@ -107,7 +115,7 @@ public class AllInterviewsPrograms {
 		int max = 0;
 		for (int i = 0; i < arr.length; i++) {
 
-			if (max < arr[i]) {
+			if (max < arr[i]) {  
 				max = arr[i];
 			}
 
@@ -123,7 +131,7 @@ public class AllInterviewsPrograms {
 	}
 
 	public static void main(String[] args) {
-		AllInterviewsPrograms.findDuplicateFromArrayList();
+		AllInterviewsPrograms.countEachCharacterOccurancranceUsingJava8();
 
 	}
 
