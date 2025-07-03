@@ -45,8 +45,9 @@ public class CountCharacterBySequence {
 		Set<String> st = new HashSet<String>(list);
         for (String s : st)
             System.out.println(s + ": " + Collections.frequency(list, s));
-		//find most occurence 
         
+        
+		//find most occurence 
         Optional<Entry<String, Long>>	maxStr = list.stream()
    			 .collect(Collectors.groupingBy(s->s,Collectors.counting()))
    	 	     .entrySet().stream().max(Comparator.comparing(Entry::getValue));

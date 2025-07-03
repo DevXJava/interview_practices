@@ -1,7 +1,5 @@
 package com.interview.threads;
 
-import java.util.Collection;
-
 class ThreadTest extends Thread{
 	 @Override
 	public void run() {

@@ -47,6 +47,10 @@ public class ConvertListOfObjectToMap {
 		Map<Integer, Product> map = list.stream().collect(Collectors.toMap(Product::getId, Function.identity(),
 				(existing,replacement)->existing));
 		System.out.println("map is : "+map);
+		
+		Map<Integer, String> map2 = list.stream().collect(Collectors.toMap(Product::getId, Product::getName,
+				(existing,replacement)->existing));
+		System.out.println("map2 is : "+map2);
 
 	}
 
