@@ -22,13 +22,13 @@ public class ReverseStringUsingJava8 {
 		
 		//=============================================================
 		List<String> reversedStr = Arrays.stream(string.split(" ")).map(word->new StringBuilder(word).reverse().toString()).collect(Collectors.toList());
-		
+		System.out.println("reversedStr : "+reversedStr);
 		//==========================Reverse Each Word Without Inbuilt Function=================================
 		String reverseEachWord = "";
 		for(int i=string.length()-1;i>=0;i--) {
 			reverseEachWord = reverseEachWord+string.charAt(i);
 		}
-		System.out.println("reverse : "+reverseEachWord);
+		System.out.println("reverse each word: "+reverseEachWord);
 
 	}
 

@@ -16,6 +16,7 @@ public class MajorityElementWith {
 				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 		System.out.println("map is : "+map);
 		
+		//Another way 
 		Optional<Integer> majority = map.entrySet().stream().filter(e->e.getValue()>arr.length/2)
 				.map(Map.Entry::getKey).findFirst();
 		

@@ -237,7 +237,13 @@ public class Employee {
 				.collect(Collectors.groupingBy(Employee::getDeptName,Collectors.groupingBy(Employee::getGender,Collectors.averagingDouble(Employee::getSalary))));
 		
 		//28. To get a list of employees from each department whose salary is greater than the average salary of their department
-		
+		Map<String, List<Employee>> empEachDeptWhoseSalgreaterThenAvgSal = list.stream().collect(Collectors.groupingBy(Employee::getDeptName,
+				Collectors.collectingAndThen(Collectors.toList(), empList->{
+					double avg = empList.stream().mapToDouble(Employee::getSalary)
+							.average()
+							.orElse(0.0);
+					return empList.stream().filter(emp->emp.getSalary()>avg).collect(Collectors.toList());
+				})));
 		
 		//29. Find Highest salary in the organisation.
 		
@@ -245,7 +251,7 @@ public class Employee {
 		//Or
 		Optional<Employee> empHighest = list.stream().sorted(Comparator.comparingDouble(Employee::getSalary).reversed())
                 .findFirst();
-	
+		Optional<Employee> findHighestSalary = list.stream().collect(Collectors.maxBy(Comparator.comparingDouble(Employee::getSalary)));
 		
 		//30. Find Second Highest salary in the organisation.
 		Optional<Employee> emp2 = list.stream().sorted(Comparator.comparingDouble(Employee::getSalary)
