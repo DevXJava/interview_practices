@@ -29,6 +29,10 @@ public class AaPractice {
 		list.add(new Employee(8, "Ali", 23, 145, "M", "IT", "Trivandam", 2015));
 		list.add(new Employee(9, "Ram", 25, 160, "M", "IT", "Blore", 2010));
 
+		//46. Youngest male in IT dept ?
+		Optional<Employee> youngestMaleEmpInHrDept = list.stream()
+				.filter(emp->emp.getGender().equals("M")&&emp.getDeptName().equals("HR")).min(Comparator.comparingInt(Employee::getAge));
+		System.out.println("Youngest Emp : "+youngestMaleEmpInHrDept.get().getName());
 		// 45. Find the employees whose name start with J.
 		List<Employee> nameStartWith = list.stream().filter(emp -> emp.getName().startsWith("M"))
 				.collect(Collectors.toList());
@@ -380,7 +384,15 @@ public class AaPractice {
 		       .filter(n5 -> n5 % 2 == 0)
 		       .forEach(System.out::println);  // Output: 2 4
 		System.out.println(numbers8);  // Output: [1, 2, 3, 4, 5]
- 				
+ 		
+		//21. count word character occurrence from string ?
+		String string = "devendra";
+		List<Character> characters = string.chars().mapToObj(c->(char)c).toList();
+		Map<Character,Long> countWordOccur = characters.stream().collect(Collectors.groupingBy(Character::charValue,
+				Collectors.counting()));
+		countWordOccur.forEach((k,v)->{
+			System.out.println(k+" : "+v);
+		});
 
 	}
 

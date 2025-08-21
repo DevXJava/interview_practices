@@ -1,7 +1,6 @@
 package com.medium;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.DoubleSummaryStatistics;
 import java.util.List;
@@ -117,7 +116,6 @@ public class Employee {
 		list.add(new Employee(2, "Francesca", 29, 120, "F", "HR", "Hyderabad", 2015));
 		list.add(new Employee(3, "Ramesh", 30, 115, "M", "HR", "Chennai", 2014));
 		list.add(new Employee(4, "Melanie", 32, 125, "F", "HR", "Chennai", 2013));
-
 		list.add(new Employee(5, "Padma", 22, 150, "F", "IT", "Noida", 2013));
 		list.add(new Employee(6, "Milad", 27, 140, "M", "IT", "Gurugram", 2017));
 		list.add(new Employee(7, "Uzma", 26, 130, "F", "IT", "Pune", 2016));

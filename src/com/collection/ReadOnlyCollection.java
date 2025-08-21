@@ -1,6 +1,7 @@
 package com.collection;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -55,9 +56,21 @@ public class ReadOnlyCollection {
 	}
 	
 	
+	
+	
+	
 	public static void main(String[] args) {
 		
-       unmofiableList();
+       //unmofiableList();
+       
+       List<Integer> integers = Arrays.asList(1,2,3);
+       integers.set(0, 10);
+       integers.add(12);
+       System.out.println(integers);
+   	   List<Integer> list = new ArrayList<>();
+   	   list.add(1);
+   	   list.add(2);
+   	   list.add(3);
 	}
 
 }

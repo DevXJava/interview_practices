@@ -20,7 +20,7 @@ public class ReverseStringUsingJava8 {
 		System.out.println(reversed);
 		
 		
-		//=============================================================
+		//=========================Reverse Each Word====================================
 		List<String> reversedStr = Arrays.stream(string.split(" ")).map(word->new StringBuilder(word).reverse().toString()).collect(Collectors.toList());
 		System.out.println("reversedStr : "+reversedStr);
 		//==========================Reverse Each Word Without Inbuilt Function=================================

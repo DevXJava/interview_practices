@@ -77,6 +77,10 @@ public class AllInterviewsPrograms {
 			}
 		}
 		hashMap.forEach((k, v) -> System.out.println(k + "  :  " + v));
+		
+		//Another way .
+		List<Character> list = str.chars().mapToObj(c->(char)c).collect(Collectors.toList());
+				
 	}
 	
 	public static void countEachCharacterOccurancranceUsingJava8() {
