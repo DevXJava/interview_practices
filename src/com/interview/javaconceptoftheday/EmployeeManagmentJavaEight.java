@@ -8,60 +8,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-//https://javaconceptoftheday.com/solving-real-time-queries-using-java-8-features-employee-management-system/
-class Employee {
-	private int id;
-	private String name;
-	private int age;
-	private String gender;
-	private String department;
-	private int yearOfJoining;
-	private double salary;
 
-	public Employee(int id, String name, int age, String gender, String department, int yearOfJoining, double salary) {
-		this.id = id;
-		this.name = name;
-		this.age = age;
-		this.gender = gender;
-		this.department = department;
-		this.yearOfJoining = yearOfJoining;
-		this.salary = salary;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public int getAge() {
-		return age;
-	}
-
-	public String getGender() {
-		return gender;
-	}
-
-	public String getDepartment() {
-		return department;
-	}
-
-	public int getYearOfJoining() {
-		return yearOfJoining;
-	}
-
-	public double getSalary() {
-		return salary;
-	}
-
-	@Override
-	public String toString() {
-		return "Id : " + id + ", Name : " + name + ", age : " + age + ", Gender : " + gender + ", Department : "
-				+ department + ", Year Of Joining : " + yearOfJoining + ", Salary : " + salary;
-	}
-}
 
 public class EmployeeManagmentJavaEight {
 
@@ -180,20 +127,9 @@ public class EmployeeManagmentJavaEight {
 		
 		System.out.println("contMaleFemale :"+contMaleFemale);
 		
-		
-		
-				
-				
-				
-				
-				
-				
-		
-		
-		
-		
-		
-		
+		// print employee name whose age >25
+		List<String> empAge = employeeList.stream().filter(e -> e.getAge() > 25).map(Employee::getName)
+				.collect(Collectors.toList());
 		
 		// sorted employee by age in descending order
 		List<Employee> emp = employeeList.stream().sorted((a, b) -> b.getAge() - a.getAge()).collect(Collectors.toList());

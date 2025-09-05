@@ -5,11 +5,11 @@ import java.util.Map.Entry;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-class Student {
+class Student1 {
     private String name;
     private int rank;
 
-    public Student(String name, int rank) {
+    public Student1(String name, int rank) {
         this.name = name;
         this.rank = rank;
     }
@@ -30,34 +30,34 @@ class Student {
 
 public class GroupByRanking {
     public static void main(String[] args) {
-        List<Student> students = Arrays.asList(
-            new Student("Alice", 1),
-            new Student("Bob", 2),
-            new Student("Charlie", 1),
-            new Student("David", 3),
-            new Student("Eve", 2),
-            new Student("Frank", 3)
+        List<Student1> students = Arrays.asList(
+            new Student1("Alice", 1),
+            new Student1("Bob", 2),
+            new Student1("Charlie", 1),
+            new Student1("David", 3),
+            new Student1("Eve", 2),
+            new Student1("Frank", 3)
         );
 
         // Group students by rank
-        Map<Integer, List<Student>> groupedByRank = students.stream()
-                .collect(Collectors.groupingBy(Student::getRank));
+        Map<Integer, List<Student1>> groupedByRank = students.stream()
+                .collect(Collectors.groupingBy(Student1::getRank));
 
         // Print grouped students
         groupedByRank.forEach((rank, studentList) -> 
             System.out.println("Rank " + rank + ": " + studentList)
         );
         
-        List<Student> startWithA = students.stream().filter(s->s.getName().startsWith("A")).collect(Collectors.toList());
+        List<Student1> startWithA = students.stream().filter(s->s.getName().startsWith("A")).collect(Collectors.toList());
         
         startWithA.forEach(System.out::println);
         
         //Compare by rank
-        Map<Integer,Student> compareByRank = students.stream().sorted(Comparator.comparing(Student::getRank)).collect(Collectors.toMap(Student::getRank, 
+        Map<Integer,Student1> compareByRank = students.stream().sorted(Comparator.comparing(Student1::getRank)).collect(Collectors.toMap(Student1::getRank, 
         		student->student,(existing,replacement)->existing,LinkedHashMap::new));
         
-       Set<Entry<Integer, Student>>  set = compareByRank.entrySet();
-       for(Entry<Integer, Student> entry:set) {
+       Set<Entry<Integer, Student1>>  set = compareByRank.entrySet();
+       for(Entry<Integer, Student1> entry:set) {
     	   System.out.println("Rank : "+entry.getKey()+"  Student Name:    "+entry.getValue());
        }
        

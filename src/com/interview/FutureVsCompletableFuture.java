@@ -41,7 +41,7 @@ public class FutureVsCompletableFuture {
 		/*
 		 CompletableFuture in Java is an enhanced version of Future, introduced in
 		 Java 8. It supports asynchronous, non-blocking, and functional-style
-		 programming. Unlike Future, it allows you to chain tasks, register callbacks,
+		 programming. Unlike Future, it allows you to chain tasks, register call backs,
 		 and compose multiple asynchronous operations.
 		 
 		 */
