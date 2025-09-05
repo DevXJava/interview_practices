@@ -1,4 +1,4 @@
-package com.guess.output;
+package com.interview.guess.output;
 
 public class Test4 {
 	public static void swap(Integer i, Integer j) {

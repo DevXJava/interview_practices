@@ -1,4 +1,4 @@
-package com.guess.output;
+package com.interview.guess.output;
 
 import java.util.Arrays;
 import java.util.List;

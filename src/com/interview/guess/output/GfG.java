@@ -1,4 +1,4 @@
-package com.guess.output;
+package com.interview.guess.output;
 
 public class GfG {
 
