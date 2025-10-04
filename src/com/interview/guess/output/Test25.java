@@ -1,6 +1,6 @@
 package com.interview.guess.output;
 
-public class ThreadStartTwice implements Runnable{
+public class Test25 implements Runnable{
 
 	public void run(){
 
@@ -10,7 +10,7 @@ public class ThreadStartTwice implements Runnable{
 
 	public static void main(String[] args) throws InterruptedException{
 
-		Thread thread1 = new Thread(new ThreadStartTwice());
+		Thread thread1 = new Thread(new Test25());
 
 		thread1.start();
 

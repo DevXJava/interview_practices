@@ -1,6 +1,6 @@
 package com.interview.guess.output;
 
-public class FinallyAndExit {
+public class Test23 {
 
 	public static void main(String[] args) {
 		try {

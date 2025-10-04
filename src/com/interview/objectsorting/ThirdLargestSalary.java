@@ -1,7 +1,9 @@
 package com.interview.objectsorting;
 
 import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 class EmployeeThird {
@@ -61,6 +63,8 @@ public class ThirdLargestSalary {
 		System.out.println("Third Largest salary name:. "+list.stream().sorted((a,b)->(b.getSalary()-a.getSalary())).skip(2).map(EmployeeThird::getName).findFirst().get());
 			
 		System.out.println("sort based on id :."+list.stream().sorted((c,d)->(c.getId()-d.getId())).collect(Collectors.toList()));
+		
+		EmployeeThird thirdLargestSal = list.stream().sorted(Comparator.comparing(EmployeeThird::getSalary).reversed()).skip(2).findFirst().orElseThrow(null);
 		
 	}
 

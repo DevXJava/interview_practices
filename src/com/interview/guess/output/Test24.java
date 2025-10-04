@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-public class CodeTricky {
+public class Test24 {
 
 	public static void main(String[] args) {
 

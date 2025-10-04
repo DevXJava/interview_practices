@@ -1,6 +1,6 @@
 package com.interview.guess.output;
 
-public class GfG {
+public class Test22 {
 
 	public static void main(String args[]) { 
 		String s1 = new String("geeksforgeeks"); 
