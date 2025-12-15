@@ -1,0 +1,241 @@
+Q.find emp who have max salary for each City ?
+
+Ans :
+SELECT e.* FROM employee e WHERE salary = (SELECT MAX(salary) FROM employee WHERE city = e.city);
+SELECT name, city, salary FROM employee e WHERE salary = (SELECT MAX(salary) FROM employee WHERE city = e.city) AND city IN ('Delhi', 'Mumbai');
+
+✅ Alternative using ROW_NUMBER() (if you want top 1 per city):
+WITH RankedEmployees AS (
+  SELECT *,
+         ROW_NUMBER() OVER (PARTITION BY city ORDER BY salary DESC) AS rank
+  FROM employee
+)
+SELECT *
+FROM RankedEmployees
+WHERE rank = 1;
+
+
+Q. swap gender M to F and F to M in employee table query ?
+Ans :
+UPDATE employee
+SET gender = CASE 
+               WHEN gender = 'M' THEN 'F'
+               WHEN gender = 'F' THEN 'M'
+               ELSE gender
+             END;
+
+Q.student (id,roll_no,name,subject,marks) table find top 3 student in each subject ?
+
+Ans :
+WITH RankedStudents AS (Select id,roll_no,name,subject,marks) ROW_NUMBER() OVER(PARTION BY subject ORDER BY marks DESC) as rank FROM student)
+select * FROM RankedStudents Where rank <=3 ;
+
+
+Q. o/p -> name, dept_name if no depart print 'no department'
+
+Employee
+ 
+| emp_id  | name    | dept_id  |
+| ------- | ------- | -------- |
+| 1       | Alice   | 10       |
+| 2       | Bob     | NULL     |
+| 3       | Charlie | 20       |
+| 4       | Diana   | 99       |
+
+Department
+| dept_id  | dept_name  |
+| -------- | ---------- |
+| 10       | HR         |
+| 20       | IT         |
+
+
+Ans :
+SELECT e.name,COALESCE(d.dept_name, 'no department') AS dept_name FROM Employee e LEFT JOIN Department d ON e.dept_id = d.dept_id;
+#select name,dept_name from Employee e left join Department d on e.dept_id= d.dept_id;
+
+Q.
+Part 1:
+--------
+You have a table of employees with Eid, Fname, Lname, Email, Salary etc. Write an SQL query to print names of all the employees whose salary greater than or equal to the employee with first name “Rita" 
+
+Table Name :: Employee
+Column Names :: Eid, Fname, Lname, Email, Salary
+
+Ans : select Fname from employee where Salary >=(select Salary from employee where Fname = 'Rita')
+ 
+Part 2:
+--------
+Now assume the salary has been moved to Salary Table. Write an SQL query to print names of all the employees whose salary greater than or equal to the employee with first name “Rita”.
+
+Table Name :: Employee 
+Column Names :: Eid, Fname, Lname, Email .
+
+Table Name :: Salary
+Column Names :: Eid, Salary
+
+Ans :
+SELECT e.Fname, e.Lname FROM Employee e JOIN Salary s ON e.Eid = s.Eid WHERE s.Salary >= (
+SELECT s2.SalaryFROM Employee e2 JOIN Salary s2 ON e2.Eid = s2.Eid WHERE e2.Fname = 'Rita' LIMIT 1)
+
+Q.Update Employee salary 10000  who have salary   5000 and 7000
+Ans : UPDATE employee SET salary = 10000 WHERE salary IN (5000, 7000);
+
+Q. Join 2 Tables ?
+employee : emid , empdept , emsalary.
+address : addid , street,city,emid.
+
+Ans :select * from employee e inner join address a on e.emid=a.emid;
+
+Q. group by Dept and Get the employees grouped by department : Emp: Name, Address ,salary ,departmentName
+Ans : SELECT name, address, salary, department_name FROM employee ORDER BY department_name;
+
+Q. How Optimize SQL Query ?
+Q. Function vs Procedure Stored procedure  ?
+Q. How to create index use of it ?
+Q. what is pivot table in SQl
+Q. what is default SQL Engine 
+Q. what is relationship in SQl
+
+Q. find second highest salary ?
+Ans : SELECT DISTINCT salary FROM employees ORDER BY salary DESC LIMIT 1 OFFSET 1;
+Ans : SELECT MAX(salary) AS second_highest_salary FROM employees WHERE salary < (SELECT MAX(salary) FROM employees);
+
+Q.find second highest salary optimized 
+Employee : salary
+select salary from employee order by salary desc offset 1 limit 1;
+
+Q. Design schema ?
+1. Orgnization : org_id,org_name,org_type,org_add
+2. Department  : dept_id,org_id
+3. Manager : manager_id,dept_id,manager_name
+4. Employee : emp_id,dept_id,manager_id,emp_name
+
+Q. find list of all employee whose manager name is "Venkat"
+Ans:
+select emp.name,mg.manager_name form employee e inner join Manager mg on e.manager_id = mg.manager_id where mg.manager_name = "Venkat"
+
+
+Q. find top 5 customer ?
+select customer_id from customer order by customer_id asc limit 5;
+
+Q. find duplicate user ?
+SELECT userid, COUNT(*) as cnt FROM user GROUP BY userid HAVING COUNT(*) > 1;
+
+Q. find highest 5  sum of amount order  of customer using sql?
+
+Q.Optimsutic and Pasimistic locking ?	
+
+Q.Project --->(Group 1,(Group 2(Group 3(Group 4))))  ...... 10nth ---> have 5 task may be multiple task ---->Linked with group and sub group design database ?
+==================================================================================================================================
+Q. Primary Key vs Unique Key ?
+Ans:
+🔹 Primary Key
+A Primary Key is a column (or set of columns) that uniquely identifies each row in a table.
+It is the main unique identifier for records.
+
+✅ Rules of Primary Key:
+Only one primary key per table (though it can be composite, i.e., multiple columns together).
+Cannot contain NULL values.
+Must contain unique values.
+Automatically creates a unique clustered index (in most databases like MySQL, SQL Server).
+
+👉 Example:
+CREATE TABLE Employee (
+    emp_id INT PRIMARY KEY,   -- Primary Key
+    name VARCHAR(100),
+    email VARCHAR(100) UNIQUE
+);
+Here, emp_id is the Primary Key → uniquely identifies each employee.
+
+🔹 Unique Key
+A Unique Key ensures that the values in a column (or set of columns) are unique across rows.
+It is not the main identifier but still enforces uniqueness.
+
+✅ Rules of Unique Key:
+A table can have multiple unique keys.
+Unlike Primary Key, Unique Key can have one NULL value (varies by database).
+Creates a non-clustered unique index by default.
+👉 Example:
+CREATE TABLE Employee (
+    emp_id INT PRIMARY KEY,
+    email VARCHAR(100) UNIQUE,   -- Unique Key
+    phone VARCHAR(20) UNIQUE     -- Another Unique Key
+);
+Here:
+emp_id (Primary Key) → main identifier.
+email and phone (Unique Keys) → prevent duplicate entries.
+
+🔹 Comparison Table:
+| Feature           | **Primary Key**           | **Unique Key**              |
+| ----------------- | ------------------------- | --------------------------- |
+| **Purpose**       | Main identifier           | Enforces uniqueness         |
+| **Per Table**     | Only 1 (can be composite) | Multiple allowed            |
+| **NULL Allowed?** | ❌ No                      | ✅ Yes (only 1 null allowed) |
+| **Duplicates?**   | ❌ Not allowed             | ❌ Not allowed               |
+| **Index Type**    | Clustered (by default)    | Non-clustered (by default)  |
+-----------------------------------------------------------------------------------
+✅ Summary:
+Primary Key = Main identity (mandatory, unique, not null).
+Unique Key = Extra uniqueness constraints (can be multiple, allows null).
+
+==========================================================================================
+Q. n+1 Query problem ?
+Ans: 
+🔹 What is the N+1 Query Problem?
+Suppose you fetch a list of entities (like Students) in 1 query.
+Then, for each student, you lazily fetch related data (like Courses) → this generates N extra queries.
+So in total, 1 (main query) + N (child queries) = N+1 queries.
+👉 Example (Hibernate / JPA):
+List<Student> students = studentRepository.findAll();
+for(Student s : students) {
+    System.out.println(s.getCourses().size()); 
+}
+What happens?
+
+First query → SELECT * FROM student (fetches all students).
+Then, for each student → SELECT * FROM course WHERE student_id = ?
+If there are 100 students → 1 + 100 = 101 queries 😱
+
+🔹 Why is it a Problem?
+Very inefficient.
+Causes performance issues in production when data grows.
+Known as an anti-pattern in ORM frameworks.
+
+🔹 How to Fix N+1 Problem?
+✅ 1. Use JOIN FETCH (Hibernate/JPA):
+@Query("SELECT s FROM Student s JOIN FETCH s.courses")
+List<Student> findAllWithCourses();
+This fetches students + courses in a single query.
+
+✅ 2. Use EntityGraph:
+@EntityGraph(attributePaths = "courses")
+@Query("SELECT s FROM Student s")
+List<Student> findAllWithCourses();
+JPA feature to eagerly load associations.
+
+✅ 3. Use batch_size (Hibernate setting)
+hibernate.default_batch_fetch_size=10
+Instead of fetching 1-by-1, Hibernate groups queries into batches.
+
+✅ 4. Use DTO Projections
+Fetch only the required fields in one SQL query:
+@Query("SELECT new com.example.StudentDTO(s.name, c.name) 
+        FROM Student s JOIN s.courses c")
+List<StudentDTO> findAllStudentWithCourses();
+
+🔹 Example
+Without Fix (N+1 Problem)
+SELECT * FROM student;
+SELECT * FROM course WHERE student_id=1;
+SELECT * FROM course WHERE student_id=2;
+...
+With Fix (JOIN FETCH)
+SELECT s.*, c.* 
+FROM student s
+JOIN course c ON s.id = c.student_id;
+
+✅ Summary:
+N+1 query problem = fetching parent + children lazily causes multiple queries.
+Fix = Use JOIN FETCH, EntityGraph, batch_size, or projections.
+
+Q. Truncate vs Delete ?

@@ -2,6 +2,7 @@ package com.interview.all;
 
 import java.util.HashMap;
 import java.util.LinkedHashSet;
+import java.util.List;
 import java.util.Set;
 
 public class RemoveDuplicateCharacterFromString {
@@ -19,6 +20,11 @@ public class RemoveDuplicateCharacterFromString {
 			System.out.print(c);
 
 		}
+		
+		//Remove duplicate character using java 8?
+		
+		List<Character> characters = str.chars().mapToObj(c->(char)c).toList();
+		List<Character> uniqueChar = characters.stream().distinct().toList();
 
 		// Checking normal occurrence
 		HashMap<Character, Integer> charCount = new HashMap<>();

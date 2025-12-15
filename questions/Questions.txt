@@ -1,0 +1,1541 @@
+1. Technosoft (Robert Bosch ) --- Contract to hire layoff
+2. Sumansa Media ----- lay off due to covide
+3. Innoeye aquired by Rakuten Symphony ----- they layoff 
+4. Einfochips (Parent Company Arrow ) ---- layoff project over 
+5. Eclat (Handling Thred Eclinical Research ) ---- layoff
+
+1. How can you use Amazon S3 in a Java application?
+2. How do you connect a Java application to an Amazon RDS database?
+3. What is the use of the AWS SDK for Java? How do you use it?
+4. How can you upload and download files to/from S3 using Java?
+5. How do you implement secure credentials handling for AWS in a Java application?
+6. What is IAM and how do you use roles and policies in a Java AWS environment?
+7. How can you invoke a Lambda function from a Java application?
+8. How do you use Amazon DynamoDB with Java?
+9. Explain how to use Amazon SNS or SQS in a Java-based microservice.
+10. How do you deploy a Spring Boot Java application to AWS Elastic Beanstalk?
+11. What are the advantages of using AWS Lambda with Java for backend services?
+12. How do you monitor and log your Java application in AWS (e.g., CloudWatch integration)?
+13. What are some best practices when using EC2 instances for running Java apps?
+14. Explain how you’d configure CI/CD for a Java app using AWS CodePipeline and CodeBuild.
+15. How can you make a Java web app serverless using AWS services (API Gateway, Lambda, S3)?
+
+
+
+
+
+
+Interview Experience at Wipro | Java + Spring Boot + Microservices (5 YOE)
+If you’re preparing for backend developer interviews, this might help you.
+
+⸻
+
+I recently appeared for a technical interview at Wipro for a Java Backend Developer role (5 years’ experience).
+Sharing my experience here in the hope that it helps others preparing for similar roles.
+
+Here’s a breakdown of the topics and types of questions that were asked during the technical round:
+
+⸻
+
+Key Areas Covered in the Interview:
+
+1. Core Java & OOPs
+ • How does HashMap work internally?
+ • Difference: HashMap, Hashtable, ConcurrentHashMap
+ • What is volatile and synchronized?
+ • What is immutability and how does it help in concurrency?
+ • Memory leak scenarios and how to avoid them
+
+2. Spring & Spring Boot
+ • Bean lifecycle & Spring container
+ • Use of @Component, @Service, @Repository
+ • Role of @ComponentScan, @Configuration, @Bean
+ • What is Spring Boot auto-configuration?
+ • How do profiles work in Spring Boot?
+
+3. Microservices Architecture
+ • Monolith vs Microservices: pros & cons
+ • Service discovery with Eureka/Consul
+ • Inter-service communication: Feign vs RestTemplate vs WebClient
+ • Circuit Breaker and Retry: Resilience4j
+ • Centralized configuration & secrets management
+
+4. REST APIs & Best Practices
+ • Difference between PUT, POST, and PATCH
+ • API versioning strategies
+ • What is idempotency? Why is it critical?
+ • Securing APIs using JWT and OAuth2
+ • Validating incoming payloads with annotations
+
+5. Exception Handling & Logging
+ • Global exception handling using @ControllerAdvice
+ • Logging strategies across services
+ • Masking sensitive data in logs
+ • ELK vs Splunk — what and why?
+
+6. Database, JPA & Transactions
+ • Lazy vs Eager loading — real-time use cases
+ • N+1 select problem and solutions
+ • Difference between get() and load() in Hibernate
+ • Transaction management: @Transactional deep dive
+ • Writing optimized JPQL & Criteria queries
+
+7. Real-World Scenarios & Design
+ • A challenging bug you fixed in production
+ • How to ensure system resiliency under high load
+ • Blue-green & canary deployments: which one and when?
+ • How do you monitor microservices (tools & strategy)?
+ • Handling version mismatch between services
+ 
+ 
+ 
+ 
+ ---------------------------------Questions-------------------------------------
+1.   Public vs Private access modifiers
+2.   Static methods vs Instance methods
+3.   Primitive data types vs Objects
+4.   Wrapper classes (Integer, String) vs Primitive types (int, String)
+5.   Array vs List
+6.   Set vs List
+7.   Comparable vs Comparator
+8.   Interface vs Abstract class
+9.   Final vs Static keyword
+10. == vs equals() method
+11. Autoboxing vs Unboxing
+12. Checked exceptions vs Unchecked exceptions
+13. Thread vs Runnable
+14. StringBuilder vs StringBuffer
+15. Synchronized methods vs Synchronized blocks
+16. Abstract class vs Concrete class
+17. Method Overloading vs Method Overriding
+18. Serialization vs Deserialization
+19. HashMap vs TreeMap
+20. ArrayList vs LinkedList
+21. HashMap vs HashTable
+22. Enum vs Constant variables
+23. Singleton pattern vs Prototype pattern
+24. Garbage Collection vs Manual memory management
+25. Lambda expressions vs Anonymous classes
+26. Functional programming vs Object-oriented programming
+27. Try-catch blocks vs finally blocks
+28. Shallow Copy vs Deep Copy
+29. Stack vs Heap Memory Allocation
+30. @SpringBootApplication vs @Configuration
+31. @ComponentScan vs @EnableAutoConfiguration
+32. @Configuration vs @Bean
+33. @Autowired vs @Qualifier
+34. @RestController vs @Controller
+35. @RequestMapping vs @GetMapping
+36. @PathVariable vs @RequestParam
+37. @PostMapping vs @PutMapping
+38. PUT vs PATCH
+39. @ExceptionHandler vs @ControllerAdvice
+40. @Primary vs @Qualifier
+41. @Async vs @Scheduled
+42. @Cacheable vs @CacheEvict
+43. application.properties vs application.yml
+44. Microservices architecture vs Monolithic architecture
+45. JAR vs WAR files
+46. Maven vs Gradle
+47. Continuous Integration vs Continuous Deployment
+48. Agile vs Waterfall methodologies
+49. RESTful API vs SOAP API
+50. Reactive programming vs Imperative programming
+
+
+-------------------------Microservices Comunication----------------------------
+
+✅ Common Synchronous Communication Methods
+1. REST (HTTP) using RestTemplate or WebClient
+Most common and simple way
+
+Uses HTTP over the network to make synchronous calls
+
+🔧 Example (Using RestTemplate)
+
+@RestController
+public class OrderController {
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @GetMapping("/create-order")
+    public String createOrder() {
+        String paymentStatus = restTemplate.getForObject("http://payment-service/pay", String.class);
+        return "Order created with payment status: " + paymentStatus;
+    }
+}
+⚠️ RestTemplate is deprecated for reactive use. Use WebClient for newer projects.
+
+2. Feign Client (Declarative REST Client)
+Part of Spring Cloud
+
+Cleaner and more maintainable
+
+Built-in support for load balancing (via Ribbon or Spring Cloud LoadBalancer)
+
+🔧 Example (Using FiegClient)
+
+@FeignClient(name = "payment-service")
+public interface PaymentClient {
+    @GetMapping("/pay")
+    String makePayment();
+}
+
+@RestController
+public class OrderController {
+    @Autowired
+    private PaymentClient paymentClient;
+
+    @GetMapping("/create-order")
+    public String createOrder() {
+        String paymentStatus = paymentClient.makePayment();
+        return "Order created with payment status: " + paymentStatus;
+    }
+}
+3. gRPC (Binary Protocol)
+High-performance alternative to REST
+
+Uses Protocol Buffers (protobuf) instead of JSON
+
+Useful for internal microservice communication
+
+⚙️ Synchronous vs Asynchronous: 
+Feature	             Synchronous	                Asynchronous
+Wait for response?	  ✅ Yes	                      ❌ No (uses callbacks or events)
+
+Technologies used	  REST, Feign, gRPC	              Kafka, RabbitMQ, JMS
+
+Performance	          Slower under load (blocking)	  More scalable (non-blocking)
+
+Simplicity	          ✅ Easier to implement	      Slightly more complex
+
+
+
+
+
+
+----------------We can validate controller like that ----------------------
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Map<String, String>> handleValidationException(MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+
+        ex.getBindingResult().getFieldErrors().forEach(error ->
+            errors.put(error.getField(), error.getDefaultMessage())
+        );
+
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
+}
+
+
+
+
+
+
+
+------------------------Annotations------------------------------------------
+🔍 Top Concept Battles You Need to Master:
+ 1. @RestController vs. @Controller
+ 2. Spring MVC vs. Spring Boot
+ 3. @Bean vs. @Component
+ 4. Singleton vs. Prototype
+ 5. JPA vs. Hibernate
+ 6. @Autowired vs. @Inject
+ 7. REST vs. SOAP
+ 8. @GetMapping vs. @PostMapping
+ 9. @RequestParam vs. @PathVariable
+ 10. Spring Security vs. Apache Shiro
+ 11. @ComponentScan vs. @EnableAutoConfiguration
+ 12. @Transactional vs. TransactionManagementConfigurer
+ 13. ApplicationContext vs. BeanFactory
+ 14. @Configuration vs. @Component
+ 15. @Service vs. @Repository
+ 16. @EnableWebMvc vs. @SpringBootApplication
+ 17. @Qualifier vs. @Primary
+ 18. @RequestMapping vs. @GetMapping
+ 19. Spring Boot Starter vs. Actuator
+ 20. @Profile vs. @Conditional
+ 21. @Async vs. @Scheduled
+ 22. @Entity vs. @Table
+ 23. @Column vs. @Transient
+ 24. Lazy vs. Eager fetching
+ 25. @Scope vs. @Bean
+ 26. Spring AOP vs. AspectJ
+ 27. @RequestBody vs. @ResponseBody
+ 28. @Valid vs. @Validated
+ 29. @PropertySource vs. @Value
+ 30. Spring Data JPA vs. Spring JDBC
+ 31. @RestControllerAdvice vs. @ControllerAdvice
+ 32. @EnableCaching vs. @Cacheable
+ 33. @ModelAttribute vs. @RequestBody
+ 34. @SessionAttributes vs. @SessionAttribute
+ 35. @EnableJpaRepositories vs. @EnableTransactionManagement
+ 36. @NamedQuery vs. @Query
+ 37. @Embeddable vs. @Embedded
+ 38. @OneToMany vs. @ManyToOne
+ 39. @MappedSuperclass vs. @Inheritance
+ 40. @EnableScheduling vs. @Scheduled
+ 41. @ResponseStatus vs. @ExceptionHandler
+ 42. @EnableWebSecurity vs. @EnableGlobalMethodSecurity
+ 43. @DataJpaTest vs. @SpringBootTest
+ 44. @MockBean vs. @SpyBean
+ 45. @ConditionalOnProperty vs. @ConditionalOnClass
+ 46. @SpringBootConfiguration vs. @Configuration
+ 47. @ActiveProfiles vs. @Profile
+ 48. @Import vs. @ImportResource
+ 49. @EnableAspectJAutoProxy vs. @EnableTransactionManagement
+ 50. @PersistenceContext vs. @Autowired
+ 
+ 
+ Most ask Real time java interview questions.
+
+1. What are interfaces in Java, and why can't they have constructors?
+2. Can you declare a private method inside a Java interface? If yes, why would you use it?
+3. What is the difference between default and static methods in an interface?
+4. Explain what is meant by variable arguments (varargs) in Java. When would you prefer to use them?
+5. Why does the main method in Java accept a String[] args parameter? Can you overload the main method?
+6. What will happen if you call a static method using a null reference in Java? Will it compile and run?
+Ans :
+class Test {
+    public static void show() {
+        System.out.println("Static method called");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Test obj = null;
+        obj.show();  // ✅ No NullPointerException
+    }
+}
+O/p : Static method called
+7. Explain the contract between equals() and hashCode(). Why is it so important in collections like HashMap or HashSet?
+
+8. Give a real-world scenario where you would override equals() and hashCode() in your Java class.
+9. What is the difference between an abstract class and an interface? When should you choose one over the other?
+10. What is a marker interface in Java? Can you create a custom one? Give an example.
+11. Explain the role of the volatile keyword in Java multithreading. When is it necessary to use it?
+12. Can a functional interface exist without any abstract methods? Why or why not?
+13. If you insert null and the string "ABC" into a Java TreeSet, what will happen? Why?
+14. What happens if a return statement is written inside both the try and finally block? Which one gets executed?
+
+
+
+1) what is marker interface
+2) Why use a marker interface?
+3) when to use interface and abstract class?
+4) what is the use of constructor in java?
+5) what is static method ?
+6) can we use static method in constructor ? Yes 
+7) what is the contract between hashcode and equals methods
+8) what is failfast iteration and how will we resolve
+9) what are virtualthreads
+10) diff between map vs flatmap in java8
+11) what are sealed classes
+12) what are spring boot advantages
+13) what is application context
+14) what are the scope in spring
+15) diff between prototype and request scope
+16) what are components of kafka
+17) what is partition in kafka
+18) how to handle if consumer keeps on failing
+----------------------------STRING PROGRAMS------------------------------------
+1. Reverse a String -- Done
+2. Check if a String is a Palindrome  --Done
+3. Remove Duplicates from a String  --Done 
+4. Find the First Non-Repeating Character --Done 
+5. Count the Occurrences of Each Character --Done 
+6. Reverse Words in a Sentence --Done 
+7. Check if Two Strings are Anagrams --Done  
+8. Find the Longest Substring Without Repeating Characters 
+9. Convert a String to an Integer (atoi Implementation) 
+10. Compress a String (Run-Length Encoding) 
+11. Find the Most Frequent Character --Done  
+12. Find All Substrings of a Given String --Done
+13. Check if a String is a Rotation of Another String 
+14. Remove All White Spaces from a String 
+15. Check if a String is a Valid Shuffle of Two Strings 
+16. Convert a String to Title Case 
+17. Find the Longest Common Prefix 
+18. Convert a String to a Character Array  --Done 
+19. Replace Spaces with %20 (URL Encoding) 
+20. Convert a Sentence into an Acronym 
+21. Check if a String Contains Only Digits 
+22. Find the Number of Words in a String --Done
+23. Remove a Given Character from a String --Done
+24. Find the Shortest Word in a String --Done 
+25. Find the Longest Palindromic Substring
+26. Reverse Each Words in a Sentence --Done
+27. Count character in String  
+-------------------------------------------------------------------------------------
+
+1. Experience worked with Java, Spring, SpringBoot
+2. How to handle dependency Injection in SpringBoot
+3. What is Authentication & Authorization?
+4. What are the error codes used?
+5. What is 404,402, 502, 503, 401 error codes?
+6. How to handle "Not Found" error?
+7. What is the issue behind "Bad Request" error?
+8. What is Mockito?
+9. When and when not to use @Mock?
+10. What is Error and Exception?
+11. How to handle OutOfMemoryException
+12. How to handle "Service Not Found" error even when the beans are properly registered?
+13. How to debug in local and remote repository??
+14. How to create pipeline and deploy in Jenkins?
+15. What happens when there is a collision in HashMap?
+16. What is hashcode() and equals() method and its uses?
+17. What is multithreading? How multithreading is implemented in my project?
+18. What is NullPointerException? and How it is handled?
+19. Is server port and debug port same?
+20. DB @Bean and @Autowired?
+21. What is FunctionalInterface?
+22. What is ClassCastException?
+23. How to handle Gateway Timeout and Service Unavailable error in project?
+
+
+
+
+Day 25: Java Internals — What is the String Pool?
+
+In Java, memory efficiency is key — and the String Pool is one of the most elegant optimizations built into the JVM.
+
+
+🔹 What is the String Pool?
+
+✅The String Pool is a special memory region inside the Java Heap where string literals are stored and reused to save memory.
+
+✅When you create a string like this:
+
+String s1 = "Java";
+String s2 = "Java";
+
+✅Both s1 and s2 point to the same object in the pool.
+
+
+🔸 What if you use new?
+
+✅String s3 = new String("Java");
+
+✅This creates a new object in the heap, even if an identical literal already exists in the pool.
+
+
+🔹 Use intern() to help reuse:
+
+String s4 = new String("Java").intern();
+
+Now s4 points to the string in the pool — not the one on the heap.
+
+
+🧠 Why it matters:
+
+1️⃣ Reduces memory footprint
+
+2️⃣ Makes string comparison with == possible in some cases
+
+3️⃣ Essential to understand for Java performance optimization and interviews
+
+
+Want a visual explanation with my handwritten notes?
+Drop a comment or DM me!
+
+Tomorrow’s topic: Memory Management in Java (Stack vs Heap)
+
+
+Just attended a Java interview for a 3 YOE (Years of Experience) role — and I was hit with some deep & practical questions. Thought I’d share them to help others prepare and reflect on their own knowledge too!
+🧠 These questions weren’t just theoretical — they really tested real-world Java understanding:
+🔹 Java Concepts & Best Practices
+❓ What are some Java best practices you wish you had known earlier in your career?
+ ❓ How do you structure large-scale Java applications to keep them maintainable?
+ ❓ Do you prefer writing if-else chains or using switch expressions in Java 14+? Why?
+🔹 Performance & Optimization
+❓ How do you detect and fix memory leaks in Java applications?
+ ❓ What’s your go-to approach for optimizing Java code for performance?
+🔹 New Java Features
+❓ Which recent Java feature has had the most impact:
+ → Records
+ → Pattern Matching
+ → Sealed Classes
+ → Virtual Threads?
+ ❓ Are you using Project Loom (virtual threads) in production yet? Why or why not?
+🔹 Java Interview Trivia
+❓ Difference between HashMap, LinkedHashMap, and TreeMap — can you explain each in one sentence?
+ ❓ Internal working of HashMap in Java — and what changed after Java 8?
+ ❓ How do you handle concurrent modifications in a ConcurrentHashMap?
+ 
+ 
+ -----------------------Thread----------------------------------------
+ 🔥50 Interview Questions on Multithreading🔥 
+
+1. What is multithreading in Java?
+2.  How do you create a thread in Java?
+3.  What are the different states of a thread in Java?
+4.  Difference between Runnable and Thread in Java?
+5.  Purpose of the start() method in the Thread class?
+6.  What is synchronization in Java?
+7.  How does synchronized keyword work in Java?
+8.  What is a deadlock?
+9.  Different ways to achieve thread synchronization in Java?
+10. Difference between synchronized method and synchronized block?
+11. How do threads communicate with each other?
+12. Purpose of wait(), notify(), and notifyAll()?
+13. Blocking queue in Java?
+14. What is a Condition in Java concurrency?
+15. What is thread safety and why is it important?
+16. What are the ways to achieve thread safety in Java?
+17. What is an atomic operation?
+18. Classes in the java.util.concurrent.atomic package?
+19. What is the difference between volatile keyword and Atomic classes?
+20. What is the ExecutorService in Java and how is it different from using threads directly?
+21. How do you create an ExecutorService?
+22. Difference between execute() and submit() methods in ExecutorService.
+23. How do you gracefully shut down an ExecutorService?
+24. Difference between shutdown() and shutdownNow() methods in ExecutorService?
+25. What is a Future in Java and how is it related to ExecutorService?
+26. How can you cancel a task that has been submitted to an ExecutorService?
+27. What is a ScheduledExecutorService and how do you use it?
+28. How do you handle exceptions thrown by tasks submitted to an ExecutorService?
+29. Explain the lifecycle of an ExecutorService?
+30. What is a thread pool and why is it used?
+31. Different types of thread pools provided by the Executors utility class?
+32. How do you create a fixed thread pool in Java?
+33. How do you create a cached thread pool in Java?
+34. What is a single-thread executor?
+35. How do you create a scheduled thread pool?
+36. What are the benefits of using a thread pool?
+37. How does the thread pool manage the number of threads in the pool?
+38. Difference between a fixed thread pool and a cached thread pool?
+39. How does ThreadPoolExecutor work internally?
+40. What are the core and maximum pool sizes in ThreadPoolExecutor?
+41. What is the keep-alive time in ThreadPoolExecutor and how does it affect thread pool behavior?
+42. Blocking queue and how is it used in ThreadPoolExecutor?
+43. Different types of blocking queues you can use with ThreadPoolExecutor?
+44. How would you handle a scenario where you need to perform multiple tasks in parallel?
+45. Producer-consumer problem and how can you solve it in Java?
+46.Implement a singleton class in a multithreaded environment.
+47. How do you handle exceptions in threads in Java?
+48. Daemon thread in Java.
+49. How do you create a daemon thread in Java?
+50. Benefits of using the ConcurrentHashMap over HashMap in a multithreaded environment?
+
+
+---------------------Infosys VISA Client -----------------------------------------
+1. Create a new Spring Boot Project and write Rest Api complete flow.
+2. What is difference between spring and springboot.
+And : 
+The difference between Spring and Spring Boot lies mainly in configuration, setup complexity, and ease of development.
+
+🌱 Spring Framework (Traditional Spring)
+Spring is a comprehensive programming and configuration model for Java applications.
+✅ Key Features:
+Core features: Dependency Injection (DI), Aspect-Oriented Programming (AOP)
+
+Modular: You can choose only what you need (e.g., Spring MVC, Spring Data, Spring Security)
+
+Requires manual setup:
+
+You need to define XML or Java config files
+
+Configure web.xml, dispatcher servlet, and beans manually
+
+❌ Drawbacks:
+Boilerplate code
+
+Manual configuration (datasource, dispatcher servlet, view resolvers)
+
+More complex for beginners
+=========
+⚡ Spring Boot
+Spring Boot is a rapid development tool built on top of Spring Framework. It’s designed to simplify setup and reduce development effort.
+
+✅ Key Features:
+Auto Configuration: No need to manually configure beans or XML
+Embedded Servers: Tomcat/Jetty included — no need to deploy WAR files
+Starter Dependencies: Pre-bundled dependencies for web, JPA, security, etc.
+Production Ready: Actuator endpoints for health checks, metrics, and monitoring
+
+3. What is main dependency in Spring boot.
+Ans : 
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter</artifactId>
+</dependency>
+
+4. Where you will add profiling information in spring boot.
+Ans :
+🔹 1. Using @Profile Annotation on Beans
+Use the @Profile annotation to conditionally register beans based on the active profile.
+@Service
+@Profile("dev")
+public class DevDataSourceConfig implements DataSourceConfig {
+    // dev-specific bean
+}
+
+@Service
+@Profile("prod")
+public class ProdDataSourceConfig implements DataSourceConfig {
+    // prod-specific bean
+}
+🔹 2. Using Profile-Specific application-{profile}.properties Files
+Create separate config files like:
+
+application-dev.properties
+application-test.properties
+application-prod.properties
+
+And place environment-specific settings like:
+
+# application-dev.properties
+spring.datasource.url=jdbc:mysql://localhost/devdb
+
+# application-prod.properties
+spring.datasource.url=jdbc:mysql://prod-server/proddb
+🔹 3. Activating a Profile
+✅ Option 1: In application.properties
+spring.profiles.active=dev
+
+✅ Option 2: As a Command-Line Argument
+
+java -jar app.jar --spring.profiles.active=prod
+✅ Option 3: In application code
+
+SpringApplication app = new SpringApplication(MyApplication.class);
+app.setAdditionalProfiles("dev");
+app.run(args);
+
+5. What is dependency Injection.
+Ans :
+
+6. Where you will add configuration information for mongoDB.
+
+7. From where to download dependency for spring Boot Project.
+Ans :
+✅ 1. Using [Spring Initializr (Recommended)]
+🔗 Website: https://start.spring.io
+
+➤ Steps:
+Go to https://start.spring.io
+
+Choose:
+Project: Maven / Gradle
+Language: Java
+
+Spring Boot version (default is latest stable)
+Group / Artifact / Name
+Dependencies: Add dependencies like Spring Web, Spring Data JPA, Spring Security, etc.
+Click "Generate"
+
+A .zip file will download containing your full Spring Boot project with dependencies managed in pom.xml or build.gradle.
+
+✅ 2. Using Maven Central (manually)
+You can search for and copy dependencies from:
+
+🔗 https://mvnrepository.com
+
+Example for Spring Boot Web:
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-web</artifactId>
+</dependency>
+Add this to your pom.xml under <dependencies>.
+
+📝 Spring Boot BOM (Bill of Materials) manages versions automatically, so you typically don’t need to specify versions manually.
+
+✅ 3. Inside an IDE (like IntelliJ or Eclipse)
+In IntelliJ IDEA:
+File → New → Project → Spring Initializr
+Choose dependencies and generate the project directly
+In Eclipse (with Spring Tools):
+File → New → Spring Starter Project
+
+It uses Spring Initializr under the hood
+
+🧠 Tip: Use Spring Boot Starters
+Use starter dependencies to avoid manual version conflict management:
+<dependency>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-data-jpa</artifactId>
+</dependency>
+
+Spring Boot manages the underlying versions via a parent like:
+<parent>
+  <groupId>org.springframework.boot</groupId>
+  <artifactId>spring-boot-starter-parent</artifactId>
+  <version>3.2.0</version>
+</parent>
+
+8. Where we can have routing information in Angular.
+9. Complete file structure of angular Project.
+10. If we will integrate angular with our Rest api then where we will specify path.
+11. where we can add dependency in angular.
+12. what is the main entry point in angular. How it will take us to different component.
+13. Write a program to find Second highest in an array of 10 integers.
+Ans : 
+int[] arr = {12,20,30,50,80,45};
+List<Integer> list = Arrays.stream(arr).boxed().collect(Collectors.toList()); 
+Integer seconHighest = list.stream().sorted(Comparator.reverseOrder()).distinct().limit(2).skip(1).findFirst();
+14. Write a program to print a char and count its occurance.
+Ans :
+String str="java";
+List<Character> listChar = str.chars().mapToObj(c->(char)c).collect(Collectors.toList());
+Map<Character,Long> countCharOccur = listChar.stream().collect(Collectors.groupingBy(Function.identity(),Collectors.counting()));
+15. How to handle exceptions in spring boot.
+Ans: using @RestControllerAdvice it is combination of @ControllerAdvice and @ResponseBody 
+16. write return statement of an api call.
+Ans :
+@GetMapping("/user/{id}")
+public ResponseEntity<?> getUserById(@PathVariable Long id) {
+    Optional<User> user = userRepository.findById(id);
+
+    if (user.isPresent()) {
+        return ResponseEntity.ok(user.get());
+    } else {
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                             .body("User not found with ID: " + id);
+    }
+}
+
+17. write a query that will calculate annual salary of each year(monthly salary is given for year 2023,2024,2025) where annual salary is greater than 1 lakh.
+Ans :
+
+
+
+18. Difference between ArrayList and array, Sprig and Spring boot, HashMap and HashTable.?
+19. What is Serialization and Deserialization and why we need that or advantage.?
+20. Spring Boot Annotations ?
+21. What spring immutable how to create a immutable class.?
+22. Difference between spring IOC and dependency injection.?
+Ans :
+🔄 1. IoC (Inversion of Control)
+Definition:
+A design principle where the control of object creation and lifecycle is inverted — from the program to a container (like Spring).
+
+In Spring:
+The Spring IoC container (like ApplicationContext) manages:
+Object creation
+Configuration
+Wiring dependencies
+Lifecycle management
+🧩 2. Dependency Injection (DI)
+Definition:
+A design pattern and way of achieving IoC — where the dependencies are "injected" into a class instead of the class creating them itself.
+
+Types of DI:
+Constructor Injection
+Setter Injection
+Field Injection
+
+✅ So, What's the Difference?
+| Concept                        | Description                                                                                |
+| ------------------------------ | ------------------------------------------------------------------------------------------ |
+| **IoC (Inversion of Control)** | A principle — Spring container manages objects and their interactions                      |
+| **Dependency Injection**       | A design pattern — *how* dependencies are passed (injected) into objects, implementing IoC |
+
+23.Final, Finally, Finalize?
+
+24.Hibernate configuration steps with Sprint boot App.
+Ans : its like JPA 
+
+
+25.write get API to get data by id from DB.
+26.Write singleton design pattern.
+27.Which collections and Java8 features used in your last project.
+28.SQL query to find employee 2nd max salary.
+
+29.Spring MVC flow.
+
+
+30.Hashing technique to store data.(collision)
+
+
+31.Types of exception and how to handle exceptions. 
+
+32.Reverse the given string and remove white space
+Input s= “sky is blue”
+Output=”blue is sky”
+Ans :
+String str="sky is blue";
+List<String> list = Arrays.stream(str.split("\\s+")).collect(Collectors.toList());
+String reverseSentence = list.stream().collect(Collectors.collectingAndThen(Collectors.toList(),list1->{
+Collection.reverse(list1);
+
+return String.join(" ",list1);
+
+}));
+
+33. How two threads communicate to each other.
+Ans:
+| Method        | Purpose                                      |
+| ------------- | -------------------------------------------- |
+| `wait()`      | Causes current thread to wait until notified |
+| `notify()`    | Wakes up one waiting thread                  |
+| `notifyAll()` | Wakes up all waiting threads                 |
+
+
+34.Why we use kafka over API ?
+
+35.How to configure kafka in microservice ?
+Ans :
+✅ 1. Add Kafka Dependencies (Maven)
+<dependency>
+    <groupId>org.springframework.kafka</groupId>
+    <artifactId>spring-kafka</artifactId>
+</dependency>
+✅ 2. Configure application.properties or application.yml
+# Kafka Server
+spring.kafka.bootstrap-servers=localhost:9092
+
+# Consumer Configuration
+spring.kafka.consumer.group-id=my-group
+spring.kafka.consumer.auto-offset-reset=earliest
+spring.kafka.consumer.key-deserializer=org.apache.kafka.common.serialization.StringDeserializer
+spring.kafka.consumer.value-deserializer=org.apache.kafka.common.serialization.StringDeserializer
+
+# Producer Configuration
+spring.kafka.producer.key-serializer=org.apache.kafka.common.serialization.StringSerializer
+spring.kafka.producer.value-serializer=org.apache.kafka.common.serialization.StringSerializer
+
+✅ 3. Create Kafka Producer Service
+@Service
+public class KafkaProducerService {
+
+    @Autowired
+    private KafkaTemplate<String, String> kafkaTemplate;
+    private static final String TOPIC = "my_topic";
+    public void sendMessage(String message) {
+        kafkaTemplate.send(TOPIC, message);
+        System.out.println("Produced message: " + message);
+    }
+}
+✅ 4. Create Kafka Consumer Listener
+@Service
+public class KafkaConsumerService {
+
+    @KafkaListener(topics = "my_topic", groupId = "my-group")
+    public void consume(String message) {
+        System.out.println("Consumed message: " + message);
+    }
+}
+✅ 5. Send Message via REST Controller (Optional)
+@RestController
+@RequestMapping("/kafka")
+public class KafkaMessageController {
+
+    @Autowired
+    private KafkaProducerService producer;
+    @PostMapping("/publish")
+    public ResponseEntity<String> sendMessage(@RequestParam String message) {
+        producer.sendMessage(message);
+        return ResponseEntity.ok("Message sent to Kafka topic.");
+    }
+}
+🧩 Key Elements of Kafka.
+| Element                                | Description                                                                                      |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------ |
+| **1. Producer**                        | Sends (publishes) data/messages to Kafka topics.                                                 |
+| **2. Consumer**                        | Reads (subscribes to) messages from Kafka topics.                                                |
+| **3. Topic**                           | A named stream of records (like a message queue or channel).                                     |
+| **4. Partition**                       | Topics are split into partitions for parallelism and scalability.                                |
+| **5. Broker**                          | Kafka server that stores and serves messages. A Kafka cluster is made up of multiple brokers.    |
+| **6. Consumer Group**                  | A group of consumers that work together to consume messages from a topic.                        |
+| **7. Zookeeper** *(in older versions)* | Manages Kafka cluster metadata like broker coordination (Kafka 3.x+ can work without Zookeeper). |
+| **8. Offset**                          | A unique ID for each message in a partition. Used to keep track of read progress.                |
+
+
+36.What are the main components of kakfa ?
+
+37.What is kafka consumer group ?
+
+38.How hash map internal work?
+
+39.What are producers and consumers in kafka ?
+
+40.Bubble sort how does it works ?
+
+41.What is stream API ?
+
+42.Java 8 feature, how is it useful?
+Ans:
+
+43.Difference between spring and spring boot.
+
+44.Why we use springboot over spring ?
+
+45.Controller, component , service what are these annotations ?
+
+46.What is mean of service annotation ?
+
+47.Can we use the component in the service layer ?
+
+
+ava Interview Questions (2025)
+
+1.What is the difference between HashSet and TreeSet? When would you use each?
+2. How do you implement a custom class loader in Java? What scenarios require it?
+3. What is the role of InvocationHandler and Proxy classes in Java? How are dynamic proxies used?
+4. Explain how the StampedLock works. How does it improve performance over ReentrantReadWriteLock?
+5. What is the difference between CompletableFuture and Future in Java concurrency?
+6. What are the implications of using raw types in Java generics? Why should they be avoided?
+7. How does the Stream.reduce() method work? Provide an example use case.
+8. What is the difference between static and instance initialization blocks in Java?
+9. Explain how the Java module path differs from the classpath. How does it improve modularization?
+10. What is the ServiceLoader class used for in Java? How does it facilitate extensibility?
+
+
+----------------------------------------------------------------------------------------------
+Q.Any experience with Prometheus, Grafana, or other observability tools?
+Q.Migration-Focused Questions Describe a project where you migrated an application from a legacy stack (e.g., Java EE or monolith) to a modern stack.
+Q.What challenges did you face, and how did you address them? 
+Q.What were the benefits post-migration? Have you handled any version upgrades of frameworks or databases (e.g., Spring Boot, Oracle, MongoDB)? 
+Q.What steps did you take to ensure compatibility and minimize downtime? 
+Q.How did you manage data consistency during a database migration (e.g., Oracle to PostgreSQL)? 
+Q.Did you use any tools or write custom scripts? 
+Q.Explain the process you followed for frontend migration (e.g., jQuery to React). 
+Q.How did you manage code reusability and user experience? 
+Q.In your experience, how do you handle rollback strategies during system migrations? 
+Q.Containerization & Docker Questions Can you walk me through how you containerized a full-stack application? 
+Q.What challenges did you face while containerizing frontend vs. backend services? How do you optimize Docker images for production environments? 
+Q.Any tools or strategies you use for reducing image size? 
+Q.Have you worked with Docker Compose or Docker Desktop in local development? 
+Q.How do you simulate production-like environments locally? 
+Q.Describe how you managed container lifecycle and orchestration in Kubernetes? 
+Q.Did you use Helm or Kustomize, and for what purpose? 
+Q.Have you ever integrated Docker with a CI/CD pipeline?
+Q.What was your deployment strategy (e.g., GitOps, Argo CD)? 
+Q.Testing & Reliability in Migration/Containers What testing strategies did you follow post-migration or during container rollout?
+Q.How did you ensure nothing broke after deployment? 
+Ans :
+Ensuring nothing breaks after deploying a microservice is critical for maintaining system reliability. Here’s a practical and professional approach that many teams follow — including techniques from CI/CD, testing, and monitoring:
+
+✅ 1. Automated Tests Before Deployment
+Run comprehensive tests as part of the CI pipeline:
+Unit Tests: Validate individual classes/methods.
+Integration Tests: Ensure the microservice works with its dependencies (e.g., DB, other services).
+Contract Tests (e.g., using Pact): Ensure APIs work as expected for consumers.
+
+End-to-End Tests: Run full workflows that touch multiple microservices.
+
+✅ 2. Staging Environment Validation
+Deploy to a staging or UAT environment first, which mimics production. Run smoke tests or automated regression tests there.
+
+✅ 3. Canary Deployment / Blue-Green Deployment
+Use safe rollout strategies:
+Canary: Release to a small subset of users first. Monitor for issues.
+Blue-Green: Run both old (blue) and new (green) versions in parallel, switch traffic only if green is stable.
+
+✅ 4. Health Checks
+Ensure readiness and liveness probes are defined:
+
+livenessProbe:
+  httpGet:
+    path: /actuator/health
+    port: 8080
+Helps detect whether your service is healthy and can accept traffic.
+
+✅ 5. Logging & Monitoring
+Use observability tools to detect issues early:
+Logging: Use centralized logging (e.g., ELK stack, Loki).
+Monitoring: Use Prometheus, Grafana to monitor metrics (CPU, latency, error rate).
+Tracing: Use OpenTelemetry/Jaeger to trace inter-service calls.
+
+✅ 6. Alerting
+Set up alerts for anomalies:
+High response times
+Increased error rates (HTTP 500s)
+Circuit breaker open state (if using resilience libraries like Resilience4j)
+
+✅ 7. Post-Deployment Smoke Test
+Once deployed:
+Call critical endpoints manually or via automated scripts.
+Verify expected behavior — can users log in, submit forms, view data, etc.?
+
+✅ 8. Rollbacks
+Have a quick rollback plan in place via:
+Versioned Docker images
+Helm/Kubernetes rollout history
+Infrastructure as Code for reverting changes
+
+🧠 Real-World Best Practices:
+"We use GitLab CI to trigger unit, integration, and contract tests on every merge. Canary deployments are handled by our Kubernetes cluster, with real-time metrics from Prometheus/Grafana. If any spike in error rate is detected, alerts are triggered via PagerDuty, and we can rollback instantly."
+
+Q.How do you monitor containerized apps post-deployment? 
+
+
+
+
+
+List<Integer> integers = Arrays.asList(10,20,10,30,20,40,50,10);
+
+List<Integer> unique = integers.stream().distinct().collect(Collectors.toList());
+
+
+String input = "hello my name is Devendra"
+output --> "Devendra is name my hello"
+
+
+String reverse = Arrays.stream(input.split(" ")).collect(Collectors.CollectingAndThen(Collectors.toList(),list->{
+Collections.reverse(list);
+return String.join(" ");
+
+}));
+
+
+String input = "hello my name is Devendra"
+
+List<String> lists = input.chars().mapToObj(s->(String)s).collect(Collectors.toLis());
+
+Collections.reverse(list);
+
+list.
+
+
+Q. What is Bucket level lock and Segment level lock in ConcurrentHashMap ?
+Q. What is the memory model in java ?
+Q. Lock v/s ReentrantLock?
+
+Condition condition = lock.newCondition();
+
+
+--------------------------------------------------------------------------------------
+I’ve interviewed 200+ Java Developers.
+
+I’ve never asked:
+👉 “What’s the difference between == and .equals()?”
+
+Instead, I ask questions that reveal how you think, debug, and design under pressure.
+
+----
+
+⚡ Scenario Questions
+
+1️⃣ “Your Spring Boot app suddenly throws OutOfMemoryError in production. What steps do you take to investigate?”
+🔎 Looking for: Heap dump analysis, GC tuning, spotting memory leaks, profiling mindset.
+
+2️⃣ “A request that normally takes 200ms now takes 20s under load. How do you approach performance tuning?”
+🔎 Looking for: Profiling-first mindset, analyzing DB queries, optimizing thread pools, caching strategy.
+
+3️⃣ “You inherit a legacy service with no tests. How do you add new features safely?”
+🔎 Looking for: Test-first approach, refactoring strategy, incremental improvements.
+
+4️⃣ “Your microservice is consuming a Kafka topic but lags behind by millions of messages. How do you diagnose?”
+🔎 Looking for: Knowledge of consumer groups, partition rebalancing, offset management, backpressure handling.
+
+5️⃣ “Users report random 500 errors from your API, but logs look fine. What’s your next step?”
+🔎 Looking for: Ability to reproduce issues, distributed tracing, log correlation, observability skills.
+
+6️⃣ “You deploy a service that works locally but fails in Kubernetes. How do you debug?”
+🔎 Looking for: Containerization basics, config/environment issues, readiness/liveness probes, networking.
+
+7️⃣ “A batch job that processes 1M records fails halfway with no clear error. How do you fix it?”
+🔎 Looking for: Retry strategies, idempotency, chunking, monitoring.
+
+
+💡 Real interviews should test thinking, not trivia.
+Because great developers aren’t the ones who know all the keywords —
+They’re the ones who can debug chaos, design clean systems, and ship under pressure.
+
+
+hashtag#Java hashtag#SystemDesign hashtag#SpringBoot hashtag#Interviews hashtag#SoftwareEngineering hashtag#Careers hashtag#Coding
+
+
+Q.
+Design and implement a Shopping Cart System. With following:  Item (Each item has a name, unit price, some unique id),  Cart (Cart has collection of items, and various operations) Users can apply discounts on cart total. The discounts can be in (% or amount) The system should allow:
+
+
+1. Adding items to the cart: Item can be added in quantity like 1, 2 or more
+2. Calculating the cart total: The total should reflect the sum of all item prices multiplied by their quantities.
+3. Updating the quantity for an item which is already in the cart 
+4. Apply some discounts to item total
+5. Remove an item from the cart
+6. Clear entire cart
+7. Get total items count
+
+
+𝙃𝙚𝙧𝙚 𝙖𝙧𝙚 𝙩𝙝𝙚 𝙠𝙚𝙮 𝙦𝙪𝙚𝙨𝙩𝙞𝙤𝙣𝙨 𝙛𝙤𝙧 𝙨𝙚𝙣𝙞𝙤𝙧 𝙅𝙖𝙫𝙖 𝙙𝙚𝙫𝙨:
+
+1. How do you optimize Java code for high-performance applications? What tools do you use to profile and debug?
+2. Explain the JVM memory model (heap, stack, metaspace) and how garbage collection works in JDK 21.
+3. What’s the difference between synchronized, ReentrantLock, and ConcurrentHashMap for thread safety?
+4. How do you handle OutOfMemoryError in a production Java application? Describe your troubleshooting process.
+5. Explain the Fork/Join framework and how you’d use it for parallel processing in Java.
+6. How do you implement a thread-safe singleton in Java? Discuss trade-offs of different approaches.
+7. What are the benefits of using Project Loom’s virtual threads in Java 21 for high-concurrency apps?
+8. How do you design a REST API in Spring Boot with proper exception handling and validation?
+9. Explain the differences between CompletableFuture and RxJava for asynchronous programming in Java.
+10. How do you tune JVM parameters (e.g., -Xmx, -XX:+UseG1GC) for a latency-sensitive application?
+11. What’s the role of the Stream API in Java, and how would you optimize a complex Stream pipeline?
+12. How do you implement custom annotations in Java, and when would you use them in a Spring Boot app?
+13. Describe how you’d use Java’s Optional to avoid NullPointerException in a large codebase.
+14. How do you integrate a Java application with Kafka for event-driven architecture? What challenges arise?
+15. Explain how Java’s module system (JPMS) impacts large-scale application design. When would you use it?
+
+
+====================================================================================================================
+
+
+1. How can you use Amazon S3 in a Java application?
+2. How do you connect a Java application to an Amazon RDS database?
+3. What is the use of the AWS SDK for Java? How do you use it?
+4. How can you upload and download files to/from S3 using Java?
+5. How do you implement secure credentials handling for AWS in a Java application?
+6. What is IAM and how do you use roles and policies in a Java AWS environment?
+7. How can you invoke a Lambda function from a Java application?
+8. How do you use Amazon DynamoDB with Java?
+9. Explain how to use Amazon SNS or SQS in a Java-based microservice.
+10. How do you deploy a Spring Boot Java application to AWS Elastic Beanstalk?
+11. What are the advantages of using AWS Lambda with Java for backend services?
+12. How do you monitor and log your Java application in AWS (e.g., CloudWatch integration)?
+13. What are some best practices when using EC2 instances for running Java apps?
+14. Explain how you’d configure CI/CD for a Java app using AWS CodePipeline and CodeBuild.
+15. How can you make a Java web app serverless using AWS services (API Gateway, Lambda, S3)?
+
+
+
+
+
+
+Interview Experience at Wipro | Java + Spring Boot + Microservices (5 YOE)
+If you’re preparing for backend developer interviews, this might help you.
+
+⸻
+
+I recently appeared for a technical interview at Wipro for a Java Backend Developer role (5 years’ experience).
+Sharing my experience here in the hope that it helps others preparing for similar roles.
+
+Here’s a breakdown of the topics and types of questions that were asked during the technical round:
+
+⸻
+
+Key Areas Covered in the Interview:
+
+1. Core Java & OOPs
+ • How does HashMap work internally?
+ • Difference: HashMap, Hashtable, ConcurrentHashMap
+ • What is volatile and synchronized?
+ • What is immutability and how does it help in concurrency?
+ • Memory leak scenarios and how to avoid them
+
+2. Spring & Spring Boot
+ • Bean lifecycle & Spring container
+ • Use of @Component, @Service, @Repository
+ • Role of @ComponentScan, @Configuration, @Bean
+ • What is Spring Boot auto-configuration?
+ • How do profiles work in Spring Boot?
+
+3. Microservices Architecture
+ • Monolith vs Microservices: pros & cons
+ • Service discovery with Eureka/Consul
+ • Inter-service communication: Feign vs RestTemplate vs WebClient
+ • Circuit Breaker and Retry: Resilience4j
+ • Centralized configuration & secrets management
+
+4. REST APIs & Best Practices
+ • Difference between PUT, POST, and PATCH
+ • API versioning strategies
+ • What is idempotency? Why is it critical?
+ • Securing APIs using JWT and OAuth2
+ • Validating incoming payloads with annotations
+
+5. Exception Handling & Logging
+ • Global exception handling using @ControllerAdvice
+ • Logging strategies across services
+ • Masking sensitive data in logs
+ • ELK vs Splunk — what and why?
+
+6. Database, JPA & Transactions
+ • Lazy vs Eager loading — real-time use cases
+ • N+1 select problem and solutions
+ • Difference between get() and load() in Hibernate
+ • Transaction management: @Transactional deep dive
+ • Writing optimized JPQL & Criteria queries
+
+7. Real-World Scenarios & Design
+ • A challenging bug you fixed in production
+ • How to ensure system resiliency under high load
+ • Blue-green & canary deployments: which one and when?
+ • How do you monitor microservices (tools & strategy)?
+ • Handling version mismatch between services
+ 
+ 
+ 
+ 
+ ---------------------------------Questions-------------------------------------
+1.   Public vs Private access modifiers
+2.   Static methods vs Instance methods
+3.   Primitive data types vs Objects
+4.   Wrapper classes (Integer, String) vs Primitive types (int, String)
+5.   Array vs List
+6.   Set vs List
+7.   Comparable vs Comparator
+8.   Interface vs Abstract class
+9.   Final vs Static keyword
+10. == vs equals() method
+11. Autoboxing vs Unboxing
+12. Checked exceptions vs Unchecked exceptions
+13. Thread vs Runnable
+14. StringBuilder vs StringBuffer
+15. Synchronized methods vs Synchronized blocks
+16. Abstract class vs Concrete class
+17. Method Overloading vs Method Overriding
+18. Serialization vs Deserialization
+19. HashMap vs TreeMap
+20. ArrayList vs LinkedList
+21. HashMap vs HashTable
+22. Enum vs Constant variables
+23. Singleton pattern vs Prototype pattern
+24. Garbage Collection vs Manual memory management
+25. Lambda expressions vs Anonymous classes
+26. Functional programming vs Object-oriented programming
+27. Try-catch blocks vs finally blocks
+28. Shallow Copy vs Deep Copy
+29. Stack vs Heap Memory Allocation
+30. @SpringBootApplication vs @Configuration
+31. @ComponentScan vs @EnableAutoConfiguration
+32. @Configuration vs @Bean
+33. @Autowired vs @Qualifier
+34. @RestController vs @Controller
+35. @RequestMapping vs @GetMapping
+36. @PathVariable vs @RequestParam
+37. @PostMapping vs @PutMapping
+38. PUT vs PATCH
+39. @ExceptionHandler vs @ControllerAdvice
+40. @Primary vs @Qualifier
+41. @Async vs @Scheduled
+42. @Cacheable vs @CacheEvict
+43. application.properties vs application.yml
+44. Microservices architecture vs Monolithic architecture
+45. JAR vs WAR files
+46. Maven vs Gradle
+47. Continuous Integration vs Continuous Deployment
+48. Agile vs Waterfall methodologies
+49. RESTful API vs SOAP API
+50. Reactive programming vs Imperative programming
+
+
+-------------------------Microservices Comunication----------------------------
+
+✅ Common Synchronous Communication Methods
+1. REST (HTTP) using RestTemplate or WebClient
+Most common and simple way
+
+Uses HTTP over the network to make synchronous calls
+
+🔧 Example (Using RestTemplate)
+
+@RestController
+public class OrderController {
+
+    @Autowired
+    private RestTemplate restTemplate;
+
+    @GetMapping("/create-order")
+    public String createOrder() {
+        String paymentStatus = restTemplate.getForObject("http://payment-service/pay", String.class);
+        return "Order created with payment status: " + paymentStatus;
+    }
+}
+⚠️ RestTemplate is deprecated for reactive use. Use WebClient for newer projects.
+
+2. Feign Client (Declarative REST Client)
+Part of Spring Cloud
+
+Cleaner and more maintainable
+
+Built-in support for load balancing (via Ribbon or Spring Cloud LoadBalancer)
+
+🔧 Example (Using FiegClient)
+
+@FeignClient(name = "payment-service")
+public interface PaymentClient {
+    @GetMapping("/pay")
+    String makePayment();
+}
+
+@RestController
+public class OrderController {
+    @Autowired
+    private PaymentClient paymentClient;
+
+    @GetMapping("/create-order")
+    public String createOrder() {
+        String paymentStatus = paymentClient.makePayment();
+        return "Order created with payment status: " + paymentStatus;
+    }
+}
+3. gRPC (Binary Protocol)
+High-performance alternative to REST
+
+Uses Protocol Buffers (protobuf) instead of JSON
+
+Useful for internal microservice communication
+
+⚙️ Synchronous vs Asynchronous: 
+Feature	             Synchronous	                Asynchronous
+Wait for response?	  ✅ Yes	                      ❌ No (uses callbacks or events)
+
+Technologies used	  REST, Feign, gRPC	              Kafka, RabbitMQ, JMS
+
+Performance	          Slower under load (blocking)	  More scalable (non-blocking)
+
+Simplicity	          ✅ Easier to implement	      Slightly more complex
+
+
+
+
+
+
+----------------We can validate controller like that ----------------------
+@RestControllerAdvice
+public class GlobalExceptionHandler {
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Map<String, String>> handleValidationException(MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+
+        ex.getBindingResult().getFieldErrors().forEach(error ->
+            errors.put(error.getField(), error.getDefaultMessage())
+        );
+
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
+    }
+}
+
+
+
+
+
+
+
+------------------------Annotations------------------------------------------
+🔍 Top Concept Battles You Need to Master:
+ 1. @RestController vs. @Controller
+ 2. Spring MVC vs. Spring Boot
+ 3. @Bean vs. @Component
+ 4. Singleton vs. Prototype
+ 5. JPA vs. Hibernate
+ 6. @Autowired vs. @Inject
+ 7. REST vs. SOAP
+ 8. @GetMapping vs. @PostMapping
+ 9. @RequestParam vs. @PathVariable
+ 10. Spring Security vs. Apache Shiro
+ 11. @ComponentScan vs. @EnableAutoConfiguration
+ 12. @Transactional vs. TransactionManagementConfigurer
+ 13. ApplicationContext vs. BeanFactory
+ 14. @Configuration vs. @Component
+ 15. @Service vs. @Repository
+ 16. @EnableWebMvc vs. @SpringBootApplication
+ 17. @Qualifier vs. @Primary
+ 18. @RequestMapping vs. @GetMapping
+ 19. Spring Boot Starter vs. Actuator
+ 20. @Profile vs. @Conditional
+ 21. @Async vs. @Scheduled
+ 22. @Entity vs. @Table
+ 23. @Column vs. @Transient
+ 24. Lazy vs. Eager fetching
+ 25. @Scope vs. @Bean
+ 26. Spring AOP vs. AspectJ
+ 27. @RequestBody vs. @ResponseBody
+ 28. @Valid vs. @Validated
+ 29. @PropertySource vs. @Value
+ 30. Spring Data JPA vs. Spring JDBC
+ 31. @RestControllerAdvice vs. @ControllerAdvice
+ 32. @EnableCaching vs. @Cacheable
+ 33. @ModelAttribute vs. @RequestBody
+ 34. @SessionAttributes vs. @SessionAttribute
+ 35. @EnableJpaRepositories vs. @EnableTransactionManagement
+ 36. @NamedQuery vs. @Query
+ 37. @Embeddable vs. @Embedded
+ 38. @OneToMany vs. @ManyToOne
+ 39. @MappedSuperclass vs. @Inheritance
+ 40. @EnableScheduling vs. @Scheduled
+ 41. @ResponseStatus vs. @ExceptionHandler
+ 42. @EnableWebSecurity vs. @EnableGlobalMethodSecurity
+ 43. @DataJpaTest vs. @SpringBootTest
+ 44. @MockBean vs. @SpyBean
+ 45. @ConditionalOnProperty vs. @ConditionalOnClass
+ 46. @SpringBootConfiguration vs. @Configuration
+ 47. @ActiveProfiles vs. @Profile
+ 48. @Import vs. @ImportResource
+ 49. @EnableAspectJAutoProxy vs. @EnableTransactionManagement
+ 50. @PersistenceContext vs. @Autowired
+ 
+ 
+ Most ask Real time java interview questions.
+
+1. What are interfaces in Java, and why can't they have constructors?
+2. Can you declare a private method inside a Java interface? If yes, why would you use it?
+3. What is the difference between default and static methods in an interface?
+4. Explain what is meant by variable arguments (varargs) in Java. When would you prefer to use them?
+5. Why does the main method in Java accept a String[] args parameter? Can you overload the main method?
+6. What will happen if you call a static method using a null reference in Java? Will it compile and run?
+Ans :
+class Test {
+    public static void show() {
+        System.out.println("Static method called");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Test obj = null;
+        obj.show();  // ✅ No NullPointerException
+    }
+}
+O/p : Static method called
+7. Explain the contract between equals() and hashCode(). Why is it so important in collections like HashMap or HashSet?
+
+8. Give a real-world scenario where you would override equals() and hashCode() in your Java class.
+9. What is the difference between an abstract class and an interface? When should you choose one over the other?
+10. What is a marker interface in Java? Can you create a custom one? Give an example.
+11. Explain the role of the volatile keyword in Java multithreading. When is it necessary to use it?
+12. Can a functional interface exist without any abstract methods? Why or why not?
+13. If you insert null and the string "ABC" into a Java TreeSet, what will happen? Why?
+14. What happens if a return statement is written inside both the try and finally block? Which one gets executed?
+
+
+
+1) what is marker interface
+2) Why use a marker interface?
+3) when to use interface and abstract class?
+4) what is the use of constructor in java?
+5) what is static method ?
+6) can we use static method in constructor ? Yes 
+7) what is the contract between hashcode and equals methods
+8) what is failfast iteration and how will we resolve
+9) what are virtualthreads
+10) diff between map vs flatmap in java8
+11) what are sealed classes
+12) what are spring boot advantages
+13) what is application context
+14) what are the scope in spring
+15) diff between prototype and request scope
+16) what are components of kafka
+17) what is partition in kafka
+18) how to handle if consumer keeps on failing
+
+1. Reverse a String 
+2. Check if a String is a Palindrome 
+3. Remove Duplicates from a String 
+4. Find the First Non-Repeating Character 
+5. Count the Occurrences of Each Character 
+6. Reverse Words in a Sentence 
+7. Check if Two Strings are Anagrams 
+8. Find the Longest Substring Without Repeating Characters 
+9. Convert a String to an Integer (atoi Implementation) 
+10. Compress a String (Run-Length Encoding) 
+11. Find the Most Frequent Character 
+12. Find All Substrings of a Given String 
+13. Check if a String is a Rotation of Another String 
+14. Remove All White Spaces from a String 
+15. Check if a String is a Valid Shuffle of Two Strings 
+16. Convert a String to Title Case 
+17. Find the Longest Common Prefix 
+18. Convert a String to a Character Array 
+19. Replace Spaces with %20 (URL Encoding) 
+20. Convert a Sentence into an Acronym 
+21. Check if a String Contains Only Digits 
+22. Find the Number of Words in a String 
+23. Remove a Given Character from a String 
+24. Find the Shortest Word in a String 
+25. Find the Longest Palindromic Substring
+
+
+1. Experience worked with Java, Spring, SpringBoot
+2. How to handle dependency Injection in SpringBoot
+3. What is Authentication & Authorization?
+4. What are the error codes used?
+5. What is 404,402, 502, 503, 401 error codes?
+6. How to handle "Not Found" error?
+7. What is the issue behind "Bad Request" error?
+8. What is Mockito?
+9. When and when not to use @Mock?
+10. What is Error and Exception?
+11. How to handle OutOfMemoryException
+12. How to handle "Service Not Found" error even when the beans are properly registered?
+13. How to debug in local and remote repository??
+14. How to create pipeline and deploy in Jenkins?
+15. What happens when there is a collision in HashMap?
+16. What is hashcode() and equals() method and its uses?
+17. What is multithreading? How multithreading is implemented in my project?
+18. What is NullPointerException? and How it is handled?
+19. Is server port and debug port same?
+20. DB @Bean and @Autowired?
+21. What is FunctionalInterface?
+22. What is ClassCastException?
+23. How to handle Gateway Timeout and Service Unavailable error in project?
+
+
+
+
+Day 25: Java Internals — What is the String Pool?
+
+In Java, memory efficiency is key — and the String Pool is one of the most elegant optimizations built into the JVM.
+
+
+🔹 What is the String Pool?
+
+✅The String Pool is a special memory region inside the Java Heap where string literals are stored and reused to save memory.
+
+✅When you create a string like this:
+
+String s1 = "Java";
+String s2 = "Java";
+
+✅Both s1 and s2 point to the same object in the pool.
+
+
+🔸 What if you use new?
+
+✅String s3 = new String("Java");
+
+✅This creates a new object in the heap, even if an identical literal already exists in the pool.
+
+
+🔹 Use intern() to help reuse:
+
+String s4 = new String("Java").intern();
+
+Now s4 points to the string in the pool — not the one on the heap.
+
+
+🧠 Why it matters:
+
+1️⃣ Reduces memory footprint
+
+2️⃣ Makes string comparison with == possible in some cases
+
+3️⃣ Essential to understand for Java performance optimization and interviews
+
+
+Want a visual explanation with my handwritten notes?
+Drop a comment or DM me!
+
+Tomorrow’s topic: Memory Management in Java (Stack vs Heap)
+
+
+Just attended a Java interview for a 3 YOE (Years of Experience) role — and I was hit with some deep & practical questions. Thought I’d share them to help others prepare and reflect on their own knowledge too!
+🧠 These questions weren’t just theoretical — they really tested real-world Java understanding:
+🔹 Java Concepts & Best Practices
+❓ What are some Java best practices you wish you had known earlier in your career?
+ ❓ How do you structure large-scale Java applications to keep them maintainable?
+ ❓ Do you prefer writing if-else chains or using switch expressions in Java 14+? Why?
+🔹 Performance & Optimization
+❓ How do you detect and fix memory leaks in Java applications?
+ ❓ What’s your go-to approach for optimizing Java code for performance?
+🔹 New Java Features
+❓ Which recent Java feature has had the most impact:
+ → Records
+ → Pattern Matching
+ → Sealed Classes
+ → Virtual Threads?
+ ❓ Are you using Project Loom (virtual threads) in production yet? Why or why not?
+🔹 Java Interview Trivia
+❓ Difference between HashMap, LinkedHashMap, and TreeMap — can you explain each in one sentence?
+ ❓ Internal working of HashMap in Java — and what changed after Java 8?
+ ❓ How do you handle concurrent modifications in a ConcurrentHashMap?
+
+  

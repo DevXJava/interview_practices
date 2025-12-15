@@ -1,0 +1,370 @@
+1. What is JavaScript?
+2. What are the data types supported by JavaScript?
+Ans : 
+JavaScript supports two main categories of data types:
+
+🧱 1. Primitive Data Types (Immutable)
+
+Data Type
+Description
+Example
+String
+Textual data
+"hello", 'JS'
+Number
+Integer and floating point numbers
+42, 3.14
+BigInt
+Large integers beyond 2^53 - 1
+123n, BigInt(9007199254740991)
+Boolean
+True or false values
+true, false
+undefined
+Variable declared but not assigned
+let a; → undefined
+null
+Intentional absence of any value
+let b = null;
+Symbol
+Unique identifier (added in ES6)
+Symbol('id')
+
+
+
+
+🧳 2. Non-Primitive (Reference) Data Types
+
+Data Type
+Description
+Example
+Object
+Collection of key-value pairs
+{name: "John", age: 30}
+Array
+Ordered list of values (also object)
+[1, 2, 3]
+Function
+Callable object
+function greet() {}
+Date
+Built-in object for dates
+new Date()
+RegExp
+Regular expression object
+/abc/
+
+
+3. What is the difference between `let`, `const`, and `var`?
+Ans : 
+
+Feature
+var
+let
+const
+
+Scope
+var : Function-scoped
+let : Block-scoped ({})
+const :Block-scoped ({})
+Hoisting
+✅ Yes (initialized as undefined)
+✅ Yes (in TDZ - not initialized)
+✅ Yes (in TDZ - not initialized)
+Re-declaration
+✅ Allowed
+❌ Not allowed in same scope
+❌ Not allowed in same scope
+Re-assignment
+✅ Allowed
+✅ Allowed
+❌ Not allowed
+Default Usage
+Older JS / Avoid using today
+Recommended for mutable vars
+Recommended for constants
+
+
+
+4. Explain how `==` and `===` differ.
+Ans : 
+=     : is a assign operator 
+==   : Comparison operator (compare if values are equals)
+=== :  strict equality operator (compare if value and data type is equals)
+!=    : inequality operator
+!==  : Strict inequality operator 
+
+5. What is a closure?
+Ans : 
+A closure is a **function that remembers and can access variables from its lexical scope, even after that outer function has finished executing.
+In simpler terms:
+Closures let a function "remember" variables from the place where it was created.
+function outerFunction() {
+  let message = "Hello from outer!";
+
+  function innerFunction() {
+    console.log(message);  // Accesses message even after outerFunction has finished
+  }
+
+  return innerFunction;
+}
+
+const myClosure = outerFunction(); // outerFunction executes
+myClosure(); // Logs: Hello from outer!
+
+
+6. What is hoisting?
+Ans : 
+✅ What is Hoisting in JavaScript?
+Hoisting is JavaScript’s default behavior of moving declarations to the top of their scope (global or function) before code execution.
+
+🔍 In Other Words:
+When your code runs, JavaScript "hoists" variable and function declarations (not initializations) to the top of the scope.
+Example : 
+🧪 Example 1: Variable Hoisting with var
+console.log(x); // undefined (NOT ReferenceError)
+var x = 5;
+
+JavaScript internally treats it like:
+var x;          // declaration hoisted
+console.log(x); // undefined
+x = 5;          // initialization remains in place
+
+7. Explain the concept of "this" in JavaScript.
+Ans : 
+
+
+8. What are JavaScript prototypes?
+Ans:  In JavaScript, every object has a hidden internal property called [[Prototype]], which refers to another object — known as its prototype.
+This is the foundation of prototypal inheritance — where objects inherit properties and methods from other objects.
+📌 Why Are Prototypes Important?
+Prototypes allow:
+Object inheritance without classes
+Shared methods (for memory efficiency)
+The use of built-in methods like .toString(), .hasOwnProperty(), etc.
+Exa :
+function Person(name) {
+  this.name = name;
+}
+// Adding a method to the prototype
+Person.prototype.sayHello = function () {
+  console.log(`Hello, my name is ${this.name}`);
+};
+
+const p1 = new Person("Alice");
+const p2 = new Person("Bob");
+
+p1.sayHello(); // Hello, my name is Alice
+p2.sayHello(); // Hello, my name is Bob
+
+9. What is the difference between `null` and `undefined`?
+Ans: 
+10. How does JavaScript handle asynchronous operations?
+
+
+11. What is a promise?
+Ans : 
+A Promise in JavaScript is an object that represents the eventual completion (or failure) of an asynchronous operation, and lets you attach callbacks to handle the result.
+📦 Think of it like:
+“A placeholder for a value that’s not available yet, but will be in the future.”
+📌 States of a Promise
+State	                 Description
+Pending: 	    Initial state, neither fulfilled nor rejected
+Fulfilled:	     Operation completed successfully
+Rejected: 	     Operation failed with an error
+🧠 Promises (Old Way)
+Before async/await, we used Promises with .then() and .catch().
+function getUserData() {
+  fetch('https://jsonplaceholder.typicode.com/users/1')
+    .then(response => response.json())
+    .then(data => console.log("User data:", data))
+    .catch(err => console.log("Error:", err));
+}
+
+12. What are async/await functions?
+Ans :We use async to mark a function that works with async code, and await to wait for Promises.
+async function getUserData() {
+  try {
+    const response = await fetch('https://jsonplaceholder.typicode.com/users/1');
+    const data = await response.json();
+    console.log("User data:", data);
+  } catch (err) {
+    console.log("Error:", err);
+  }
+}
+
+getUserData();
+
+13. Explain event delegation in JavaScript.
+
+14. What are JavaScript modules?
+Ans : JavaScript modules are reusable pieces of code that are split across files to keep your codebase organized, maintainable, and easy to scale. Modules let you export and import variables, functions, classes, etc., between files.
+
+🧱 Why Use Modules?
+Without modules, JavaScript apps quickly become messy as all code lives in one global space. Modules allow:
+
+Code reusability ✅
+Separation of concerns ✅
+Avoiding global scope pollution ✅
+Easier testing and maintenance ✅
+
+🔄 Types of Modules in JavaScript
+| Type            | Description                    | Syntax Example           |
+| --------------- | ------------------------------ | ------------------------ |
+| **ES6 Modules** | Modern standard for modular JS | `import/export`          |
+| **CommonJS**    | Used in Node.js (older style)  | `require/module.exports` |
+
+15. How can you prevent a function from being called multiple times?
+Ans :
+✅ 1. Use a Flag Variable
+let isClicked = false;
+
+function handleClick() {
+  if (isClicked) return;
+  isClicked = true;
+
+  console.log("Button clicked");
+
+  // Optional: reset after some time if needed
+  setTimeout(() => {
+    isClicked = false;
+  }, 2000);
+}
+
+16. What is the event loop?
+Ans :The event loop is a fundamental concept in JavaScript that enables asynchronous programming, allowing JavaScript (which is single-threaded) to handle non-blocking operations like network requests, timers, or DOM events.
+🧪 Real-World Example
+console.log("1");
+
+setTimeout(() => {
+  console.log("2");
+}, 1000);
+
+Promise.resolve().then(() => {
+  console.log("3");
+});
+
+console.log("4");
+
+O/P : 1
+4
+3
+2
+
+
+
+17. What is the difference between `apply()` and `call()` methods?
+18. What is the `bind()` method used for?
+19. What is a JavaScript event loop?
+20. Explain the concept of "event bubbling" and "event capturing".?
+Ans : 
+event bubbling:- inner to outer function or variable call 
+event capturing:- outer to inner function or variable call.
+
+21. What is the difference between `deep copy` and `shallow copy`?
+22. What are generator functions?
+23. What is the `new` keyword used for?
+Ans : 
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+}
+
+const john = new Person('John', 30);
+console.log(john.name); // Output: 'John'
+console.log(john.age);  // Output: 30
+
+
+24. How do JavaScript’s `setTimeout` and `setInterval` work?
+25. What is a `WeakMap` and how is it different from a `Map`?
+26. What is a `Set` in JavaScript?
+27. What is `Object.create()` used for?
+28. How does JavaScript’s garbage collection work?
+
+29. What are "decorators" in JavaScript?
+30. Explain the difference between `prototype` and `__proto__`.
+31. What is the purpose of `Object.assign()`?
+32. What are "template literals"?
+33. What is the `spread` (...) operator?
+Ans :The spread operator (...) is a powerful ES6 feature that expands (or "spreads out") iterables like arrays, objects, or strings into individual elements.
+
+It’s commonly used for:
+Copying arrays/objects
+Merging arrays/objects
+Passing multiple arguments to functions
+🔹 1. Spread with Arrays
+A.✅ Copy an Array
+const original = [1, 2, 3];
+const copy = [...original];
+console.log(copy); // [1, 2, 3]
+B.✅ Merge Arrays
+const arr1 = [1, 2];
+const arr2 = [3, 4];
+const merged = [...arr1, ...arr2];
+console.log(merged); // [1, 2, 3, 4]
+C.✅ Add Elements to an Array
+const numbers = [2, 3, 4];
+const newNumbers = [1, ...numbers, 5];
+
+console.log(newNumbers); // [1, 2, 3, 4, 5]
+
+🔹 2. Spread with Objects
+A. ✅ Clone an Object
+const user = { name: 'Niraj', age: 25 };
+const clonedUser = { ...user };
+
+console.log(clonedUser); // { name: 'Niraj', age: 25 }
+
+
+
+34. What is the `rest` parameter?
+35. Explain the `for...of` loop.
+36. What are `async` and `await` keywords used for?
+37. What is `Symbol` used for in JavaScript?
+38. How do you create a class in JavaScript?
+Ans : In JavaScript, you can create a class using the class keyword introduced in ES6 (ECMAScript 2015). A class is essentially a blueprint for creating objects with shared properties and methods.
+🔹 Basic Syntax:
+class Person {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+
+  // Method
+  greet() {
+    console.log(`Hello, my name is ${this.name} and I am ${this.age} years old.`);
+  }
+}
+🔹 Create an Object (Instance)
+const person1 = new Person("Niraj", 25);
+person1.greet(); // Output: Hello, my name is Niraj and I am 25 years old.
+🔹 Static Methods
+Static methods are called on the class itself, not on instances:
+class MathUtil {
+  static add(a, b) {
+    return a + b;
+  }
+}
+
+console.log(MathUtil.add(5, 3)); // 8
+
+
+39. What is destructuring in JavaScript?
+Ans : Array destructuring lets you assign elements of an array to variables in a single statement.
+const colors = ['red', 'green', 'blue'];
+const [firstColor, secondColor] = colors;
+console.log(firstColor); // Output: 'red'
+console.log(secondColor); // Output: 'green'
+
+
+Object destructuring allows you to extract properties from objects into variables.
+const person = { name: 'Alice', age: 25 };
+const { name, age } = person;
+console.log(name); // 'Alice'
+console.log(age);  // 25
+
+
+
+
+
+40. What is the `Proxy` object?

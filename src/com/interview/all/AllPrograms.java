@@ -428,6 +428,25 @@ public class AllPrograms {
 	    public static void objectTypeParameters(Object object) {
 		System.out.println("objects");
 		}
+	    
+	    
+	  public static void startWith1() {
+		  List<Integer> integers = Arrays.asList(1,23,34,11,14,19,28);
+		  List<Integer> integer = integers.stream().filter(n->String.valueOf(n).startsWith("1")).collect(Collectors.toList());
+	  }
+	  
+	  public static void findCommonValuesFromList() {
+		  List<Integer> integers = Arrays.asList(10,15,11,23,25,67,34);
+		  List<Integer> integer = Arrays.asList(10,15,11,29);
+		  
+		  List<List<Integer>> lists = Arrays.asList(integer,integers);
+		  System.out.println("list of lits is : "+lists);
+		  
+		  List<Integer> list = lists.stream().flatMap(List::stream).toList();
+		  Set<Integer> set = new HashSet<>();
+		  List<Integer> commonValues = list.stream().filter(n->!set.add(n)).toList();
+		  System.out.println("common values are : "+commonValues);
+	  }
 		public static void main(String[] args) {
 			HashMap<String, Integer> map = new HashMap<>();
 	        map.put("Apple", 50);
@@ -438,7 +457,7 @@ public class AllPrograms {
 	        System.out.println(linkedHashMap);
 
 	        
-	        AllPrograms.reverseEachWordOfAStringInJava();
+	        AllPrograms.findCommonValuesFromList();
 
 		}
 
