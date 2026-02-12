@@ -1,0 +1,128 @@
+
+AWS :
+
+1.✅ Whay is Elastic Bean Stack ?
+Ans :
+AWS Elastic Beanstalk is a Platform as a Service (PaaS) offered by Amazon Web Services that lets you deploy and manage web applications easily without worrying about the infrastructure.
+🔹 Key Features
+| Feature                         | Description                                                             |
+| ------------------------------- | ----------------------------------------------------------------------- |
+| **Managed environment**         | AWS handles provisioning, load balancing, auto-scaling, and monitoring. |
+| **Supports multiple languages** | Java, Python, Node.js, .NET, PHP, Ruby, Go, and Docker.                 |
+| **Integrated with CI/CD**       | Works well with GitHub, CodePipeline, etc.                              |
+| **Auto-scaling**                | Automatically scales up/down based on load.                             |
+| **Monitoring**                  | Integrated with CloudWatch for logs and metrics.                        |
+
+🔹 How It Works
+You upload your application (WAR, JAR, ZIP, or Docker).
+Elastic Beanstalk creates environment:
+EC2 instance(s)
+Load balancer
+Auto Scaling Group
+RDS (optional)
+AWS manages the deployment, updates, scaling, and health monitoring.
+
+Q2. What is EC2 in AWS?
+Q3. What is Lambda in AWS ?
+Ans :
+AWS Lambda is a serverless compute service where you write a small piece of code (called a "function") and AWS runs it on-demand without provisioning or managing servers.
+
+✅ Key Features:
+No server management
+Scales automatically
+Billed only for the execution time
+Event-driven: triggers include S3, DynamoDB, API Gateway, SNS, etc.
+📌 Example Use Case:
+Upload image to S3 ➡️ Trigger Lambda ➡️ Resize image ➡️ Store resized image in another S3 bucket
+
+Q4. ✅What is S3 Storage in AWS ?
+Q5. ✅What is CloudWatch in AWS ?
+Ans :
+Amazon CloudWatch is a monitoring and observability service provided by AWS that helps you collect, view, and analyze metrics, logs, and events from your AWS infrastructure, applications, and services in real time.
+🔹 Key Features of CloudWatch
+| Feature                 | Description                                                                |
+| ----------------------- | -------------------------------------------------------------------------- |
+| **Metrics**             | Collect performance metrics (e.g., CPU, memory, disk, custom app metrics). |
+| **Logs**                | Centralized logging from AWS services and custom applications.             |
+| **Alarms**              | Notify you when a metric crosses a threshold (e.g., high CPU, low disk).   |
+| **Dashboards**          | Create custom visualizations and monitoring dashboards.                    |
+| **Events**              | Respond to events (e.g., instance start/stop) using rules and Lambda.      |
+| **CloudWatch Insights** | Run queries on log data for analysis and debugging.                        |
+🔧 Example: Create a CloudWatch Alarm for EC2 CPU > 80%
+Go to EC2 → Monitoring → Create Alarm.
+Set the condition: CPUUtilization > 80 for 5 minutes.
+Set actions: send notification via SNS topic.
+Save the alarm — CloudWatch will now monitor and notify you.
+
+Q6. ✅What is ESC in AWS ?
+Q7. ✅What is API Gateway in AWS ?
+Q8. ✅What is Security Group in AWS ?
+Ans :
+A Security Group (SG) in AWS acts as a virtual firewall that controls inbound and outbound traffic to your EC2 instances 
+(or other AWS resources like RDS, Lambda in VPC, etc.).
+🔐 Key Points:
+Security groups are stateful:
+If you allow inbound traffic, the corresponding outbound response is automatically allowed.
+They control traffic at the instance level, not the subnet level.
+Security groups only allow traffic (they do not deny — anything not explicitly allowed is denied).
+🔸 Example:
+You launch a web server on EC2 and want to:
+| Direction | Rule                                       | Purpose                                |
+| --------- | ------------------------------------------ | -------------------------------------- |
+| Inbound   | Allow TCP on port 80 (HTTP) from 0.0.0.0/0 | Allow public web traffic               |
+| Inbound   | Allow TCP on port 22 (SSH) from your IP    | Allow secure remote access             |
+| Outbound  | Allow all traffic                          | Default to let EC2 access internet/API |
+🔧 Sample Security Group Rule:
+| Type   | Protocol | Port Range | Source                   |
+| ------ | -------- | ---------- | ------------------------ |
+| HTTP   | TCP      | 80         | 0.0.0.0/0                |
+| SSH    | TCP      | 22         | 203.0.113.0/32           |
+| Custom | TCP      | 8080       | sg-xxxxxxxx (another SG) |
+🔄 Security Group vs NACL (Network ACL)
+| Feature    | Security Group                    | Network ACL                       |
+| ---------- | --------------------------------- | --------------------------------- |
+| Level      | Instance-level                    | Subnet-level                      |
+| Stateful   | ✅ Yes                             | ❌ No (must allow both directions) |
+| Rules      | Only **allow**                    | Allow or deny                     |
+| Applied to | ENIs (Elastic Network Interfaces) | Subnets  
+
+📌 Best Practices:
+Keep SSH ports restricted to known IPs.
+Separate public and private SGs (e.g., one for web, one for DB).
+Use SG referencing for service-to-service communication.
+
+✅ Example: Assign SG to EC2
+When launching an EC2 instance:
+Go to Configure Security Group step.
+.Add rules (e.g., HTTP, HTTPS, SSH).
+Assign the SG — either create new or reuse existing.                         |
+
+Q9. ✅What is RDS in AWS ?
+Q10.✅ What is VPC in AWS ?
+Q11.❓ What is Subnet in AWS ?
+Ans :
+In AWS (Amazon Web Services), a subnet is a range of IP addresses within a VPC (Virtual Private Cloud). It allows you to logically separate and organize your resources within a network.
+A subnet (short for sub-network) is a segment of a larger network (VPC) where you can place AWS resources such as EC2 instances, databases, and load balancers.
+🛠️ Types of Subnets in AWS:
+| Type               | Description                                            |
+| ------------------ | ------------------------------------------------------ |
+| **Public Subnet**  | Connected to the internet via an **Internet Gateway**. |
+| **Private Subnet** | No direct internet access. Used for backend systems.   |
+
+📌 Example Scenario:
+Imagine you have a VPC with CIDR block 10.0.0.0/16.
+You can divide it into subnets:
+10.0.1.0/24 → Public Subnet
+10.0.2.0/24 → Private Subnet
+
+🛡️ Why Use Subnets?
+To separate frontend/backend layers
+To secure resources (private subnets = no internet)
+To control network routing
+For high availability (across multiple Availability Zones)
+
+🔧 How to Create a Subnet in AWS?
+Go to VPC Dashboard
+Click Subnets → Create Subnet
+Choose your VPC, availability zone, and CIDR block (e.g., 10.0.1.0/24)
+Optionally associate a route table and security group

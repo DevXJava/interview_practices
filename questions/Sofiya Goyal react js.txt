@@ -1,0 +1,312 @@
+Top 25 React Interview Questions and Answers | Sofia Goyal
+
+
+
+Q.6 What is Higher Order component ?
+Ans : 
+Q.7 What is Synthetic events ?
+Ans : its like javascript normal events : onClick, onChange 
+Q.8 What is refs ?
+Ans : Accessing and modifying DOM elements (e.g., focus, scroll, measure).
+
+Integrating with third-party libraries (e.g., D3, Chart.js).
+
+Managing animations or manual DOM changes.
+
+Avoiding controlled inputs (less common but possible).
+
+
+Q.9 What is Controlled and Uncontrolled Component ?
+Ans : If controlled of React is Controlled Component like : useState().
+      If not Controlled by react is called Uncontrolled component like : useRef() , useRef is not rerending 
+	  
+Q.10 Difference b/w state and props ?
+Ans : states are under component and its mutable , but props are out of component we are passing data through props and its is immutable.	  
+
+Q.11 What is props drilling in react js ?
+Ans :  Parent->child1->child2->child3. here parent is passing data by in multiple steps to child3 , this data we can pass directly using redux or context .
+it is like React context .
+
+Q.12 What is lifting the state up ?
+Ans : Shift child elements to directly in Parent elements .
+     example : suppose we have <input type"text" > under <form> tag then we can directly call input into form tag
+	 
+Q.13 What is react router dom ?
+Ans : one page to another page jump .
+
+Q. 14 What is PureComponent ?
+Ans: it is a class base component , used for perfrmance optimization , if component is not update then it is not rendering the component, 
+its main work of pure component , using React.memo() we can impliment using functional component. React.memo() is a higher oreder component also 
+
+Q. 15 Styling Technique in React ?	
+Ans : Internal , External And Inline .
+
+Q. 16 How to async data fetching ?
+
+Ans : 
+function asyncwaitExample(){
+const [data,setData] = useState([])
+const [loading,setLoading] = useState(true)
+const [error,setError] = useState(null)
+
+useEffect(()=>{
+
+const fetchData = async() =>{
+
+try{
+const response = await fetch('https://');
+if(!response.ok){
+throw new Error('Network problem');
+}
+const data await response.json();
+setData(data)
+
+}catch(error){
+setError(error)
+}
+finally{
+setLoading(false)
+}
+
+};
+
+fetchData();
+},[]);
+return(
+<ul>
+{
+data.map((item)=>{
+
+<li key={item.id}>{item.title}</li>
+})
+}
+</ul>
+
+)
+
+}	
+
+Q. 17 Conditional Rendering in React ?
+Ans : we get this things using like , a. if else condition , b. Ternary operatot , c.logical && we can use 
+     d .switch case 
+     like this we can render button conditionaly .
+	 
+Q.18 Client Side Rendering vs Server Sider Rendering ?	 
+
+Q 19. What is React.Memo ?
+
+Q.20 Lazy Loading vs Code Spliting in React JS ?
+Ans : According to requirment load the data is called Lazy loading .
+     Example :
+	 
+	 import React, {Suspance} from 'React'
+	 const LazyComponet = React.lazy(()=> import('./HeavyComponent'));
+	 function lazyLoadingExample{
+	 return(
+	 <div>
+	   <h1> Welcome Lay </h1>
+	   
+	   <Suspense fallback={<div>Loading.... </div>}> 
+	   <LazyComponet>
+	   </Suspance>
+	 
+	 );
+	 
+  }
+  
+  export default lazyLoadingExample
+  
+  Code Spliting Example .
+  
+  its like cathc() and then() block like .
+  
+  
+Q. 20 What are the challenges using  React ?
+Ans : maintainig state is problem when progrma is become big then we need to use some libraries.
+b. complex from handing is challanges again we need to use external libraries like farmic .
+
+Q. What is custom hooks ?
+Ans : it is kind of Javascript function using for create some utility function, using inbuilt function we can create own function called custom hooks .
+
+Example :
+import {useState,useEffect} from 'react'
+
+function useFetch(url){
+const [data,setData]  = useState(null);
+const [loading,setLoading] = useState(true);
+const [error,setError] = useState(null);
+
+useEffect(()=>{
+const fetchData= async() =>{
+try{
+const response = await fetch(url);
+if(!response.ok){
+throw new Error('Network problem');
+}
+const data await response.json();
+setData(data)
+
+}catch(error){
+setError(error)
+}
+finally{
+setLoading(false)
+}
+
+};
+
+}
+fetchData();
+},[url]);
+}
+
+Q. useEffect vs uesEffectLayout ?
+Q. useMemo vs useCallback?
+Q. How to optimize react app perfrmance?
+Ans : use React inbuilt optimization React.memo , Pure component 
+Optimize state management,state lifting  etc .
+useMemo and useCallback etc.
+Dont forget to use Keys .
+
+------------------------------------------Java Script Interview questions ------------------------------------------------
+Q. What is Hoisting in JavaScript?
+Ans :
+🔍 Key Points:
+1.Only declarations (not initializations) are hoisted.
+2.var, function declarations, and class declarations are hoisted.
+3.let and const are also hoisted but stay in a "Temporal Dead Zone" (TDZ)", so using them before declaration causes a ReferenceError.
+
+Example : function Hoisting
+greet(); // ✅ Works
+function greet() {
+    console.log("Hello!");
+}
+
+Q. What is prototype in js ?
+Ans :
+Every JavaScript function (including constructors) has a built-in property called .prototype. This property is an object that is shared among all instances created using that function.
+Example :
+const animal = {
+    speak() {
+        console.log("Animal sound");
+    }
+};
+const dog = Object.create(animal);
+dog.speak(); // Animal sound
+
+Q.🔁 What is a Higher Order Component (HOC) in React?
+Ans : A Higher Order Component (HOC) is an advanced pattern in React used to reuse component logic.
+      It’s a function that takes a component and returns a new component.
+	  
+Q. What is react lifecycle?
+Ans : 🔄 React Lifecycle Explained (for Class Components)
+      React lifecycle methods are hooks that allow you to run code at particular times in a component's life (creation, updating, and destruction).	  
+	    
+📦 Three Main Phases
+1. Mounting – when the component is being created and inserted into the DOM.
+2. Updating – when the component is being re-rendered due to state/prop changes.
+3. Unmounting – when the component is removed from the DOM.	 
+
+🟩 1. Mounting Phase
+| Method                              | Purpose                                                |
+| ----------------------------------- | ------------------------------------------------------ |
+| `constructor()`                     | Initialize state and bind methods.                     |
+| `static getDerivedStateFromProps()` | Update state from props before render (rarely used).   |
+| `render()`                          | Returns JSX. Required.                                 |
+| `componentDidMount()`               | Runs once after the first render; great for API calls. |
+
+✅ Typical Use: API fetch, setting timers, subscriptions.
+
+🔄 2. Updating Phase
+Occurs when:
+this.setState() is called
+Parent re-renders and passes new props 
+
+| Method                              | Purpose                                                                |
+| ----------------------------------- | ---------------------------------------------------------------------- |
+| `static getDerivedStateFromProps()` | Same as in mounting.                                                   |
+| `shouldComponentUpdate()`           | Determines whether to re-render.                                       |
+| `render()`                          | Re-render with new data.                                               |
+| `getSnapshotBeforeUpdate()`         | Capture values (like scroll position) before DOM is updated.           |
+| `componentDidUpdate()`              | Run code after the component updates. Good for DOM or network updates. |
+
+✅ Typical Use: Responding to prop changes, DOM measurements, side effects.
+
+🟥 3. Unmounting Phase
+| Method                   | Purpose                                                           |
+| ------------------------ | ----------------------------------------------------------------- |
+| `componentWillUnmount()` | Cleanup work like clearing timers, cancelling subscriptions, etc. |
+✅ Typical Use: Avoid memory leaks, cleanup side effects.
+
+📜 Full Lifecycle Flow
+Mounting:
+constructor → getDerivedStateFromProps → render → componentDidMount
+
+Updating:
+getDerivedStateFromProps → shouldComponentUpdate → render → getSnapshotBeforeUpdate → componentDidUpdate
+
+Unmounting:
+componentWillUnmount
+
+✅ React Hooks Equivalent (for Functional Components)
+| Class Component        | Functional Component (Hooks)                |
+| ---------------------- | ------------------------------------------- |
+| `componentDidMount`    | `useEffect(() => {}, [])`                   |
+| `componentDidUpdate`   | `useEffect(() => {…}, [deps])`              |
+| `componentWillUnmount` | `useEffect(() => { return () => {}; }, [])` |
+📌 Example:
+import React, { Component } from 'react';
+
+class MyComponent extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { count: 0 };
+    console.log("Constructor");
+  }
+
+  componentDidMount() {
+    console.log("Component Mounted");
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log("Component Updated");
+  }
+
+  componentWillUnmount() {
+    console.log("Component Will Unmount");
+  }
+
+  render() {
+    return (
+      <div>
+        <p>Count: {this.state.count}</p>
+        <button onClick={() => this.setState({ count: this.state.count + 1 })}>
+          Increment
+        </button>
+      </div>
+    );
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+ 

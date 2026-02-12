@@ -1,0 +1,41 @@
+------------------------------Controller Test---------------------------
+✅ Key Points
+
+@WebMvcTest(StudentController.class) → loads only controller beans.
+
+@MockBean → mocks StudentServiceImpl.
+
+MockMvc → used to perform HTTP requests and verify responses.
+
+ObjectMapper → converts objects to/from JSON.
+
+Covered cases:
+
+Create (POST /save)
+
+Get all with pagination (GET /getall)
+
+Get by ID (found & not found)
+
+Update (PUT /update/{id})
+
+Delete (DELETE /deletebyid/{id})
+
+
+---------------------Service Test---------------------------------------
+✅ Summary:
+
+@ExtendWith(MockitoExtension.class) → enables Mockito in JUnit 5.
+
+@Mock → create fake objects (dependencies).
+
+@InjectMocks → injects mocks into class under test.
+
+@MockBean → mock inside Spring Boot context (more for controller/integration tests).
+
+@BeforeEach → setup before every test.
+
+@Test → actual test method.
+
+--------------------------Repository Test-------------------------------------
+for Repository test we need to configure H2 Database and test it .

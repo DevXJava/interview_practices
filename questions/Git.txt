@@ -1,0 +1,26 @@
+echo "# dev-configuration-service" >> README.md
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/devsus/dev-configuration-service.git
+git push -u origin main
+
+
+…or push an existing repository from the command line
+git remote add origin https://github.com/devsus/dev-configuration-service.git
+git branch -M main
+git push -u origin main
+
+
+
+
+===========================KAFKA===========================================
+1. Producer : It is producing messages contineously .
+2. Kafka Broker : The Broker is Kafka Server, Its just a meaning full name given to the kafka server, 
+                  And this name make sence as well because all that kafka dose it act as a massage broker between producer and consumer.
+		The Producer and consumer dont interact directly, They use KAFKA Server as an agent or broker to exchange messages.		  
+2. Consumer : It is consuming data from producer .
+3. Topic : Topic is like a table in database or folder in a file system, Topic is identified by name, you can have any number of topic .
+4. Partition:
+5. Offset : 
