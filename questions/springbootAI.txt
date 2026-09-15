@@ -1,0 +1,1 @@
+spring boot AI mainly containing , ChatClinet , ChatMaodel which can used by GPT-4 or we can use Local Ollama Model also.
