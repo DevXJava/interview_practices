@@ -341,15 +341,15 @@ public class AllPrograms {
 	 System.out.println(maxStr.get().getValue());
 	}
 	public static void findOutPut() {
-		System.out.println(0.1*3 == 0.3);
-		System.out.println(0.1*2 == 0.2);
+		System.out.println(0.1*3 == 0.3); // false
+		System.out.println(0.1*2 == 0.2); // true
 	}
 	
 
 	//22-03-2025 capgemini
 
 	//22-03-2025 capgamini
-
+    //20.
 	public static void reverseStringByWordUsingJava8(){
 		String sentence = "Java Concept Of The Day";
 		String reversed = Arrays.stream(sentence.split(" ")) //split sentence into words
@@ -365,7 +365,7 @@ public class AllPrograms {
 	}
 
 	
-	// 
+	// 21.
 	public static void reverseEachWordOfAStringInJava() {
 		
 		String string = "Welcome to Powerplay !";
@@ -375,7 +375,7 @@ public class AllPrograms {
 		System.out.println("reversedEachWords : "+reversedEachWords);
 	}
 	
-
+    //22.
 	public static LinkedHashMap<String, Integer> shortHashMapAscOrderByValue(HashMap<String, Integer> mapParameter) {
 		HashMap<String, Integer> map = new HashMap<>();
         map.put("Apple", 50);
@@ -405,6 +405,7 @@ public class AllPrograms {
         
 	}
 
+    //23.
 	public static void reverseEachWordOfStringusingJava8(){
 		String input = "Welcome to Powerplay";
 
@@ -417,24 +418,27 @@ public class AllPrograms {
 
     //===================================================================================================================
 	
+	//24.
 	  public static void objectTypeParameters(String string) {
 	     System.out.println("string"); 
 	  }
 	 
+	//25.
 		/*
 		 * public static void objectTypeParameters(StringBuffer stringBuffer) {
 		 * System.out.println("string buffer"); }
 		 */
+	//26.	
 	    public static void objectTypeParameters(Object object) {
 		System.out.println("objects");
 		}
 	    
-	    
+	//27.    
 	  public static void startWith1() {
 		  List<Integer> integers = Arrays.asList(1,23,34,11,14,19,28);
 		  List<Integer> integer = integers.stream().filter(n->String.valueOf(n).startsWith("1")).collect(Collectors.toList());
 	  }
-	  
+	//28.  
 	  public static void findCommonValuesFromList() {
 		  List<Integer> integers = Arrays.asList(10,15,11,23,25,67,34);
 		  List<Integer> integer = Arrays.asList(10,15,11,29);

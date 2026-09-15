@@ -20,7 +20,7 @@ public class ArrayFrequency {
 				if (arr[i] == arr[j]) {
 					count++;
 					// To avoid counting same element again
-					fr[j] = visited;
+					fr[j] = visited; //fr[j] contain -1 if its already visited
 				}
 			}
 			if (fr[i] != visited)

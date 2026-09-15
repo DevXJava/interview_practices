@@ -1,4 +1,4 @@
-package com.interview;
+package com.interview.alls;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -90,8 +90,9 @@ public class AaPractice {
 				.collect(Collectors.toList());
 
 		// 36. Find lowest paid salary in each department based on the gender.
-		Map<String, Optional<Employee>> lowestSalEachDept = list.stream().collect(Collectors
-				.groupingBy(Employee::getDeptName, Collectors.minBy(Comparator.comparing(Employee::getSalary))));
+		Map<String,Map<String,Optional<Employee>>> lowestSalEachDeptBasedOnGender = list.stream().collect(Collectors.groupingBy(Employee::getDeptName,
+                Collectors.groupingBy(Employee::getGender,Collectors.minBy(Comparator.comparing(Employee::getSalary)))));
+        System.out.println("lowestSalEachDeptBasedOnGender : "+lowestSalEachDeptBasedOnGender);
 
 		// 35. Find lowest paid salary in the organisation
 		Employee lowestSalInOrg = list.stream().min(Comparator.comparing(Employee::getSalary)).get();
@@ -104,7 +105,7 @@ public class AaPractice {
 
 		// 33. Print the top 2 highest salary earned employees in each department
 		Map<String, Stream<Employee>> top2SalEachDept = list.stream()
-				.collect(Collectors.groupingBy(Employee::getGender, Collectors.collectingAndThen(Collectors.toList(),
+				.collect(Collectors.groupingBy(Employee::getDeptName, Collectors.collectingAndThen(Collectors.toList(),
 						l -> l.stream().sorted(Comparator.comparing(Employee::getSalary).reversed()).limit(2))));
 
 		// 32. Print the top 3 highest salary earned employees in the organisation
@@ -169,8 +170,7 @@ public class AaPractice {
 		List<Employee> allEmpBelongsBlore = list.stream().filter(e -> e.getCity().equalsIgnoreCase("Blore"))
 				.sorted(Comparator.comparing(Employee::getName)).collect(Collectors.toList());
 
-		// 19. Find the department names that these employees work for, where the number
-		// of employees in the department is over 3.
+		// 19. Find the department names that these employees work for, where the number of employees in the department is over 3.
 		Stream<Entry<String, Long>> dpnameEmpWorkFor3Dept = list.stream()
 				.collect(Collectors.groupingBy(Employee::getDeptName, Collectors.counting())).entrySet().stream()
 				.filter(entry -> entry.getValue() > 3);

@@ -127,7 +127,7 @@ Compiles, runs unit tests, packages into a JAR/WAR, and installs it into your lo
 | `mvn clean install` | Clean + Compile + Test + Package + Install | Build and install the artifact locally for reuse |
 ===========================================================================================
 Q2. What is actuators and urls ?
-Ans :Spring Boot Actuator is a subproject of Spring Boot that helps you monitor and manage your application in production. It exposes various endpoints (URLs) to ->get runtime information such as:
+Ans: Spring Boot Actuator is a subproject of Spring Boot that helps you monitor and manage your application in production. It exposes various endpoints (URLs) to ->get runtime information such as:
 ->Health of the application
 ->Metrics (memory, CPU, threads)
 ->Beans, environment, configs
@@ -158,8 +158,8 @@ Q3. Find output ?
  str=str1;
  str.equals(str2) // true   //.equals() comparing only content not object 
 ================================================================================================
-Q4. how to hide property file value in production? using configure server we can secure the data in spring boot ?
-Ans :
+Q4. how to hide property file value in production? 
+Ans : using configure server we can secure the data in spring boot .
 🔒 1. Use Environment Variables (Best Practice for Production)
 # application.properties
 db.password=${DB_PASSWORD}
@@ -285,7 +285,7 @@ application-prod.properties (production, loaded from env/secret manager)
 Activate profiles via:
 java -jar app.jar --spring.profiles.active=prod
 *******************************Capgemini************************************
-Q.11
+Q.11 Write a program for following output ?
 Input : apple avocado , banana, blue berry , cherry 
 Output :
 A = apple, avocado
@@ -350,67 +350,67 @@ Because:
 Static methods belong to the class, not the instance (object).
 Overriding is an object-oriented (runtime polymorphism) feature.
 Static methods are resolved at compile-time (early binding), not at runtime.
-class Parent {
-    static void show() {
-        System.out.println("Parent static show()");
-    }
-}
+	class Parent {
+		static void show() {
+			System.out.println("Parent static show()");
+		}
+	}
 
-class Child extends Parent {
-    static void show() {
-        System.out.println("Child static show()");
-    }
-}
-public class Test {
-    public static void main(String[] args) {
-        Parent p = new Child();
-        p.show();  // Output: Parent static show()
-    }
-}
+	class Child extends Parent {
+		static void show() {
+			System.out.println("Child static show()");
+		}
+	}
+	public class Test {
+		public static void main(String[] args) {
+			Parent p = new Child();
+			p.show();  // Output: Parent static show()
+		}
+	}
 
 =============================================================================================
 Q16. What is circular dependency in spring?
 Ans : 
 A circular dependency occurs when two or more classes (or beans) depend on each other directly or indirectly, creating a loop.
 Problem :
-@Component
-public class A {
-    @Autowired
-    private B b;
-}
+	@Component
+	public class A {
+		@Autowired
+		private B b;
+	}
 
-@Component
-public class B {
-    @Autowired
-    private A a;
-}
-Soution :
-@Component
-public class A {
-    @Autowired
-    @Lazy
-    private B b;
-}
+	@Component
+	public class B {
+		@Autowired
+		private A a;
+	}
+	Soution :
+	@Component
+	public class A {
+		@Autowired
+		@Lazy
+		private B b;
+	}
 
-@Component
-public class B {
-    @Autowired
-    private A a;
-}
-We can use constructor in above 
+	@Component
+	public class B {
+		@Autowired
+		private A a;
+	}
+We can use constructor in above. 
 =============================================================================================
 Q17. What is Microservice Architecture design pattern ?
 Ans :
 A Microservice Design Pattern is a proven solution to common problems encountered when designing, building, or deploying microservice architectures. These patterns help ensure scalability, maintainability, fault tolerance, and performance of distributed systems.
 
 🧱 Common Microservice Design Patterns
-1. Decomposition Patterns
-Split the monolith into microservices.
-By Business Capability – Divide services by domain (e.g., User, Order, Payment).
-By Subdomain – Based on Domain-Driven Design (DDD).
+1. Decomposition Patterns:
+	Split the monolithic into microservices.
+	By Business Capability – Divide services by domain (e.g., User, Order, Payment).
+	By Subdomain – Based on Domain-Driven Design (DDD).
 
-2. API Gateway Pattern
-A single entry point for all clients that routes requests to internal services.
+2. API Gateway Pattern:
+	A single entry point for all clients that routes requests to internal services.
 Tools : A. Spring Cloud Gateway (Most Common in Spring Boot)
                Built on Spring WebFlux (Reactor Netty) → supports reactive, async requests.
                Provides routing + filters + security integration.
@@ -434,38 +434,259 @@ Tools : A. Spring Cloud Gateway (Most Common in Spring Boot)
 Centralized authentication, logging, rate limiting.
 Aggregates multiple services into one response.
 
-3. Database per Service Pattern
-Each service has its own database to maintain loose coupling.
-⚠️ Requires handling distributed transactions.
+3. Database per Service Pattern:
+	Each service has its own database to maintain loose coupling.
+	⚠️ Requires handling distributed transactions.
 
-4. Circuit Breaker Pattern
+4. Circuit Breaker Pattern:
 Stops calling a failing service temporarily to prevent cascading failures.
 🛠️ Tools: Resilience4j, Hystrix
 
-5. Service Discovery Pattern
-Automatically find and connect to services dynamically.
-🛠️ Tools: Netflix Eureka, Consul
+5. Service Discovery Pattern:
+	Automatically find and connect to services dynamically.
+	🛠️ Tools: Netflix Eureka, Consul
 
-6. Strangler Pattern
-Gradually replace legacy systems by building new features as microservices.
+6. Strangler Pattern:
+	Gradually replace legacy systems by building new features as microservices.
 
-7. CQRS (Command Query Responsibility Segregation)
-Separate read and write operations into different models.
-✔ Improves performance, scalability, and security.
+7. CQRS (Command Query Responsibility Segregation):
+	Separate read and write operations into different models.
+	✔ Improves performance, scalability, and security.
 
-8. Event Sourcing Pattern
-Store state changes as a sequence of events instead of the current state.
-✔ Works well with CQRS.
+8. Event Sourcing Pattern:
+	Store state changes as a sequence of events instead of the current state.
+	✔ Works well with CQRS.
 
-9. Saga Pattern
-Manage distributed transactions through a sequence of local transactions and compensating actions.
-✔ Used when there’s no distributed ACID transaction support.
+9. Saga Pattern:
+	Manage distributed transactions through a sequence of local transactions and compensating actions.
+	✔ Used when there’s no distributed ACID transaction support.
+     The Saga Design Pattern is used in microservices to manage a business transaction that spans multiple services, without using one big distributed database transaction.
+	 Simple example:
+     Suppose you have an e-commerce system:
+		Order Service
+			 ↓
+		Payment Service
+			 ↓
+		Inventory Service
+			 ↓
+		Notification Service
+		When a customer places an order:
 
-10. Bulkhead Pattern
-Isolate resources (like threads or DB connections) between services to avoid system-wide failures.
+		.Create Order
+		.Make Payment
+		.Reserve Inventory
+		.Send Notification
+		
+		The problem is: what if Inventory fails after Payment succeeds?
+		With a normal database transaction, you might think:
+		
+		BEGIN TRANSACTION
+
+		Create Order
+		Make Payment
+		Reserve Inventory
+
+		COMMIT
+		But these are different microservices/databases, so a single normal DB transaction generally cannot cover all of them.
+		That's where Saga comes in.
+		
+		What does Saga do?
+		A Saga breaks one large business transaction into a series of local transactions.
+		Now Saga executes a compensating transaction to undo the successful previous operations.
+		
+		Inventory failed
+			   ↓
+		Refund Payment
+			   ↓
+		Cancel Order
+		
+		So:
+
+		Create Order
+			 ↓
+		Payment
+			 ↓
+		Inventory ❌
+			 ↓
+		Refund Payment
+			 ↓
+		Cancel Order
+	 
+		The important concept is:
+		Saga does not provide traditional ACID rollback across microservices. Instead, it uses compensating transactions.
+		
+		Two types of Saga:
+
+		There are mainly two approaches.
+
+		1. Choreography:
+
+		There is no central coordinator.
+		Services communicate through events.
+		
+		Order Service
+			 |
+			 | OrderCreated
+			 ↓
+		Payment Service
+			 |
+			 | PaymentCompleted
+			 ↓
+		Inventory Service
+			 |
+			 | InventoryFailed
+			 ↓
+		Payment Service
+			 |
+			 | RefundPayment
+			 ↓
+		Order Service
+			 |
+			 | CancelOrder
+			 
+	For example, with Kafka:
+ 
+       Order Service
+			 |
+			 | OrderCreated event
+			 ↓
+			Kafka
+			 ↓
+		Payment Service
+			 |
+			 | PaymentCompleted event
+			 ↓
+			Kafka
+			 ↓
+		Inventory Service 
+		
+		Each service listens for events and performs its own local transaction.
+
+		Advantages
+		Loosely coupled
+		Good for event-driven architectures
+		No central coordinator
+		Disadvantages
+
+		As the number of services increases, it can become difficult to understand the entire workflow.
+	    Service A → Event → B
+		B → Event → C
+		C → Event → D
+		D → Event → A
+
+		Debugging can become complicated.
+		
+		2. Orchestration:
+
+		Here we have a central Saga Orchestrator.
+		
+		       Saga Orchestrator
+                /     |      \
+               ↓      ↓       ↓
+           Order   Payment  Inventory
+           Service Service   Service
+		   
+		    The orchestrator controls the workflow.
+
+			For example:
+			
+			Orchestrator
+				 |
+				 | Create Order
+				 ↓
+			Order Service
+				 |
+				 | Success
+				 ↓
+			Orchestrator
+				 |
+				 | Process Payment
+				 ↓
+			Payment Service
+				 |
+				 | Success
+				 ↓
+			Orchestrator
+				 |
+				 | Reserve Inventory
+				 ↓
+			Inventory Service
+				 |
+				 | FAILED
+				 ↓
+			Orchestrator
+				 |
+				 | Refund Payment
+				 ↓
+			Payment Service
+				 |
+				 | Success
+				 ↓
+			Orchestrator
+				 |
+				 | Cancel Order
+				 ↓
+			Order Service
+	 
+		Advantages:
+			Centralized workflow
+			Easier to understand
+			Easier to monitor/debug complex transactions
+		Disadvantages:
+			Orchestrator adds another component
+			Can become too powerful if badly designed
+			Services are somewhat coupled to the orchestration workflow
+			Saga vs normal transaction
+
+		This is a very common interview question.
+
+		Traditional transaction
+		
+		BEGIN
+		   ↓
+		Operation 1
+		   ↓
+		Operation 2
+		   ↓
+		Operation 3
+		   ↓
+		COMMIT
+		If Operation 3 failed 
+		
+		  ROLLBACK , Eeverything is rollback Automatically 
+		
+     Differences:		
+		  
+	Saga:
+		Transaction 1
+			 ↓
+		Transaction 2
+			 ↓
+		Transaction 3 ❌
+			 ↓
+		Compensating Transaction 2
+			 ↓
+		Compensating Transaction 1
+
+		There is no global rollback.
+
+	Instead:
+
+		Forward transaction
+		        +
+		Compensating transaction  
+		
+		
+		Saga is a distributed transaction pattern used in microservices where a business transaction is divided into a sequence of local transactions. Each local transaction publishes an event or triggers the next step, and if a step fails, compensating transactions are executed to undo the effects of previously completed steps. Saga can be implemented using choreography or orchestration.
+
+		Saga = Local Transactions + Events + Compensation + Choreography/Orchestration
+	 
+	 	 
+10. Bulkhead Pattern:
+	Isolate resources (like threads or DB connections) between services to avoid system-wide failures.
 ====================================================================================================
 Q18. How to optimize Rest API ? 
-Ans : Sorting,Pagignation, Cache @Cacheable("users"), Rate limit , @Async 
+Ans : Sorting,Pagignation, Cache @Cacheable("users"), Rate limit , @Async ,@Retry 
 =======================================================================================================
 Q19. What is N+1 Query Problem ?
 Ans: The N+1 Query Problem occurs when your application performs 1 query to fetch the main entity and then N additional queries to fetch related entities — one for each result in the main entity list. This leads to excessive DB hits and poor performance.
@@ -506,7 +727,7 @@ List<Department> findAll();
 Q20. Stereo type annotations ?
 Ans : @Service,@Repository,@Component ,@Controller, @RestController
 ==========================================================================================================
-Q21. Controller v/s RestController
+Q21. Controller v/s RestController ?
 Ans : 
 🔹 @Controller: Used in traditional MVC applications,Returns views (HTML, JSP),If you return a value, it’s treated as a view name,To return JSON, you mustexplicitly use @ResponseBody.
 🔹 @RestController: Introduced in Spring 4.Shortcut for @Controller + @ResponseBody.Used in RESTful APIs.All returned values are converted to JSON or XML automatically.
@@ -564,7 +785,7 @@ public WebMvcConfigurer corsConfigurer() {
 }
 
 ========================================================================================================
-Q23. Fail Fast v/s Fail safe
+Q23. Fail Fast v/s Fail safe ?
 Ans :
 🔹 Fail-Fast: Throws ConcurrentModificationException if the collection is modified while iterating (except via iterator's own methods).Doesn't guarantee iteration after modification.Not thread-safe.
 Example: ArrayLis,HashMap,HashSet 
@@ -572,8 +793,204 @@ Example: ArrayLis,HashMap,HashSet
 Thread-safe but may have stale data.
 Examples:CopyOnWriteArrayList,ConcurrentHashMap.
 =========================================================================================================
-Q24. Internal working of HashMap
+Q24. Internal working of HashMap?
 Ans:
+🧠 What is HashMap?
+👉 HashMap stores data in key->value paires 
+Map<String,Integer> map = new HashMap<>();
+map.put("A",10);
+map.put("B",20);
+
+⚙️ Internal Structure
+👉 Internally, HashMap uses: Array of buckets .
+Each bukcet contains :
+LinkedList(java 7)
+LinkedList + Tree (Reb Black Tree) (java 8 +)
+
+🔑 How put() Works ?
+  map.put("A",10);
+  Step 1: Calculate Hash .
+          int hash = key.hashCode // we can wite formula for hasscode accordingly.
+		  
+  Step 2: Find Bucket Index .
+          index = hash % arraySize;
+  
+  Step 3: Insert into Bucket .
+			If bucket empty → insert directly
+			If collision → use chaining (LinkedList / Tree)  
+			
+  💥 Collision Example:
+            map.put("A", 10);
+			map.put("B", 20); 
+        Bucket[2] → (A,10) → (B,20)	;	
+
+   🔄 How get() Works?
+   
+     Steps:
+	 1. Calculate hash
+	 2. Find bucket 
+	 3. Traverse list/tree
+	 4. Match key using .equals()
+	
+  ⚠️ Important: equals() + hashCode()
+       if(node.hash == && key.equals(node.key))  
+	   ✔ hashCode find bucket 
+	   ✔ equals -> find excact key
+	   
+   🌳 Java 8 Optimization (Very Important)
+   👉 If collisions increase:
+
+	| Condition | Structure      |
+	| --------- | -------------- |
+	| < 8 nodes | LinkedList     |
+	| ≥ 8 nodes | Red-Black Tree |
+	
+	👉 Called Treeification
+	✔ Improves performance from:
+
+	O(n) → O(log n)
+	
+	📈 Time Complexity
+	| Operation          | Average  | Worst |
+	| ------------------ | -------- | ----- |
+	| put()              | O(1)     | O(n)  |
+	| get()              | O(1)     | O(n)  |
+	| get() (after tree) | O(log n) |       |
+	
+	🔄 Resize (Rehashing)
+	
+	👉 Default capacity = 16
+	👉 Load factor = 0.75
+	
+	When resize happens:
+	size > capacity * loadFactor
+
+	👉 Example: 16 * 0.75 = 12
+
+	👉 After 12 elements → resize to 32
+
+    What happens in resize?
+	New array created
+	All elements rehashed
+	Reassigned to new buckets
+	
+	🚀 Pro Tips (Advanced)
+
+	✔ HashMap is not thread-safe
+	✔ Use ConcurrentHashMap in multi-threading
+	✔ HashMap allows:
+		1 null key.
+		Multiple null values.
+		
+ Q.HashMap vs Hashtable vs ConcurrentHashMap ?	
+ Ans: 🧠 Quick Summary.
+    | Feature     | HashMap     | Hashtable     | ConcurrentHashMap |
+	| ----------- | ----------- | ------------- | ----------------- |
+	| Thread-safe | ❌ No        | ✅ Yes       | ✅ Yes           |
+	| Performance | 🚀 Fast     | 🐢 Slow       | ⚡ Fast          |
+	| Locking     | ❌ None      | 🔒 Full map   | 🔐 Bucket-level |
+	| Null key    | ✅ 1 allowed | ❌ Not allowed | ❌ Not allowed |
+	| Null values | ✅ Allowed   | ❌ Not allowed | ❌ Not allowed |
+	| Introduced  | Java 1.2     | Java 1.0        | Java 1.5       |
+ 🔍 1️⃣ HashMap
+	Map<String, Integer> map = new HashMap<>();
+	✔ Features
+		Not thread-safe
+		Very fast (no locking)
+		Allows:
+		1 null key
+		multiple null values
+	❌ Problem
+		In multi-threading → data inconsistency
+     
+🔍 2️⃣ Hashtable
+	Map<String, Integer> map = new Hashtable<>();
+	✔ Features
+		Thread-safe
+		Uses synchronized methods
+	❌ Problem
+		Entire map locked:
+		One thread at a time ❌
+		👉 Very slow in high concurrency
+
+🔍 3️⃣ ConcurrentHashMap
+	Map<String, Integer> map = new ConcurrentHashMap<>();
+	✔ Features
+		Thread-safe
+		High performance
+		Uses:
+		CAS (Compare-And-Swap)
+		Bucket-level locking
+
+⚙️ Locking Difference (Very Important)
+	HashMap            → No Lock ❌
+	Hashtable          → Full Lock 🔒
+	ConcurrentHashMap  → Partial Lock 🔐
+
+📊 Visualization
+	Hashtable:
+	[ LOCK ENTIRE MAP ]
+
+	ConcurrentHashMap:
+	[ Bucket1 🔒 ] [ Bucket2 🔓 ] [ Bucket3 🔓 ]
+
+⚡ Performance Comparison:
+	| Operation   | HashMap | Hashtable | ConcurrentHashMap |
+	| ----------- | ------- | --------- | ----------------- |
+	| get()       | Fast    | Slow      | Fast              |
+	| put()       | Fast    | Slow      | Fast              |
+	| Concurrency | ❌      | ❌        | ✅               |
+
+	
+	
+⚠️ Null Handling
+	HashMap:
+	map.put(null, 1); // ✅
+
+	Hashtable:
+	map.put(null, 1); // ❌
+
+	ConcurrentHashMap:
+	map.put(null, 1); // ❌
+
+👉 Why CHM doesn't allow null?
+
+✔ To avoid ambiguity in concurrent operations	
+
+👉 Multiple threads can work simultaneously ✅
+		
+   🎯 When to Use What?	
+	| Scenario      | Use               |
+	| ------------- | ----------------- |
+	| Single-thread | HashMap           |
+	| Multi-thread  | ConcurrentHashMap |
+	| Legacy        | Hashtable         |
+	
+🚀 Interview Answer (Perfect)
+👉 Difference between HashMap, Hashtable, and ConcurrentHashMap?
+      ✔ HashMap:
+		Not thread-safe
+		Fast
+
+	  ✔ Hashtable:
+		 Thread-safe
+         Full synchronization → slow
+
+	  ✔ ConcurrentHashMap:
+		Thread-safe
+		Partial locking + CAS
+		Best performance
+🧠 Internal Working Summary:
+    | Map               | Internal Working               |
+	| ----------------- | ------------------------------ |
+	| HashMap           | Array + LinkedList/Tree        |
+	| Hashtable         | Same as HashMap + synchronized |
+	| ConcurrentHashMap | Array + CAS + bucket locking   |
+
+Q. Internal working of HashTable?
+Q. Internal working of ConcurrentHashMap ?
+Q. Internal working of TreeMap ?	
+    
 ===========================================================================================================
 Q25. TreeMap v/s HashMap
 Ans:Both TreeMap and HashMap are part of the Java Map interface, but they have key differences in ordering, performance, and internal implementation.
@@ -665,7 +1082,7 @@ class SharedData {
     }
 }
 👉 Because of volatile, Thread-2 always reads the latest value from main memory, so it will exit the loop when flag = true.
-✅ What volatile Guarantees
+✅ What volatile Guarantees?
 Visibility: Changes made by one thread are visible to others immediately.
 Ordering (happens-before relationship)
 Read/write of a volatile variable cannot be reordered with respect to other volatile reads/writes.
@@ -776,15 +1193,15 @@ Ans : its is a fucntional interface
 ===============================================================================================
 Q33. What is microservice designe pattern in java ?
 Ans:
-A. Service Discovery
+A. Service Discovery : Mechanism to locate services dynamically,Uses service registry,Avoids hardcoded URLs 
 B. Config server : common Git hub data all services 
 C. API Gateway : Single end points for all user and managinng traffic and routing 
 D. Circuit breaker : avoid fault taulrance 
 E. SAGA Design pattern : managing distributed transaction   
 F. Stragler Design pattern .
-E. Per Database service .Example: Resilience4j, Zipkin, Hystrix 
+G. Per Database service .Example: Resilience4j, Zipkin, Hystrix 
 =============================================================================================
-Q34. Reverse A Sentence Word By Word ? using java 8
+Q34. Reverse A Sentence, Word By Word ? using java 8
    Input String : Java Concept Of The Day
    Output String : Day The Of Concept Java
    
@@ -836,15 +1253,15 @@ public class GenericInterfaceExample {
 Q34. Guess the output ? 
 
       public static void objectTypeParameters(String string) {
-		  System.out.println("string"); 
+		    System.out.println("string"); 
 		  }
-		  public static void objectTypeParameters(StringBuffer stringBuffer) {
-		  System.out.println("string buffer"); 
+	  public static void objectTypeParameters(StringBuffer stringBuffer) {
+		    System.out.println("string buffer"); 
 		  }
 		 
-	    public static void objectTypeParameters(Object object) {
-		System.out.println("objects");
-		}
+	  public static void objectTypeParameters(Object object) {
+			System.out.println("objects");
+			}
 		public static void main(String[] args) {
 			AllPrograms.objectTypeParameters(null);
 		}  
@@ -1755,7 +2172,7 @@ PATCH → Partial update
 Q63. @Qualifire vs @Primary?
 Ans:
 ==================================================================================================
-Q64. Can we use @Component annotation in Repository instead of @Repository annotations
+Q64. Can we use @Component annotation in Repository instead of @Repository annotations?
 Ans : Yes, you can technically use @Component instead of @Repository — but it's not recommended for repositories. Here's why:
 ❗ But why @Repository is preferred?
 Semantics / Readability
@@ -2296,7 +2713,7 @@ class C extends B{
  public static void main(String args[]){
  A a = new A(); // it will work fine 
  B b = new B(); //it will work fine 
- C c = new B(); //it will give compile time exception 
+ C c = new B(); //it will give compile time exception because child can not hold parent property .
  A a = new C(); //it will work fine  
  }
 }
@@ -3010,8 +3427,23 @@ The formula uses XOR (h ^ (h >>> 16)) to mix high and low bits.
 Worst-case performance improved from O(n) → O(log n) (thanks to treeification).
 Memory-efficient because small buckets still use linked lists.
 =====================================================================================================================================
-Q103. Why HashMap internally using HashSet ?
-Ans : 
+Q103. Why HashSet internally using HashMap?
+Ans : HashSet internally uses HashMap,
+
+		✅ Real Relationship
+			HashMap → core data structure
+			HashSet → built on top of HashMap
+		
+		🎯 Why Use HashMap Internally?
+
+			Because HashMap already provides:
+			✔ Fast lookup → O(1)
+			✔ No duplicate keys
+			✔ Hashing mechanism
+			✔ Collision handling
+So instead of reinventing logic, Java reuses it.
+
+
 =====================================================================================================================================
 Q104. What is custom hook in React Js 
 Q105. What is Record class in Java 11?
@@ -3040,10 +3472,266 @@ public class SubstringIndices {
 Q107. What is returning groupBy in Java 8?
 Ans: It is returning HashMap .
 =================================================================================
-Q108. Why props is immutable ?
-Ans: 
+Q108. What is the purpose of immutable in java ?
+Ans:    An object is immutable if:
+
+		Its state (data) cannot be changed after it is created
+		Example:
+		In Java, String is immutable.
+		
+		String name = "Niraj";
+		name.concat(" Kumar");
+		System.out.println(name); // Niraj (unchanged)
+		
+		1️⃣ Thread Safety (Most Important)
+			Immutable objects are automatically thread-safe.
+			👉 No need for synchronization
+			Multiple threads can use it safely because:
+			No one can modify it
+			No race condition
+			
+		2️⃣ Security
+			Used in sensitive areas like:
+			Database URLs
+			File paths
+			Network connections
+			If mutable → values can be changed by mistake or malicious code.
+			Example:	
+			String url = "jdbc:mysql://localhost:3306/db";
+			
+			Immutable ensures:
+			👉 No one can tamper with it
+			
+		3️⃣ Performance (String Pool Optimization)
+			Java uses String Constant Pool.
+            String a = "Java";
+			String b = "Java";
+
+			👉 Both refer to same object
+			This works only because:
+			👉 String is immutable	
+			
+		4️⃣ Caching / Hashing (Important for Collections)
+
+			Immutable objects are ideal for:
+			HashMap
+			HashSet
+
+			Because:
+			hashCode() doesn’t change
+			Map<String, Integer> map = new HashMap<>();
+			map.put("key", 1);
+
+			If key was mutable:
+			👉 Retrieval would fail ❌	
+			
+		5️⃣ Simplicity & Reliability
+
+			Immutable objects:
+
+			Easier to understand
+			No unexpected changes
+			Safer design
+			
+		6️⃣ Safe Sharing (No Defensive Copy Needed)
+
+		Mutable object:
+		Date date = new Date();
+
+		Needs defensive copy ❌
+
+		Immutable object:
+		LocalDate date = LocalDate.now();
+		👉 Safe to share directly
+
+    🧠 How to Create Immutable Class?
+		Rules:
+		Declare class final
+		Make fields private final
+		No setters
+		Initialize via constructor
+		Return copies (for mutable fields)	
+
+     final class Student {
+
+    private final int id;
+    private final String name;
+
+    public Student(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+}
+
+			📊 Summary
+		| Benefit       | Why Important             |
+		| ------------- | ------------------------- |
+		| Thread Safety | No synchronization needed |
+		| Security      | Prevent data modification |
+		| Performance   | String pool, caching      |
+		| Reliability   | Predictable behavior      |
+		| Hashing       | Stable hashCode           |
+
+     
 =============================================================================================================================
-Q109. Supplier vs Consumer ?
+Q109. Supplier vs Consumer in java ?
+Ans:
+   In Java, both belong to:
+		java.util.function package
+
+		They are part of Functional Programming (Lambda Expressions).
+
+		🎯 1️⃣ Supplier<T>
+		👉 Definition:	Supplies (produces) a value without taking any input.
+		🔹 Method: T get();
+		
+		 Example:
+		 
+		   import java.util.function.Supplier;
+			public class SupplierExample {
+				public static void main(String[] args) {
+					Supplier<String> supplier = () -> "Hello Niraj";
+					System.out.println(supplier.get());
+				}
+			}
+    🔥 Real Use Case:
+		Generate random values
+		Lazy initialization
+		Default values
+		
+	🎯 2️⃣ Consumer<T>
+	👉 Definition:
+
+		Consumes (takes input) but returns nothing
+	   🔹 Method :	void accept(T t)
+
+	   🔹 Example:
+		import java.util.function.Consumer;
+		public class ConsumerExample {
+			public static void main(String[] args) {
+				Consumer<String> consumer = name -> 
+					System.out.println("Hello " + name);
+
+				consumer.accept("Niraj");
+			}
+		}
+
+    🔥 Real Use Case:
+		Logging
+		Printing
+		Performing operations on data
+		list.forEach(name -> System.out.println(name));	
+		
+	⚡ Key Difference:	
+	| Feature  | Supplier        | Consumer          
+	| -------- | --------------- | ---------------- |
+	| Input    | ❌ No input      | ✅ Takes input |
+	| Output   | ✅ Returns value | ❌ No return   |
+	| Method   | `get()`         | `accept()`       |
+	| Use Case | Generate data   | Process data     |
+	
+	🔥 Related Interfaces (Interview Follow-up)
+		Function<T, R> → takes input, returns output
+		Predicate<T> → returns boolean
+		
+	🔥 Combined Example:
+	import java.util.function.Consumer;
+	import java.util.function.Supplier;
+
+	public class SupplierAndConsumer {
+		public static void main(String[] args) {
+			Supplier<String> supplier = () -> "Java";
+			Consumer<String> consumer = s -> System.out.println(s+ "  Learning  "+s);
+			String supplierValue = supplier.get();
+			consumer.accept(supplierValue);
+		}
+	}
+	
+	🎯 1️⃣ Function<T, R>
+	👉 Definition: Takes input and returns output.
+	🔹 Method : R apply(T t);
+	
+		import java.util.function.Function;
+		public class FunctionExample {
+		   public static void main(String[] args) {
+		   
+		   Function<String,Integer> fucntion = str->str.length();
+		   System.out.println(function.apply("Niraj"));
+		   
+		   }
+		}
+		O/P : 5
+		🔥 Real Use Cases
+			Data transformation
+			DTO mapping
+			Converting types
+			Function<Integer, Integer> square = x -> x * x;
+			
+		🔥 Function Chaining (Important):
+            		
+			Function<Integer, Integer> multiply = x -> x * 2;
+			Function<Integer, Integer> add = x -> x + 3;
+			Function<Integer, Integer> result = multiply.andThen(add);
+			System.out.println(result.apply(5)); // (5*2)+3 = 13	
+    
+    🎯 2️⃣ Predicate<T>
+	👉 Definition: Takes input and returns boolean.
+	
+    🔹 Method : boolean test(T t);
+     
+    🔹 Example:
+	
+		import java.util.function.Predicate;
+
+		public class PredicateExample {
+
+			public static void main(String[] args) {
+			Predicate<Integer> isEeven = num->num%2==0;
+			System.out.println(isEvent.test(10));   // true
+			
+			}
+		}
+		
+		🔥 Real Use Cases
+			Filtering data
+			Validation
+			Conditions
+		Example:	list.stream()
+				.filter(n -> n > 10)
+				.forEach(System.out::println);
+	 
+	   🔥 Predicate Chaining (Very Important):
+	   
+			Predicate<Integer> greaterThan10 = x -> x > 10;
+			Predicate<Integer> even = x -> x % 2 == 0;
+
+			Predicate<Integer> combined = greaterThan10.and(even);
+
+			System.out.println(combined.test(12)); // true
+			
+			Available methods:
+				and()
+				or()
+				negate()
+				
+		⚡ Full Comparison (All 4)	:
+		
+		| Interface | Input | Output    | Method        |
+		| --------- | ----- | --------- | ----------    |
+		| Supplier  | ❌ No  | ✅ Yes     | `get()`    |
+		| Consumer  | ✅ Yes | ❌ No      | `accept()` |
+		| Function  | ✅ Yes | ✅ Yes     | `apply()`  |
+		| Predicate | ✅ Yes | ✅ Boolean | `test()`   |
+		
+	
 ========================================================================================================================
 Q110.
 subString = "Name"
@@ -3204,12 +3892,254 @@ But explicitly, you can also use:
 @EnableAspectJAutoProxy
 ===============================================================================================================
 Q117. Controlled vs Uncontrolled Component in React JS?
-Q118. Why we cant call Parent Component into Child Component ? But we call Child component into parent component.
-Q119. What is Higher Order Component in React JS ?
+Ans: In React, form elements can be handled in two ways:
 
+🔹 Controlled Components
+🔹 Uncontrolled Components
+
+🎯 1️⃣ Controlled Component:
+👉 Definition: Form data is controlled by React state.
+🔹 Example:
+
+  import { useState } from "react";
+	function ControlledForm() {
+
+		const [name, setName] = useState("");
+
+		return (
+			<>
+				<input 
+					type="text"
+					value={name}
+					onChange={(e) => setName(e.target.value)}
+				/>
+
+				<h3>Typed: {name}</h3>
+			</>
+		);
+	}
+	
+	🧠 Flow: user Inpiut-> onChange -> setState -> UI updates.
+	
+	✅ Features:
+		✔ Single source of truth (state)
+		✔ Easy validation
+		✔ Easy debugging
+		✔ Better control
+
+	🔥 Use Cases:
+		Form validation
+		Dynamic forms
+		Real-time updates
+		API-driven forms
+		
+	🎯 2️⃣ Uncontrolled Component
+	👉 Definition: Form data is handled by DOM itself (not React state)	
+	
+	🔹 Example:
+	  import {useRef} from "react";
+	  function UncontrolledForm() {
+			   const inputRef = useRef();
+			   const handleSubmit=()=>{
+				 alert(inputRef.current.value);
+			   };
+			   return(
+					   <>
+					   <input type="text" ref={inputRef}/>
+					   <button onClick={handleSubmit}>SUBMIT</button>
+					   </>
+			   
+			      );
+			   }
+
+    🧠 Flow: User Input -> Stored in DOM -> Access vie ref.
+	
+	✅ Features:
+		✔ Less code
+		✔ Better performance (no re-render)
+		✔ Quick & simple forms
+
+	🔥 Use Cases:
+		Simple forms
+		File inputs
+		Integration with non-React code.
+	⚡ Key Differences:
+     | Feature     | Controlled      | Uncontrolled |
+	| ----------- | --------------- | ------------ |
+	| Data source | React state     | DOM          |
+	| Re-render   | On every change | No           |
+	| Control     | Full control    | Limited      |
+	| Validation  | Easy            | Hard         |
+	| Code        | More            | Less         |
+=======================================================================================		
+Q118. Why we cant call Parent Component into Child Component ? But we call Child component into parent component?
+Ans:
+	🎯 First, the Statement Needs Correction
+
+	❌ “We can’t call Parent in Child” → Not entirely true
+	✅ You can import and render a parent, but it’s not recommended design
+	The real concept is about data flow and component hierarchy, not a hard restriction.
+
+	🧠 Core Principle: One-Way Data Flow
+	In React: Data flows Parent → Child (top-down)
+	
+	✅ Why Parent Calls Child?
+	This is the correct design pattern:
+	
+	function Child(props){
+	   return <h1>{props.name}</h1>
+	}
+	
+	fucntion Parent(){
+	 return <h1> <Child name="Niraj"></Child>
+	}
+	✔ Parent controls data
+	✔ Child receives via props.
+	
+	❌ Why Child Should NOT Call Parent?
+	Technically you can, but it leads to bad design issues:
+	
+		🚨 1️⃣ Circular Dependency Problem:
+		function Parent() {
+		return <Child />;
+		}
+
+		function Child() {
+			return <Parent />; // ❌ Infinite loop
+		}
+		👉 This causes:
+			Infinite rendering
+			Stack overflow
+		
+		🚨 2️⃣ Breaks Component Hierarchy
+			React is like a tree:
+			Parent
+			 ├── Child1
+			 └── Child2
+			👉 Child should not go “up” the tree.
+
+		🚨 3️⃣ Data Flow Becomes Messy
+
+		If child starts calling parent:
+
+		Hard to track data
+		Debugging nightmare
+		Violates React design
+		
+		✅ Correct Way: Child → Parent Communication
+		Instead of calling parent, use callback functions (props).
+		🔹 Example:
+		
+		fucntion Child({sendData}){
+		return(
+		<button onClick={()=>sendData("Hello Parent")}>Send Data</button>
+		
+		  );
+	   }
+	   
+	   function Child(){
+	      const handleData = (data) => {
+		   console.log(data);
+		  
+		  };
+		  return <Child sendData={handleData}>
+	   }
+	   🧠 Flow : Child -> calls function -> Parent handles it .
+	   
+	   🔥 Key Idea:
+		👉 Child never directly controls parent
+		👉 Parent gives permission via function
+		
+		⚡ Summary:
+		| Concept                | Explanation            |
+		| ---------------------- | ---------------------- |
+		| Parent → Child         | ✅ Allowed (via props)  |
+		| Child → Parent         | ✅ Via callback (props) |
+		| Child rendering Parent | ❌ Bad practice         |
+		| Reason                 | One-way data flow      |
+		
+		🎯 Interview One-Liner:
+		React follows one-way data flow, so parents pass data to children via props, and children communicate back using callback functions instead of directly calling parent components.
+
+		🚀 Real Project Insight (For You)
+
+		In your Spring Boot + React apps:
+
+		Parent → sends API data to child
+		Child → sends user action via callback
+
+		Example:
+
+		Parent = Order page
+		Child = Order form
+
+=======================================================================================================		
+Q119. What is Higher Order Component in React JS ?
+Ans: A Higher Order Component is a function that takes a component and returns a new enhanced component.
+		🧠 Simple Definition: HOC = Component → Enhanced Component.
+		🎯 Why Use HOC?
+		👉 To reuse component logic across multiple components
+		   Instead of duplicating code, you wrap components with common functionality.
+		🔥 Example (Basic HOC):
+		
+			function withLogger(WrappedComponent){
+		
+				return function EnhancedComponent(props){
+				  console.log("Component rendered ");
+				  return <WrappedComponent {...props} />
+		
+				}
+		
+			}
+		
+		
 **********************************Infosys-Contract*****************************************************
 Q201. How to join table using @Query  / Native SQL 
-Ans:
+Ans: 	Let’s go step by step:
+		✅ How to JOIN tables using @Query (JPQL)
+		✅ How to JOIN using Native SQL
+		
+		🧠 Example Scenario:
+
+			Assume 2 tables:
+			👇 User Table:
+			@Entity
+			public class User {
+				@Id
+				private Long id;
+				private String name;
+			}
+			👇 Order Table:
+			@Entity
+			public class Order {
+				@Id
+				private Long id;
+				private String product;
+				
+				@ManyToOne
+				@JoinColumn(name="user_id")
+				private User user;
+				
+				}
+				
+		✅ 1️⃣ JOIN Using JPQL (@Query)
+
+		👉 JPQL works with entity objects, not tables.
+			🔹 INNER JOIN Example:
+			@Query("SELECT o FROM Order o JOIN o.user u WHERE u.name = :name")
+			List<Order> findOrderByUserName(@Param("name") String name);
+			
+			🔹 Fetch Both Data:
+			@Query("SELECT o.product,u.name FROM ORDER o JOIN o.user u ")
+			List<Object[]> getOrderWithUser(); 
+				
+		✅ 2️⃣ JOIN Using Native SQL
+
+		👉 Works with actual database tables
+        🔹 INNER JOIN (Native):
+		 @Query(value = "SELECT * FROM orders o JOIN users u ON o.user_id = u.id WHERE u.name = :name", nativeQuery = true)
+		 List<Object[]> findOrdersNative(@Param("name") String name);
+
 =====================================================================================================================
 Q202. In Lazy loading if data is not loading and getting "Session is closed"/"Session out" exception, what is the reason?
 Ans:
@@ -3252,7 +4182,7 @@ public ResponseEntity<String> handleUserErrors(RuntimeException ex) {
 }
 ==================================================================================================
 Q205. Internal working of Set ?
-Ans :
+Ans : It is internally using HashMap .
 ========================================================================================================
 Q206. How to create dynamic query using @Query annotation using HQL Hibernate 
 Ans:
@@ -5203,6 +6133,9 @@ Ans :
 Q. Store custom objects in TreeSet and sort 
 
 Q. Shallo copy vs Deep Copy in java ?
+Ans: 1. Shallow Copy : Copies the object, but reffernce to nested objects are shared.
+     2. Deep Copy    : Copies the object and all nested objects, creating completely independent copies. 
+
 
 Q. @Mock vs @InjectMock ?
 Q. What is partial mock ?
@@ -7901,6 +8834,47 @@ Q. Create Pattern by Java Program?
 
 
 Q. int[] arr = {10,20,0,0,15,25,10,0}; // shift all zeros to right
+
+
+
+
+Q.Can we declare abstract class as a final?
+Q.Can we in declare interface data member as private ?
+Q.How to search text on vim? 
+Q.Difference between Query param  & Path Variable which one is optional?
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+===========================Linux Commans================================
+1. lsblk 
+2. sudo mkfs -t ext4 /dev/nvme1n1
+3. df -h
+4. sudo mkdir /app 
+5. sudo mount /dev/nvme1n1 /app 
+6. sudo file -s /dev/nvme1n1
+
+=> about nginx server 
+1. sudo systemctl start nginx
+2. sudo systemctl enable nginx
+3. sudo systemctl status nginx
  
 
 

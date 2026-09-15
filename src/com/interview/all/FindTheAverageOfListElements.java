@@ -15,7 +15,7 @@ public class FindTheAverageOfListElements {
 		
 		System.out.println("min : "+iss.getMin());
 		
-		System.out.println("min : "+iss.getMax());
+		System.out.println("max : "+iss.getMax());
 		
 		System.out.println("get count : "+iss.getCount());
 	}

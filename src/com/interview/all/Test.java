@@ -42,6 +42,14 @@ public class Test {
 			}
 
 		}
+
+		//-----------------Shotest way is ---------------------------------------------
+
+		String string = "JAVA_WORLD";
+        String string1 = string.replace("_"," ").replace("JAVA","Java")
+                .replace("WORLD","World");
+        System.out.println("string1 is : "+string1);
+
 		
 		//-----------------------------------------------
 		HashMap<Integer, String> hashMap = new HashMap<Integer,String>();
@@ -57,6 +65,14 @@ public class Test {
 		}
 		
 		map.forEach((k,v)->{System.out.println(k+" "+v);});
+
+		//shotest way is -----------------------------------------------------
+		List<Map.Entry<Integer,String>> list1 = new LinkedList<>(hashMap.entrySet());
+        Collections.sort(list1, Map.Entry.comparingByValue());
+
+        list1.forEach(shorted->{
+            System.out.println(shorted.getKey()+"  :  "+shorted.getValue());
+        });
 		
 
 	}

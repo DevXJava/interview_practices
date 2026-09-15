@@ -19,7 +19,9 @@ public class SortMapByValues {
 		hashMap.put(5, "dat");
 
 		List<Map.Entry<Integer, String>> list = new LinkedList<Map.Entry<Integer, String>>(hashMap.entrySet());
-		Collections.sort(list, (v1, v2) -> v1.getValue().compareTo(v2.getValue()));
+		//Collections.sort(list, (v1, v2) -> v1.getValue().compareTo(v2.getValue()));
+		//Shotest way is 
+		Collections.sort(list, Map.Entry.comparingByValue());
 		HashMap<Integer, String> map = new LinkedHashMap<>();
 		for (Map.Entry<Integer, String> entry : list) {
 			map.put(entry.getKey(), entry.getValue());

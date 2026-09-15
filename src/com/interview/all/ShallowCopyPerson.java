@@ -4,6 +4,10 @@ class Address{
     Address(String city) {
         this.city = city;
     }
+	@Override
+    public String toString() {
+        return city;
+    }
 }
 public class ShallowCopyPerson implements Cloneable{
 
@@ -20,7 +24,7 @@ public class ShallowCopyPerson implements Cloneable{
 
 	@Override
 	protected Object clone() throws CloneNotSupportedException {
-		return super.clone();
+		return super.clone(); //shallow copy
 	}
 	@Override
 	public String toString() {

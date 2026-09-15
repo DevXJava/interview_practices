@@ -25,6 +25,13 @@ public class SortListOfAlphaNumericStringOnTheBasisOfNumber {
 
         // Print sorted list
         list.forEach(System.out::println);
+
+		List<String> result = list.stream().sorted(Comparator.comparing((String s) -> s.split("-")[0].toLowerCase())
+                                           .thenComparingInt(s -> Integer.parseInt(s.split("-")[1]))).toList();
+
+        //sorting an only digit
+        List<String> list1 = list.stream().sorted(Comparator.comparingInt(s-> Integer.parseInt(s.split("-")[1]))).toList();
+        System.out.println(list1);										   
 		
 
 	}

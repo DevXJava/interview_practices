@@ -43,7 +43,7 @@ public class Childi extends Parenti {
 		// parent.display();
 		System.out.println(parenti.x);
 		Childi child = new Childi();
-		child.print(10.0, 10); // it will give ambiguous 
+		child.print(10.0, 10); // working fine here
 		child.print(10, 10.0); 
 	}
 

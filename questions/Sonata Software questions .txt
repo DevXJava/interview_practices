@@ -1,0 +1,276 @@
+10-04-2025
+Core Java – Basic & Intermediate
+ How many ways can you create a String in Java? 
+ What is the String pool? 
+ Why is String immutable in Java? 
+ Differentiate between String, StringBuilder, and StringBuffer. 
+ What is the difference between List, Set, and Map? 
+ How does HashMap work internally? 
+ What is hashing in Java? 
+ How is String created internally in Java? 
+ What is Optional class in Java 8 and why is it used? 
+ How do you prevent NullPointerException using Optional? 
+ What are Java access modifiers? 
+ Explain OOP concepts used in Java. 
+
+Java Version & Features
+ Which Java version are you currently using? 
+ What features are introduced in Java 8? 
+ Explain Lambda expressions. 
+ What are Stream APIs? 
+ What features are introduced in Java 17? 
+ What is Record class in Java 17? 
+ What are sealed classes? 
+ What is pattern matching for switch? 
+ Provide real-time usage of Record classes. 
+ How do you access values from a Record class? 
+
+Spring Boot / Microservices
+ Explain your current project architecture. 
+ How are microservices structured in your application? 
+ What is BFF (Backend for Frontend) pattern? 
+ How do you manage authentication in microservices? 
+ How do services communicate in your system? 
+ How do you handle session management in chat-based services? 
+ How do you validate requests in microservices? 
+
+Architecture / System Design
+ Explain end-to-end flow of your feature implementation. 
+ How do you integrate AI/LLM services in backend? 
+ How do you configure routing between services? 
+ How do you manage conversation/session-based requests? 
+ How do you handle guest vs authenticated users? 
+ How do you design API gateway/BFF layer? 
+
+Collections & Data Structures
+ What is the difference between ArrayList and LinkedList? 
+ How does HashMap handle collisions? 
+ What happens when HashMap bucket exceeds threshold? 
+ What is load factor in HashMap? 
+ What is equals() and hashCode() contract? 
+
+Coding / Practical Questions
+ Write a simple Record class. 
+ Create DTO using record class. 
+ Print values from record class. 
+ Write example of Optional usage. 
+ Demonstrate String immutability with example. 
+
+Experience / Project Based Questions
+ Explain your current project. 
+ What is your role and responsibility? 
+ What architecture are you using? 
+ What database did you use? 
+ What migration activities did you perform? 
+ What was your sprint process? 
+ How do you handle production bugs? 
+
+Project & Architecture
+ Explain your current project architecture end-to-end. 
+ How did you integrate AI/LLM into your application? 
+ What is the role of Spring AI in your project? 
+ How does the request flow from UI to backend and back? 
+ Explain BFF (Backend for Frontend) architecture used in your project. 
+ How are microservices separated in your system? 
+ How do you handle guest vs authenticated users? 
+ 
+AI Integration
+ Which LLM models were used in your project? 
+ How do you switch between Azure OpenAI and AWS SageMaker? 
+ How do you configure temperature and model parameters? 
+ How do you validate LLM responses? 
+ How do you handle prompt generation? 
+ How do you perform model testing and load testing? 
+ 
+Backend / Microservices
+ How do you generate session ID for conversations? 
+ How do you maintain chat conversation history? 
+ How do you validate request before sending to service? 
+ How do you route request to correct microservice? 
+ How do you handle API gateway/BFF validation? 
+ How do you design microservice communication? 
+ 
+Database / API
+ How is content pool stored? 
+ How do you fetch content for AI search? 
+ How do you manage caching? 
+ How do you handle fallback when no response from AI? 
+ 
+Project Questions
+ Explain your healthcare project architecture. 
+ How does eligibility rule engine work? 
+ What are different factors used in eligibility calculation? 
+ What was your role in data migration? 
+ How did you migrate Oracle to Postgres? 
+ What challenges did you face during DB migration? 
+ 
+Java Questions
+ Which Java version are you using? 
+ What features of Java 11 are you using? 
+ Explain OOP concepts used in your project. 
+ What are access modifiers? 
+ What are Java streams? 
+ What are lambda expressions? 
+ 
+Spring / Microservices
+ Explain microservices architecture you worked on. 
+ Difference between monolith and microservices. 
+ How do services communicate? 
+ How do you handle API calls? 
+ 
+Agile / Process
+ Explain sprint cycle. 
+ What is story point estimation? 
+ How do you handle bug fixes? 
+ How do you handle production issues? 
+ 
+Database
+ Difference between Oracle and Postgres. 
+ How do you handle schema migration? 
+ What tools did you use for migration? 
+ 
+Core Java
+ How do you rate yourself in Core Java? 
+ What Java version are you using? 
+ Explain Optional class in Java. 
+ How Optional prevents NullPointerException? 
+ Explain Optional.of vs Optional.ofNullable. 
+ How is String created in Java? 
+ 
+Project Questions
+ Explain your education domain project. 
+ What microservices were you working on? 
+ What is assessment service? 
+ How do NodeJS and Java interact? 
+ How do you maintain microservices? 
+ 
+Architecture
+ Explain microservices architecture. 
+ How do you manage multiple services? 
+ How do services communicate? 
+ How do you handle API versioning? 
+ 
+Coding Concepts
+ What is String immutability? 
+ Difference between heap and stack? 
+ How Java memory works? 
+Java 17 Questions
+ What features are introduced in Java 17? 
+ Explain record class. 
+ What are sealed classes? 
+ What is pattern matching for switch? 
+ What is random generator class? 
+Record Class Deep Dive
+ Write a simple record class. 
+ How record class reduces boilerplate code? 
+ Are record classes immutable? 
+ How to access values in record class? 
+ When should you use record class? 
+ Record class vs DTO class? 
+Real Time Usage
+ Where did you use record class in project? 
+ How did you use record class for DTO? 
+ Can record class be used in REST API response? 
+ Record class vs Lombok? 
+Cloud & Microservices
+ Explain Docker usage. 
+ How do you deploy in Kubernetes? 
+ How do you use AWS in your project? 
+ How do you design REST API? 
+String Questions
+ How many ways to create String? 
+ What is String pool? 
+ Why String is immutable? 
+ String vs StringBuilder vs StringBuffer. 
+ Which is thread safe? 
+ Which is faster? 
+Collections
+ Difference between List, Set, Map. 
+ What is HashMap? 
+ How HashMap works internally? 
+ What is hash collision? 
+ What is load factor? 
+ HashMap default size? 
+ When does HashMap resize? 
+ LinkedList in HashMap bucket? 
+Advanced Collections
+ When HashMap converts to Red Black Tree? 
+ What is hashing? 
+ equals vs hashCode? 
+ ConcurrentHashMap vs HashMap? 
+Architecture
+ Explain micro frontend architecture. 
+ What is reactive microservices? 
+ How do you deploy using Docker? 
+ How do you monitor logs using Kibana? 
+1. Candidate Background & Project Experience
+ Can you explain your current project in the banking/payments domain and your role in it? 
+ What are the major components of a card payment system you have worked on? 
+ How does your system handle domestic vs. international transactions? 
+ What challenges arise when integrating multiple external systems via APIs? 
+ Can you explain the multi-region deployment strategy used in your project? 
+ How does Route 53 help in traffic routing and failover? 
+ What monitoring and logging tools have you used in production (e.g., ELK)? 
+ What does individual contribution mean in the context of your last project? 
+
+2. System Design & Real-Time Scenarios
+Payment Duplication / Idempotency
+ What problems can occur if a user clicks the Paybutton multiple times? 
+ How would you handle duplicate payment requests at the backend? 
+ What is an idempotency key and why is it important in payment systems? 
+ How do you design the database to support idempotent APIs? 
+ What are the pros and cons of using database-level locking? 
+ What happens if two requests hit the backend at the same millisecond? 
+ How would your design change in a distributed microservices setup? 
+
+3. Core Java – Coding & Logic
+String Problems
+ How would you find the first non-repeating character in a string? 
+ Why is LinkedHashMap useful for this problem? 
+ How would you implement the same logic using Java 8 Streams? 
+ What is the time and space complexity of your approach? 
+Employee / Salary Problems
+ How do you find the second highest salary from a list of employees? 
+ Why do we use distinct() in this scenario? 
+ How does skip(1) work in streams? 
+ When should you use Optional, and when should you avoid it? 
+
+4. Java 8 & Streams
+ What are the key features introduced in Java 8? 
+ What is functional programming in Java? 
+ Explain the use of map, filter, and collect. 
+ What is the difference between map() and mapToObj()? 
+ How does groupingBy() work internally? 
+ What is lazy evaluation in streams? 
+
+5. Java Fundamentals
+Strings
+ How many ways can you create a String in Java? 
+ What is the String Pool? 
+ Why is String immutable in Java? 
+ What problems does immutability solve? 
+ Difference between String, StringBuilder, and StringBuffer? 
+ Which one is thread-safe and why? 
+Collections
+ Difference between List, Set, and Map? 
+ How does HashMap internally store data? 
+ What are buckets and how are they used? 
+ Difference between HashMap and ConcurrentHashMap? 
+ Why is ConcurrentHashMap preferred in multi-threaded environments? 
+Iterators
+ Difference between Iterator and ListIterator? 
+ Can you modify a collection while iterating over it? 
+ What happens if you do so incorrectly? 
+
+6. JVM & Memory Management
+ Explain JVM architecture. 
+ Difference between Heap and Stack memory? 
+ What is shared vs. thread-local memory? 
+ What is JIT compilation? 
+ How does Garbage Collection work at a high level? 
+
+7. Serialization & Data Handling
+ What is Java Serialization? 
+ Why do we need serialVersionUID? 
+ What are the risks of serialization? 
+ Difference between serialization and converting objects to JSON?

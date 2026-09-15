@@ -2,24 +2,33 @@ package com.interview.all;
 
 public class Testcrymsonlogic1 {
 
-	public String solution(String string) {
+	public static void findDuplicatesOccurance(String string) {		
+    char[] ch = string.toCharArray();
+    for (int i = 0; i < ch.length; i++) {
+        boolean alreadyVisited = false;
+        // Check whether this character appeared earlier
+        for (int k = 0; k < i; k++) {
+            if (ch[k] == ch[i]) {
+                alreadyVisited = true;
+                break;
+            
+        }
 
-		int count = 0;
-		char ch[] = string.toCharArray();
-		char c = 0;
-		for (int i = 0; i < ch.length; i++) {
-			for (int j = i + 1; j < ch.length; j++) {
-				if (ch[i] == ch[j]) {
-					count++;
-					c = ch[i];
-					System.out.println(c + "  " + count);
-				}
+        if (alreadyVisited) {
+            continue;
+        }
 
-			}
+        int count = 1;
+        for (int j = i + 1; j < ch.length; j++) {
 
-		}
+            if (ch[i] == ch[j]) {
+                count++;
+            }
+        }
 
-		return "" + c;
+        if (count > 1) {
+            System.out.println(ch[i] + " : " + count);
+        }
 
 	}
 

@@ -22,7 +22,7 @@ public class DivergentTest {
         t.show("hello");     // Output?
         t.show(10);          // Output?
         t.show(new Integer(10)); // Output?
-        t.show(3.14);        // Output?
+        t.show(3.14);        // Output?  here object will call due to java can not be narrowing double to integer while method overloading
          
 //		Test t = new Test();
 //        t.show(null);     // Output?
